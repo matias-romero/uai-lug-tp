@@ -58,7 +58,7 @@ Public Class Partida
         'Mezclo el mazo y reparto la mano de cada jugador
         _mazo.Barajar()
         For Each manoPorJugador In _jugadores
-            manoPorJugador.Mano = New Mano()
+            manoPorJugador.Mano = New Mano(Nothing)
         Next
     End Sub
 
