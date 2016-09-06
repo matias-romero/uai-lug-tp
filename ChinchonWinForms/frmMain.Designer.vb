@@ -22,17 +22,9 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.VisorCarta1 = New ChinchonWinForms.VisorCarta()
         Me.VisorCarta2 = New ChinchonWinForms.VisorCarta()
+        Me.VisorCarta1 = New ChinchonWinForms.VisorCarta()
         Me.SuspendLayout()
-        '
-        'VisorCarta1
-        '
-        Me.VisorCarta1.Carta = Nothing
-        Me.VisorCarta1.Location = New System.Drawing.Point(26, 29)
-        Me.VisorCarta1.Name = "VisorCarta1"
-        Me.VisorCarta1.Size = New System.Drawing.Size(119, 167)
-        Me.VisorCarta1.TabIndex = 0
         '
         'VisorCarta2
         '
@@ -41,6 +33,15 @@ Partial Class frmMain
         Me.VisorCarta2.Name = "VisorCarta2"
         Me.VisorCarta2.Size = New System.Drawing.Size(119, 167)
         Me.VisorCarta2.TabIndex = 1
+        '
+        'VisorCarta1
+        '
+        Me.VisorCarta1.Carta = Nothing
+        Me.VisorCarta1.Location = New System.Drawing.Point(26, 29)
+        Me.VisorCarta1.MostrarCarta = False
+        Me.VisorCarta1.Name = "VisorCarta1"
+        Me.VisorCarta1.Size = New System.Drawing.Size(119, 167)
+        Me.VisorCarta1.TabIndex = 0
         '
         'frmMain
         '

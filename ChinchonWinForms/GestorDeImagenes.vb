@@ -1,5 +1,5 @@
-﻿Imports System.Drawing
-Imports Chinchon
+﻿Imports Chinchon
+Imports System.Drawing
 
 ''' <summary>
 ''' Utilitario para encapsular los dibujos de cada carta
@@ -8,10 +8,38 @@ Public Class GestorDeImagenes
     Private Const AnchoSpritePx As Integer = 208
     Private Const AltoSpritePx As Integer = 319
 
-    Private Shared FullSizeBitmap As Image = My.Resources.Baraja_española_completa
+    Private Shared ReadOnly FullSizeBitmap As Image = My.Resources.Baraja_española_completa
 
+    ''' <summary>
+    ''' Devuelve la imagen de la carta mostrando su cara
+    ''' </summary>
+    ''' <param name="unaCarta">Carta por dibujar</param>
     Public Shared Function DibujarCarta(unaCarta As Carta) As Image
-        Return LoadSpriteFromImage(New Point(GetOffsetXFor(unaCarta.Numero), GetOffsetYFor(unaCarta.Palo)))
+        Dim offset As Point
+        If unaCarta Is Nothing Then 'Espacio de carta en blanco
+            offset = New Point(0 * AnchoSpritePx, 4 * AltoSpritePx)
+        ElseIf TypeOf unaCarta Is CartaComodin Then 'Caso especial del comodin que no estaba incluido en la imagen
+            Return My.Resources.Comodin_Solo
+        Else 'El resto de las cartas sale como sprite
+            offset = New Point(GetOffsetXFor(unaCarta.Numero), GetOffsetYFor(unaCarta.Palo))
+        End If
+
+        Return LoadSpriteFromImage(offset)
+    End Function
+
+    ''' <summary>
+    ''' Devuelve una carta vista desde la contracara
+    ''' </summary>
+    Public Shared Function DibujarReversoDeCarta() As Image
+        Dim offset As Point = New Point(1 * AnchoSpritePx, 4 * AltoSpritePx)
+        Return LoadSpriteFromImage(offset)
+    End Function
+
+    ''' <summary>
+    ''' Devuelve la representación de un slot vacio para colocar una carta
+    ''' </summary>
+    Public Shared Function DibujarCartaEnBlanco() As Image
+        Return DibujarCarta(Nothing)
     End Function
 
     Private Shared Function GetOffsetXFor(numero As Integer)

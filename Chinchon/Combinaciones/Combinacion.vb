@@ -1,7 +1,7 @@
 ﻿Namespace Combinaciones
 
     Public MustInherit Class Combinacion
-        Private _cartas As List(Of Carta)
+        Private ReadOnly _cartas As New List(Of Carta)
 
         ''' <summary>
         ''' Enumera las cartas incluidas en la combinación
@@ -12,6 +12,31 @@
                 Return _cartas
             End Get
         End Property
+
+        ''' <summary>
+        ''' Agrega una carta específica a la combinación
+        ''' </summary>
+        ''' <param name="carta">La carta que agrega</param>
+        Public Sub AgregarCarta(carta As Carta)
+            _cartas.Add(carta)
+        End Sub
+
+        ''' <summary>
+        ''' Agrega un listado de cartas a la combinación
+        ''' </summary>
+        ''' <param name="listadoCartas">Listado de cartas por agregar</param>
+        Public Sub AgregarCartas(listadoCartas As IEnumerable(Of Carta))
+            _cartas.AddRange(listadoCartas)
+        End Sub
+
+        ''' <summary>
+        ''' Elimina una carta de la combinación
+        ''' </summary>
+        ''' <param name="unaCarta">Carta que desea eliminar de la combinación</param>
+        ''' <returns>Retorna verdadero en caso de haberla encontrado y removido de la colección</returns>
+        Public Function RemoverCarta(unaCarta As Carta)
+            Return _cartas.Remove(unaCarta)
+        End Function
 
         ''' <summary>
         ''' Determina el número mínimo de cartas permitidas para poder hacer la combinación

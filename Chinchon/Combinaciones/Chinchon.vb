@@ -1,7 +1,10 @@
 ﻿Namespace Combinaciones
 
+    ''' <summary>
+    ''' Un "chinchón" es una escalera con las 7 cartas de la mano
+    ''' </summary>
     Public Class Chinchon
-        Inherits Combinacion
+        Inherits Escalera
 
         Public Overrides ReadOnly Property MinimoCartasNecesarias As Integer
             Get
@@ -15,9 +18,6 @@
             End Get
         End Property
 
-        Public Overrides Function EsValida() As Boolean
-            Throw New NotImplementedException()
-        End Function
     End Class
 
 End Namespace

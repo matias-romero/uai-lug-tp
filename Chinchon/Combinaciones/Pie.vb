@@ -6,8 +6,6 @@
     Public Class Pie
         Inherits Combinacion
 
-        Private Const MinimoCartasPermitidas As Integer = 3
-
         Public Overrides ReadOnly Property MaximoCartasPermitidas As Integer
             Get
                 Return 4
@@ -16,7 +14,7 @@
 
         Public Overrides Function EsValida() As Boolean
             Dim cartasCombinadas As Carta() = Me.Cartas.ToArray() 'Evito multiples enumeraciones
-            If cartasCombinadas.Length >= MinimoCartasPermitidas AndAlso cartasCombinadas.Length <= MaximoCartasPermitidas Then
+            If cartasCombinadas.Length >= MinimoCartasNecesarias AndAlso cartasCombinadas.Length <= MaximoCartasPermitidas Then
                 'Si todas las cartas combinadas tienen el mismo número
                 Dim unaCarta As Carta = cartasCombinadas(0)
                 Return cartasCombinadas.All(Function(c) c.Numero.Equals(unaCarta.Numero))
