@@ -4,14 +4,25 @@ Public Class Carta
     Implements IEquatable(Of Carta)
     Implements IComparable(Of Carta)
 
+    Private ReadOnly _palo As Palo
+    Private ReadOnly _numero As Integer
+
     Public Sub New(numero As Integer, palo As Palo)
-        Me.Numero = numero
-        Me.Palo = palo
+        _numero = numero
+        _palo = palo
     End Sub
 
     Public Overridable ReadOnly Property Palo As Palo
+        Get
+            Return _palo
+        End Get
+    End Property
 
     Public Overridable ReadOnly Property Numero As Integer
+        Get
+            Return _numero
+        End Get
+    End Property
 
     Public Overridable ReadOnly Property ValorSinCombinar As Integer
         Get
