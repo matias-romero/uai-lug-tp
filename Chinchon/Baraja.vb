@@ -3,6 +3,8 @@
 Public Class Baraja
     Implements IEnumerable(Of Carta)
 
+    Public Const CantidadCartasTotales As Integer = 50
+
     Private ReadOnly _cartas As New List(Of Carta)
     Private ReadOnly _barajadorPorDefecto As IBarajador
 
@@ -32,6 +34,16 @@ Public Class Baraja
     Public Sub Barajar()
         _barajadorPorDefecto.Barajar(_cartas)
     End Sub
+
+    Public Function TomarCarta() As Carta
+        Return Me.TomarCartas(1).Single()
+    End Function
+
+    Public Function TomarCartas(cantidad As Integer) As Carta()
+        Dim cartasTomadas As Carta() = _cartas.Take(cantidad).ToArray()
+        _cartas.RemoveRange(0, cartasTomadas.Length)
+        Return cartasTomadas
+    End Function
 
 #Region "Implemento IEnumerable para poder foreachear la baraja"
     Public Function GetEnumerator() As IEnumerator(Of Carta) Implements IEnumerable(Of Carta).GetEnumerator

@@ -62,8 +62,13 @@ Public Class Partida
         Next
     End Sub
 
+    ''' <summary>
+    ''' Crea una nueva ronda notificando que cambio el turno
+    ''' </summary>
     Public Function NuevaRonda() As Ronda
-        Return New Ronda(Me.Jugadores)
+        Dim ronda As Ronda = New Ronda(Me.Jugadores)
+        _rondas.Add(ronda)
+        Return ronda
     End Function
 
     ''' <summary>

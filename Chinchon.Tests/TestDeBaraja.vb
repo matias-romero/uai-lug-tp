@@ -69,4 +69,18 @@ Public Class TestDeBaraja
         Assert.AreEqual(Palo.Oro, comodin.Palo, "El comodín no respeta el palo asignado por el usuario")
     End Sub
 
+    <TestMethod()>
+    Public Sub LasCartasSiempreDebenTomarseDelFinalDeLaBaraja()
+        Const CantidadCartasTomadas As Integer = 3
+
+        Dim baraja As New Baraja()
+        Assert.AreEqual(baraja.CantidadCartasTotales, baraja.Count(), "La baraja utilizada debe ser de 50 cartas")
+
+        Dim ultimasTresCartas As Carta() = baraja.Skip(baraja.CantidadCartasTotales - CantidadCartasTomadas).ToArray()
+        Assert.AreEqual(CantidadCartasTomadas, ultimasTresCartas.Length, "Debo quedarme solo con las últimas tres cartas")
+
+        Dim cartasTomadas As Carta() = baraja.TomarCartas(CantidadCartasTomadas)
+        Assert.AreEqual(baraja.CantidadCartasTotales - CantidadCartasTomadas, baraja.Count(), "La cantidad de cartas tomadas tiene que descontarse de la baraja")
+        Assert.IsTrue(cartasTomadas.All(Function(c) Not baraja.Contains(c)), "No deben quedar en la baraja ninguna de las cartas tomadas")
+    End Sub
 End Class

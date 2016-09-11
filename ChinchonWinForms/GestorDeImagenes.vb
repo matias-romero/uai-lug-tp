@@ -56,6 +56,8 @@ Public Class GestorDeImagenes
                 Return 2 * AltoSpritePx
             Case Palo.Basto
                 Return 3 * AltoSpritePx
+            Case Else
+                Throw New ArgumentOutOfRangeException("palo", palo)
         End Select
     End Function
 
