@@ -3,7 +3,7 @@
   <Class Name="Chinchon.Baraja" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAQACBAAAAAAAIAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAACAQECBAAAAAAAIAAAAAAIAAEAAAAAAAAAAA=</HashCode>
       <FileName>Baraja.vb</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -11,7 +11,7 @@
   <Class Name="Chinchon.Carta">
     <Position X="13.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAQEgAAAAAAAAAAAAIAAAAAAAAABAAA=</HashCode>
+      <HashCode>AAAAQAAAAAAAQAQEgAEAAAAAAAAAAIAAAAAAAAABAAA=</HashCode>
       <FileName>Carta.vb</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -50,7 +50,7 @@
   <Class Name="Chinchon.Ronda">
     <Position X="10.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAIAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAIAAAGAAA=</HashCode>
       <FileName>Ronda.vb</FileName>
     </TypeIdentifier>
   </Class>
@@ -83,6 +83,16 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Combinaciones\Pie.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Chinchon.Turno">
+    <Position X="10.25" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAABAAAAAAAAABAIAgAAAAAEAAEA=</HashCode>
+      <FileName>Turno.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="Chinchon.Palo" Collapsed="true">

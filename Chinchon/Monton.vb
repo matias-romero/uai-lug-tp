@@ -2,7 +2,7 @@
 ''' Modela el montón de cartas que queda hacia arriba (LIFO)
 ''' </summary>
 Public Class Monton
-    Private _pila As New Stack(Of Carta)
+    Private ReadOnly _pila As New Stack(Of Carta)
 
     ''' <summary>
     ''' Devuelve la carta actual visible del montón

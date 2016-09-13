@@ -64,6 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conector.vb" />
+    <Compile Include="Exceptions\CredencialesInvalidadException.vb" />
+    <Compile Include="GenericRepository.vb" />
+    <Compile Include="IConector.vb" />
+    <Compile Include="JugadorRepositorio.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

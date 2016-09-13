@@ -92,6 +92,7 @@
     <Compile Include="Combinaciones\Pie.vb" />
     <Compile Include="Monton.vb" />
     <Compile Include="Ronda.vb" />
+    <Compile Include="Turno.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

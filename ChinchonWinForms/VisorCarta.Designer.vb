@@ -48,5 +48,5 @@ Partial Class VisorCarta
 
     End Sub
 
-    Friend WithEvents picture As PictureBox
+    Private WithEvents picture As PictureBox
 End Class

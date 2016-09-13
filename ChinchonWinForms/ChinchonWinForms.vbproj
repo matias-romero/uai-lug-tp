@@ -71,6 +71,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmLoginJugador.Designer.vb">
+      <DependentUpon>frmLoginJugador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoginJugador.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -78,7 +84,19 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNuevaPartida.Designer.vb">
+      <DependentUpon>frmNuevaPartida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNuevaPartida.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GestorDeImagenes.vb" />
+    <Compile Include="ManoPorJugador.Designer.vb">
+      <DependentUpon>ManoPorJugador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManoPorJugador.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -94,16 +112,27 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Sesion.vb" />
     <Compile Include="VisorCarta.Designer.vb">
       <DependentUpon>VisorCarta.vb</DependentUpon>
     </Compile>
     <Compile Include="VisorCarta.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="VisorDeCartasEventsData.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmLoginJugador.resx">
+      <DependentUpon>frmLoginJugador.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevaPartida.resx">
+      <DependentUpon>frmNuevaPartida.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManoPorJugador.resx">
+      <DependentUpon>ManoPorJugador.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -139,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Licenses.txt" />
+    <None Include="Resources\ChinchonLogo.png" />
     <None Include="Resources\Comodin_Solo.jpg" />
     <None Include="Resources\Baraja_española_completa.png" />
   </ItemGroup>

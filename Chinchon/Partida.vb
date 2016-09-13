@@ -2,19 +2,30 @@
 
 Public Class Partida
     Public Event PartidaListaParaEmpezar As EventHandler
+    Public Event EmpiezaNuevaRonda As EventHandler
+    Public Event EmpiezaNuevoTurno As EventHandler
 
     Private Const MinimoNumeroJugadoresRequeridos As Integer = 2
     Private Const MaximoNumeroDeJugadoresPermitidos As Integer = 4
 
+    Private ReadOnly _id As Guid
     Private ReadOnly _mazo As New Baraja()
     Private ReadOnly _monton As New Monton()
     Private ReadOnly _rondas As New List(Of Ronda)
     Private ReadOnly _jugadores As New List(Of ManoPorJugador)
 
+    Public Sub New()
+        _id = Guid.NewGuid()
+    End Sub
+
     ''' <summary>
-    ''' Devuelve o establece el identificador de la partida
+    ''' Devuelve el identificador de la partida
     ''' </summary>
-    Public Property Id As Guid
+    Public ReadOnly Property Id As Guid
+        Get
+            Return _id
+        End Get
+    End Property
 
     ''' <summary>
     ''' Devuelve o establece el puntaje limite definido para quedarse dentro de la partida
@@ -58,8 +69,10 @@ Public Class Partida
         'Mezclo el mazo y reparto la mano de cada jugador
         _mazo.Barajar()
         For Each manoPorJugador In _jugadores
-            manoPorJugador.Mano = New Mano(Nothing)
+            manoPorJugador.Mano = New Mano(_mazo.TomarCartas(7))
         Next
+
+        Me.NuevaRonda()
     End Sub
 
     ''' <summary>
@@ -68,17 +81,9 @@ Public Class Partida
     Public Function NuevaRonda() As Ronda
         Dim ronda As Ronda = New Ronda(Me.Jugadores)
         _rondas.Add(ronda)
+        RaiseEvent EmpiezaNuevaRonda(ronda, EventArgs.Empty)
         Return ronda
     End Function
-
-    ''' <summary>
-    ''' El jugador cierra la partida, validando las combinaciones armadas para calcular puntaje
-    ''' </summary>
-    ''' <param name="jugador">Jugador que realiza el cierre</param>
-    ''' ''' <param name="carta">Carta utilizada para el cierre</param>
-    Public Sub Cerrar(jugador As Jugador, carta As Carta)
-        'TODO
-    End Sub
 
     Private ReadOnly Property PuedoComenzarPartida As Boolean
         Get
