@@ -1,4 +1,5 @@
 ﻿Imports Chinchon
+Imports Chinchon.Entities
 
 Public Class ManoPorJugador
     Private _manoDelJugador As Mano

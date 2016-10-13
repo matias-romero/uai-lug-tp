@@ -1,4 +1,4 @@
-﻿Imports Chinchon
+﻿
 
 Public Class Carta
     Implements IEquatable(Of Carta)

@@ -161,6 +161,10 @@
       <Project>{66fee86f-f9dd-4ffc-9fab-1b241881eceb}</Project>
       <Name>Chinchon.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Chinchon.Entities\Chinchon.Entities.vbproj">
+      <Project>{cf4ec479-c0b5-4442-b339-22c1143cc427}</Project>
+      <Name>Chinchon.Entities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Chinchon\Chinchon.Core.vbproj">
       <Project>{1b43e33c-7801-4d00-a98b-7dd82998de1b}</Project>
       <Name>Chinchon.Core</Name>

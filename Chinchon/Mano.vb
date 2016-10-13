@@ -1,4 +1,6 @@
-﻿''' <summary>
+﻿Imports Chinchon.Entities
+
+''' <summary>
 ''' Modela las 7 cartas en juego por cada jugador
 ''' </summary>
 Public Class Mano

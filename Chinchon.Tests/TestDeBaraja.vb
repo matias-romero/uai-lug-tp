@@ -1,4 +1,5 @@
 ﻿Imports System.Text
+Imports Chinchon.Entities
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
 <TestClass()>

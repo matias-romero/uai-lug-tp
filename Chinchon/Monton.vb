@@ -1,4 +1,6 @@
-﻿''' <summary>
+﻿Imports Chinchon.Entities
+
+''' <summary>
 ''' Modela el montón de cartas que queda hacia arriba (LIFO)
 ''' </summary>
 Public Class Monton

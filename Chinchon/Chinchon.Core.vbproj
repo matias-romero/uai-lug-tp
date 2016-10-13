@@ -62,8 +62,6 @@
     <Compile Include="Acciones\IAccion.vb" />
     <Compile Include="Baraja.vb" />
     <Compile Include="BarajadorPorAzar.vb" />
-    <Compile Include="Carta.vb" />
-    <Compile Include="CartaComodin.vb" />
     <Compile Include="Combinaciones\Chinchon.vb" />
     <Compile Include="Combinaciones\Combinacion.vb" />
     <Compile Include="Combinaciones\Escalera.vb" />
@@ -71,7 +69,6 @@
     <Compile Include="IBarajador.vb" />
     <Compile Include="Mano.vb" />
     <Compile Include="ManoPorJugador.vb" />
-    <Compile Include="Palo.vb" />
     <Compile Include="Jugador.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -113,6 +110,12 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chinchon.Entities\Chinchon.Entities.vbproj">
+      <Project>{cf4ec479-c0b5-4442-b339-22c1143cc427}</Project>
+      <Name>Chinchon.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

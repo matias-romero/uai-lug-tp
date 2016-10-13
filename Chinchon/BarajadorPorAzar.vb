@@ -1,4 +1,5 @@
 ﻿Imports Chinchon
+Imports Chinchon.Entities
 
 ''' <summary>
 ''' Implementación del mezclador de cartas utilizando una version del algoritmo "Fisher–Yates shuffle"

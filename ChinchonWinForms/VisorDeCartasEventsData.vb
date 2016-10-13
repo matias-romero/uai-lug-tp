@@ -1,4 +1,5 @@
 ﻿Imports Chinchon
+Imports Chinchon.Entities
 
 Public Delegate Sub EventoConCartaRelacionada(sender As Object, e As AccionConCartaRelacionadaEventArgs)
 

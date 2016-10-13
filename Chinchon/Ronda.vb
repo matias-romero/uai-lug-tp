@@ -1,4 +1,6 @@
-﻿''' <summary>
+﻿Imports Chinchon.Entities
+
+''' <summary>
 ''' Una ronda representa una vuelta completa por todos los jugadores de la partida
 ''' </summary>
 Public Class Ronda

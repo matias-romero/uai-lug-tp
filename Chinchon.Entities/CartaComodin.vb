@@ -6,7 +6,7 @@ Public Class CartaComodin
     Public Const ValorComodin As Integer = 25
 
     Public Sub New()
-        MyBase.New(0, Chinchon.Palo.Oro)
+        MyBase.New(0, Chinchon.Entities.Palo.Oro)
     End Sub
 
     Public Overrides ReadOnly Property Numero As Integer

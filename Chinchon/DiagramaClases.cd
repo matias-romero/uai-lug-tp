@@ -8,25 +8,10 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Chinchon.Carta">
-    <Position X="13.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAQAAAAAAAQAQEgAEAAAAAAAAAAIAAAAAAAAABAAA=</HashCode>
-      <FileName>Carta.vb</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="Chinchon.CartaComodin">
-    <Position X="13.75" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AIAAAAAAAACAQAAAAAAAAAAAAAEAAAAAAgAAAAABAAA=</HashCode>
-      <FileName>CartaComodin.vb</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Chinchon.Jugador" Collapsed="true">
     <Position X="10.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAEAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
       <FileName>Jugador.vb</FileName>
     </TypeIdentifier>
   </Class>
@@ -43,14 +28,14 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAmEAgAAgAAAAACAAABAAAAAACAAAAAQIAAAECACQA=</HashCode>
+      <HashCode>AAAmEAwAAgAAAAACAABBAAAAAEAAAAAAQIAAAECACQA=</HashCode>
       <FileName>Partida.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Chinchon.Ronda">
     <Position X="10.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQAIAAAGAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAgAAACQAIAAAGAAA=</HashCode>
       <FileName>Ronda.vb</FileName>
     </TypeIdentifier>
   </Class>
@@ -86,7 +71,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Chinchon.Turno">
-    <Position X="10.25" Y="3.5" Width="1.5" />
+    <Position X="10.25" Y="5" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -95,12 +80,18 @@
       <FileName>Turno.vb</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="Chinchon.Palo" Collapsed="true">
-    <Position X="12" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAABAAgAAAAAAAAAAg=</HashCode>
-      <FileName>Palo.vb</FileName>
-    </TypeIdentifier>
+  <Class Name="Chinchon.Entities.Carta" Collapsed="true">
+    <Position X="13.75" Y="3" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chinchon.Entities.CartaComodin" Collapsed="true">
+    <Position X="13.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Enum Name="Chinchon.Entities.Palo">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
   </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

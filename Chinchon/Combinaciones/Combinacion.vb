@@ -1,4 +1,6 @@
-﻿Namespace Combinaciones
+﻿Imports Chinchon.Entities
+
+Namespace Combinaciones
 
     Public MustInherit Class Combinacion
         Private ReadOnly _cartas As New List(Of Carta)

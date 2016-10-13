@@ -1,5 +1,6 @@
 ﻿Imports Chinchon
 Imports System.ComponentModel
+Imports Chinchon.Entities
 
 <DefaultBindingProperty("Carta")>
 Public Class VisorCarta

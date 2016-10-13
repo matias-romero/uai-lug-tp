@@ -1,4 +1,5 @@
 ﻿Imports Chinchon.Combinaciones
+Imports Chinchon.Entities
 Imports Microsoft.VisualStudio.TestTools.UnitTesting
 
 <TestClass()>
