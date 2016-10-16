@@ -1,4 +1,6 @@
-﻿Public Class Turno
+﻿Imports Chinchon.Entities
+
+Public Class Turno
     Public Event TurnoFinalizado As EventHandler
 
     Private ReadOnly _jugador As Jugador

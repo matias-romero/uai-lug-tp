@@ -1,9 +1,14 @@
-﻿Imports Chinchon
+﻿Imports Chinchon.Entities
 Imports System.ComponentModel
-Imports Chinchon.Entities
 
 <DefaultBindingProperty("Carta")>
 Public Class VisorCarta
+    <Serializable()>
+    Public Class DragDropData
+        Public Property NombreControl As String
+        Public Property RolAsociado As String
+    End Class
+
     Public Event OperacionArrastreIniciada As EventoConCartaRelacionada
     Public Event OperacionDeSoltarCartaDetectada As EventoConMovimientoCartasAsociado
 
@@ -11,6 +16,7 @@ Public Class VisorCarta
     Private _cartaRenderizada As Image
     Private _mostrarCaraDeCarta As Boolean = True
     Private _habilitarComoFuenteDeArrastre As Boolean = False
+    Private _rolAsignado As String = String.Empty
 
     <Description("Devuelve o establece si se ve la cara de la carta o su reverso"), Category("Data"), DefaultValue(True)>
     Public Property MostrarCarta As Boolean
@@ -54,6 +60,16 @@ Public Class VisorCarta
         End Set
     End Property
 
+    <Description("Devuelve o establece el rol asignado al control utilizado como referencia para las acciones de Drag&Drop"), Category("Data"), DefaultValue("")>
+    Public Property RolAsignado As String
+        Get
+            Return _rolAsignado
+        End Get
+        Set(value As String)
+            _rolAsignado = value
+        End Set
+    End Property
+
     Private Sub RenderizarCarta()
         'Libero los recursos no manejados GDI del bitmap
         If _cartaRenderizada IsNot Nothing Then
@@ -79,19 +95,37 @@ Public Class VisorCarta
         RaiseEvent OperacionArrastreIniciada(Me, New AccionConCartaRelacionadaEventArgs(laCarta))
     End Sub
 
+    Private Sub OnOperacionDeSoltarCartaDetectada(origen As VisorCarta, destino As VisorCarta)
+        RaiseEvent OperacionDeSoltarCartaDetectada(Me, New MovimientoCartasEventArgs(origen.Carta, origen, destino))
+    End Sub
+
     Private Sub VisorCarta_MouseDown(sender As Object, e As MouseEventArgs)
         If Me.HabilitarComoFuenteDeArrastre AndAlso Me.Carta IsNot Nothing Then
             Call Me.OnOperacionArrastreIniciada(Me.Carta)
-            Call Me.DoDragDrop(Me.Carta, DragDropEffects.Move)
+
+            Dim dataObject As New DragDropData()
+            dataObject.RolAsociado = Me.RolAsignado
+            dataObject.NombreControl = LocalizadorDeControles.ResolveFullyQualifiedName(Me)
+            Call Me.DoDragDrop(dataObject, DragDropEffects.Move)
         End If
     End Sub
 
     Private Sub VisorCarta_DragDrop(sender As Object, e As DragEventArgs)
+        If Not e.Data.GetDataPresent(GetType(DragDropData)) Then
+            e.Effect = DragDropEffects.None
+            Return
+        End If
 
+        Dim data As DragDropData = e.Data.GetData(GetType(DragDropData))
+        Dim origen As Control = LocalizadorDeControles.RecoverOriginalControl(data.NombreControl)
+        If origen IsNot Nothing Then
+            'Notificó un evento de desplazamiento solicitado por el usuario
+            Call Me.OnOperacionDeSoltarCartaDetectada(origen, Me)
+        End If
     End Sub
 
     Private Sub VisorCarta_DragEnter(sender As Object, e As DragEventArgs)
-
+        e.Effect = DragDropEffects.Move
     End Sub
 
     Private Sub VisorCarta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -104,4 +138,28 @@ Public Class VisorCarta
         AddHandler Me.DragDrop, AddressOf Me.VisorCarta_DragDrop
         AddHandler Me.picture.DragDrop, AddressOf Me.VisorCarta_DragDrop
     End Sub
+
+    Private Function FullyQualifiedName() As String
+        Return LocalizadorDeControles.ResolveFullyQualifiedName(Me)
+        Dim nestedNamesStack As New Stack(Of String)
+        nestedNamesStack.Push(Me.Name)
+
+        Dim parentContainer As Object = Me.Parent
+        While parentContainer IsNot Nothing
+            Dim frm As Form = TryCast(parentContainer, Form) 'Los form son a su vez Controles
+            If frm IsNot Nothing Then
+                'nestedNamesStack.Push(frm.Name)
+                parentContainer = Nothing 'Corto el algoritmo si alcance al Formulario Contenedor
+            Else
+                Dim ctl As Control = TryCast(parentContainer, Control)
+                If ctl IsNot Nothing Then
+                    nestedNamesStack.Push(ctl.Name)
+                    parentContainer = ctl.Parent
+                End If
+            End If
+        End While
+
+        Return String.Join(".", nestedNamesStack.ToArray())
+    End Function
+
 End Class

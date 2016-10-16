@@ -1,24 +1,32 @@
 ﻿Imports Chinchon
+Imports Chinchon.Entities
 
 Public Class frmNuevaPartida
-    Private _partida As Partida
-    Private ReadOnly _sesionActual As Sesion = Sesion.DefaultInstance
+    Private ReadOnly Orquestador As OrquestadorDelJuego = OrquestadorDelJuego.InstanciaPorDefecto
 
     Private Sub frmNuevaPartida_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "Bienvenido! Presione comenzar cuando esté listo"
+        Me.Text = My.Resources.Titulo_NuevaPartida
 
-        _partida = New Partida()
-        AddHandler _partida.PartidaListaParaEmpezar, AddressOf Me.PartidaActualListaParaEmpezar
+        'Explicito la configuración que voy a utilizar con el programa
+        Orquestador.UtilizarRepositoriosUsandoCadenaDeConexion(My.Settings.RepositorioPrincipal)
+        Call Me.EnlazarDatosDePartida(Orquestador.PartidaActual)
+    End Sub
+
+    Private Sub EnlazarDatosDePartida(partida As Partida)
+        AddHandler partida.PartidaListaParaEmpezar, AddressOf Me.PartidaActualListaParaEmpezar
+
+        Me.lblCodigoPartida.Text = partida.Id.ToString()
+        Me.txtPuntajeLimite.DataBindings.Add("Value", partida, "PuntajeLimite")
     End Sub
 
     Private Sub btnComenzar_Click(sender As Object, e As EventArgs) Handles btnComenzar.Click
-        _partida.Comenzar()
+        Orquestador.PartidaActual.Comenzar()
     End Sub
 
     Private Sub lnkIniciarSession_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkIniciarSession.LinkClicked
-        Dim nuevoJugador As Jugador = frmLoginJugador.PreguntarCredenciales("Ingrese sus credenciales para poder jugar", _sesionActual.RepositorioJugadores())
+        Dim nuevoJugador As Jugador = frmLoginJugador.PreguntarCredenciales(My.Resources.Titulo_IngreseSusCredenciales, Orquestador.Repositorios.Jugadores())
         If nuevoJugador IsNot Nothing Then
-            _partida.Unirse(nuevoJugador)
+            Orquestador.PartidaActual.Unirse(nuevoJugador)
 
             Call Me.EnlazarListado()
         End If
@@ -29,7 +37,8 @@ Public Class frmNuevaPartida
     End Sub
 
     Private Sub EnlazarListado()
-        Dim listadoUsuarios As IList(Of Jugador) = _partida.Jugadores.ToList()
+        Dim listadoUsuarios As IList(Of Jugador) = Orquestador.PartidaActual.Jugadores.ToList()
+
         Me.lstUsuariosConectados.DataSource = Nothing
         Me.lstUsuariosConectados.DataSource = listadoUsuarios
 

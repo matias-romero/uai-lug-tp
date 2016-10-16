@@ -8,13 +8,6 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Chinchon.Jugador" Collapsed="true">
-    <Position X="10.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAEAAAAAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
-      <FileName>Jugador.vb</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Chinchon.Monton" Collapsed="true">
     <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
@@ -87,6 +80,10 @@
   </Class>
   <Class Name="Chinchon.Entities.CartaComodin" Collapsed="true">
     <Position X="13.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Chinchon.Entities.Jugador" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Enum Name="Chinchon.Entities.Palo">

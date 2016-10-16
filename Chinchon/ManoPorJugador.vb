@@ -1,4 +1,6 @@
-﻿Friend Class ManoPorJugador
+﻿Imports Chinchon.Entities
+
+Friend Class ManoPorJugador
     Private _jugador As Jugador
 
     Public Sub New(unJugador As Jugador)

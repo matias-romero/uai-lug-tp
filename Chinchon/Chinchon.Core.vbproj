@@ -65,11 +65,12 @@
     <Compile Include="Combinaciones\Chinchon.vb" />
     <Compile Include="Combinaciones\Combinacion.vb" />
     <Compile Include="Combinaciones\Escalera.vb" />
+    <Compile Include="Configuracion\FactoriaRepositorioSQL.vb" />
     <Compile Include="Exceptions\LimiteJugadoresPorAlcanzadoException.vb" />
     <Compile Include="IBarajador.vb" />
+    <Compile Include="Configuracion\IFactoriaRepositorios.vb" />
     <Compile Include="Mano.vb" />
     <Compile Include="ManoPorJugador.vb" />
-    <Compile Include="Jugador.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -85,6 +86,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="OrquestadorDelJuego.vb" />
     <Compile Include="Partida.vb" />
     <Compile Include="Combinaciones\Pie.vb" />
     <Compile Include="Monton.vb" />
@@ -112,6 +114,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Chinchon.Data\Chinchon.Data.vbproj">
+      <Project>{66fee86f-f9dd-4ffc-9fab-1b241881eceb}</Project>
+      <Name>Chinchon.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Chinchon.Entities\Chinchon.Entities.vbproj">
       <Project>{cf4ec479-c0b5-4442-b339-22c1143cc427}</Project>
       <Name>Chinchon.Entities</Name>

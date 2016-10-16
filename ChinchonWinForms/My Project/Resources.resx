@@ -127,4 +127,10 @@
   <data name="ChinchonLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ChinchonLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Titulo_NuevaPartida" xml:space="preserve">
+    <value>Bienvenido! Presione comenzar cuando esté listo</value>
+  </data>
+  <data name="Titulo_IngreseSusCredenciales" xml:space="preserve">
+    <value>Ingrese sus credenciales para poder jugar</value>
+  </data>
 </root>

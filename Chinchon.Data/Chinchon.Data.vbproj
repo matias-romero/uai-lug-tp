@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conector.vb" />
-    <Compile Include="Exceptions\CredencialesInvalidadException.vb" />
+    <Compile Include="Exceptions\CredencialesInvalidasException.vb" />
     <Compile Include="GenericRepository.vb" />
     <Compile Include="IConector.vb" />
     <Compile Include="JugadorRepositorio.vb" />
@@ -107,10 +107,6 @@
     <ProjectReference Include="..\Chinchon.Entities\Chinchon.Entities.vbproj">
       <Project>{cf4ec479-c0b5-4442-b339-22c1143cc427}</Project>
       <Name>Chinchon.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Chinchon\Chinchon.Core.vbproj">
-      <Project>{1b43e33c-7801-4d00-a98b-7dd82998de1b}</Project>
-      <Name>Chinchon.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

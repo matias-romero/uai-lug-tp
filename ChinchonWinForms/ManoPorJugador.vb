@@ -2,11 +2,16 @@
 Imports Chinchon.Entities
 
 Public Class ManoPorJugador
+    Public Event OperacionDeSoltarCartaDetectada As EventoConMovimientoCartasAsociado
+
     Private _manoDelJugador As Mano
     Private _visoresPorCarta As VisorCarta()
 
     Private Sub ManoPorJugador_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _visoresPorCarta = New VisorCarta() {Me.VisorCarta1, Me.VisorCarta2, Me.VisorCarta3, Me.VisorCarta4, Me.VisorCarta5, Me.VisorCarta6, Me.VisorCarta7}
+        For Each visor As VisorCarta In _visoresPorCarta 'Escucho los eventos de drop de cada visor y propago el mismo al consumidor
+            AddHandler visor.OperacionDeSoltarCartaDetectada, AddressOf Me.OnOperacionDeSoltarCartaDetectada
+        Next
     End Sub
 
     Public Sub Init(manoDelJugador As Mano)
@@ -14,6 +19,7 @@ Public Class ManoPorJugador
         Dim indiceControl As Integer = 0
         For Each carta As Carta In _manoDelJugador.Cartas
             _visoresPorCarta(indiceControl).Carta = carta
+            _visoresPorCarta(indiceControl).RolAsignado = String.Concat("Mano_Indice=", indiceControl)
             indiceControl += 1
         Next
 
@@ -36,4 +42,9 @@ Public Class ManoPorJugador
         Next
         Me.ResumeLayout()
     End Sub
+
+    Private Sub OnOperacionDeSoltarCartaDetectada(sender As Object, e As MovimientoCartasEventArgs)
+        RaiseEvent OperacionDeSoltarCartaDetectada(Me, e)
+    End Sub
+
 End Class

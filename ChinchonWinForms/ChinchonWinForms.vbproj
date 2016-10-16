@@ -90,7 +90,14 @@
     <Compile Include="frmNuevaPartida.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmRegistrarJugador.Designer.vb">
+      <DependentUpon>frmRegistrarJugador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegistrarJugador.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GestorDeImagenes.vb" />
+    <Compile Include="LocalizadorDeControles.vb" />
     <Compile Include="ManoPorJugador.Designer.vb">
       <DependentUpon>ManoPorJugador.vb</DependentUpon>
     </Compile>
@@ -112,7 +119,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Sesion.vb" />
     <Compile Include="VisorCarta.Designer.vb">
       <DependentUpon>VisorCarta.vb</DependentUpon>
     </Compile>

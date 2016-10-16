@@ -1,4 +1,5 @@
-﻿Imports Chinchon.Exceptions
+﻿Imports Chinchon.Entities
+Imports Chinchon.Exceptions
 
 Public Class Partida
     Public Event PartidaListaParaEmpezar As EventHandler
@@ -16,6 +17,7 @@ Public Class Partida
 
     Public Sub New()
         _id = Guid.NewGuid()
+        Me.PuntajeLimite = 100
     End Sub
 
     ''' <summary>
@@ -36,6 +38,12 @@ Public Class Partida
     Public ReadOnly Property Jugadores As IEnumerable(Of Jugador)
         Get
             Return _jugadores.Select(Function(mpj) mpj.Jugador)
+        End Get
+    End Property
+
+    Public ReadOnly Property TurnoEnCurso As Turno
+        Get
+            Return _rondas.Last().TurnoActual
         End Get
     End Property
 
@@ -80,7 +88,9 @@ Public Class Partida
     ''' </summary>
     Public Function NuevaRonda() As Ronda
         Dim ronda As Ronda = New Ronda(Me.Jugadores)
+        ronda.AvanzarTurno() 'Inicio el primer turno de la ronda
         _rondas.Add(ronda)
+
         RaiseEvent EmpiezaNuevaRonda(ronda, EventArgs.Empty)
         Return ronda
     End Function

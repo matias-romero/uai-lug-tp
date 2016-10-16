@@ -1,4 +1,4 @@
-﻿Public interface IConector
+﻿Public Interface IConector
     Inherits IDisposable
 
     ''' <summary>
@@ -32,4 +32,4 @@
     ''' <param name="parametros">Listado opcional de parámetros incluidos en la consulta</param>
     ''' <returns>Devuelve la cantidad de filas afectadas por la consulta</returns>
     Function ModificarFilas(consulta As String, ParamArray parametros As IDbDataParameter()) As Integer
-End interface
+End Interface

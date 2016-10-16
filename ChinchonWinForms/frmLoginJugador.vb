@@ -1,5 +1,7 @@
 ﻿Imports Chinchon
 Imports Chinchon.Data
+Imports Chinchon.Data.Exceptions
+Imports Chinchon.Entities
 
 Public Class frmLoginJugador
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
@@ -22,7 +24,7 @@ Public Class frmLoginJugador
 
                 Try
                     jugadorLogueado = repositorio.ValidarCredenciales(usuario, password)
-                Catch ex As CredencialesInvalidadException
+                Catch ex As CredencialesInvalidasException
                     MessageBox.Show(ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
 

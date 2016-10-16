@@ -11,7 +11,7 @@ Public Class Ronda
     Private _turnosJugados As New List(Of Turno)
 
     Public Sub New(jugadoresActivos As IEnumerable(Of Jugador))
-        _turnoActual = 0
+        _turnoActual = -1
         'Copio los jugadores activos en cada ronda ya que es posible que algunos vayan quedando descalificados
         _jugadoresActivos = jugadoresActivos.ToArray()
     End Sub

@@ -1,4 +1,9 @@
-﻿Public Class JugadorRepositorio
+﻿Imports Chinchon.Data.Exceptions
+Imports Chinchon.Entities
+
+Public Class JugadorRepositorio
+    Implements IJugadorRepositorio
+
     Private ReadOnly _conector As IConector
 
     Public Sub New(conector As IConector)
@@ -10,9 +15,9 @@
     ''' </summary>
     ''' <param name="usuario"></param>
     ''' <param name="password"></param>
-    ''' <returns></returns>
-    Public Function ValidarCredenciales(usuario As String, password As String) As Jugador
-        Dim consulta As String = "SELECT ID, APODO WHERE APODO=@APODO AND PASSWORDHASH=@HASH"
+    ''' <returns></returns> 
+    Public Function ValidarCredenciales(usuario As String, password As String) As Jugador Implements IJugadorRepositorio.ValidarCredenciales
+        Dim consulta As String = "SELECT ID, APODO FROM JUGADOR WHERE APODO=@APODO AND PASSWORDHASH=@HASH"
         Dim parametroUsuario As IDbDataParameter = _conector.CrearNuevoParametro("@APODO", usuario)
         Dim parametroHash As IDbDataParameter = _conector.CrearNuevoParametro("@HASH", password) 'TODO: Aplicarle el hashing
         Dim tabla As DataTable = _conector.LeerResultados(consulta, parametroUsuario, parametroHash)
@@ -20,7 +25,7 @@
             Return Me.MaterializarJugadorDesdeDataRow(tabla.Rows(0))
         End If
 
-        Throw New CredencialesInvalidadException()
+        Throw New CredencialesInvalidasException()
     End Function
 
     Private Function MaterializarJugadorDesdeDataRow(dataRow As DataRow) As Jugador

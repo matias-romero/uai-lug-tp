@@ -23,16 +23,17 @@ Partial Class frmNuevaPartida
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.container = New System.Windows.Forms.GroupBox()
-        Me.btnComenzar = New System.Windows.Forms.Button()
-        Me.lblCodigoPartida = New System.Windows.Forms.Label()
-        Me.lblPuntajeLimite = New System.Windows.Forms.Label()
-        Me.txtPuntajeLimite = New System.Windows.Forms.TextBox()
         Me.groupUsuariosConectados = New System.Windows.Forms.GroupBox()
-        Me.lstUsuariosConectados = New System.Windows.Forms.ListBox()
-        Me.progressUsuariosConectados = New System.Windows.Forms.ProgressBar()
         Me.lnkIniciarSession = New System.Windows.Forms.LinkLabel()
+        Me.progressUsuariosConectados = New System.Windows.Forms.ProgressBar()
+        Me.lstUsuariosConectados = New System.Windows.Forms.ListBox()
+        Me.lblPuntajeLimite = New System.Windows.Forms.Label()
+        Me.lblCodigoPartida = New System.Windows.Forms.Label()
+        Me.btnComenzar = New System.Windows.Forms.Button()
+        Me.txtPuntajeLimite = New System.Windows.Forms.NumericUpDown()
         Me.container.SuspendLayout()
         Me.groupUsuariosConectados.SuspendLayout()
+        CType(Me.txtPuntajeLimite, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'container
@@ -40,8 +41,8 @@ Partial Class frmNuevaPartida
         Me.container.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.container.Controls.Add(Me.groupUsuariosConectados)
         Me.container.Controls.Add(Me.txtPuntajeLimite)
+        Me.container.Controls.Add(Me.groupUsuariosConectados)
         Me.container.Controls.Add(Me.lblPuntajeLimite)
         Me.container.Controls.Add(Me.lblCodigoPartida)
         Me.container.Location = New System.Drawing.Point(12, 12)
@@ -49,47 +50,6 @@ Partial Class frmNuevaPartida
         Me.container.Size = New System.Drawing.Size(313, 294)
         Me.container.TabIndex = 0
         Me.container.TabStop = False
-        '
-        'btnComenzar
-        '
-        Me.btnComenzar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnComenzar.Enabled = False
-        Me.btnComenzar.Location = New System.Drawing.Point(117, 312)
-        Me.btnComenzar.Name = "btnComenzar"
-        Me.btnComenzar.Size = New System.Drawing.Size(93, 31)
-        Me.btnComenzar.TabIndex = 1
-        Me.btnComenzar.Text = "&Comenzar"
-        Me.btnComenzar.UseVisualStyleBackColor = True
-        '
-        'lblCodigoPartida
-        '
-        Me.lblCodigoPartida.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblCodigoPartida.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCodigoPartida.Location = New System.Drawing.Point(6, 16)
-        Me.lblCodigoPartida.Name = "lblCodigoPartida"
-        Me.lblCodigoPartida.Size = New System.Drawing.Size(301, 23)
-        Me.lblCodigoPartida.TabIndex = 0
-        Me.lblCodigoPartida.Text = "lblCodigoPartida"
-        Me.lblCodigoPartida.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblPuntajeLimite
-        '
-        Me.lblPuntajeLimite.AutoSize = True
-        Me.lblPuntajeLimite.Location = New System.Drawing.Point(6, 71)
-        Me.lblPuntajeLimite.Name = "lblPuntajeLimite"
-        Me.lblPuntajeLimite.Size = New System.Drawing.Size(75, 13)
-        Me.lblPuntajeLimite.TabIndex = 2
-        Me.lblPuntajeLimite.Text = "Puntaje Límite"
-        '
-        'txtPuntajeLimite
-        '
-        Me.txtPuntajeLimite.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPuntajeLimite.Location = New System.Drawing.Point(105, 68)
-        Me.txtPuntajeLimite.Name = "txtPuntajeLimite"
-        Me.txtPuntajeLimite.Size = New System.Drawing.Size(202, 20)
-        Me.txtPuntajeLimite.TabIndex = 3
         '
         'groupUsuariosConectados
         '
@@ -105,16 +65,15 @@ Partial Class frmNuevaPartida
         Me.groupUsuariosConectados.TabIndex = 4
         Me.groupUsuariosConectados.TabStop = False
         '
-        'lstUsuariosConectados
+        'lnkIniciarSession
         '
-        Me.lstUsuariosConectados.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lstUsuariosConectados.FormattingEnabled = True
-        Me.lstUsuariosConectados.Location = New System.Drawing.Point(6, 25)
-        Me.lstUsuariosConectados.Name = "lstUsuariosConectados"
-        Me.lstUsuariosConectados.Size = New System.Drawing.Size(289, 121)
-        Me.lstUsuariosConectados.TabIndex = 0
+        Me.lnkIniciarSession.AutoSize = True
+        Me.lnkIniciarSession.Location = New System.Drawing.Point(6, 0)
+        Me.lnkIniciarSession.Name = "lnkIniciarSession"
+        Me.lnkIniciarSession.Size = New System.Drawing.Size(92, 13)
+        Me.lnkIniciarSession.TabIndex = 7
+        Me.lnkIniciarSession.TabStop = True
+        Me.lnkIniciarSession.Text = "Unirse a la partida"
         '
         'progressUsuariosConectados
         '
@@ -126,15 +85,57 @@ Partial Class frmNuevaPartida
         Me.progressUsuariosConectados.Size = New System.Drawing.Size(289, 23)
         Me.progressUsuariosConectados.TabIndex = 6
         '
-        'lnkIniciarSession
+        'lstUsuariosConectados
         '
-        Me.lnkIniciarSession.AutoSize = True
-        Me.lnkIniciarSession.Location = New System.Drawing.Point(6, 0)
-        Me.lnkIniciarSession.Name = "lnkIniciarSession"
-        Me.lnkIniciarSession.Size = New System.Drawing.Size(92, 13)
-        Me.lnkIniciarSession.TabIndex = 7
-        Me.lnkIniciarSession.TabStop = True
-        Me.lnkIniciarSession.Text = "Unirse a la partida"
+        Me.lstUsuariosConectados.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstUsuariosConectados.FormattingEnabled = True
+        Me.lstUsuariosConectados.Location = New System.Drawing.Point(6, 25)
+        Me.lstUsuariosConectados.Name = "lstUsuariosConectados"
+        Me.lstUsuariosConectados.Size = New System.Drawing.Size(289, 121)
+        Me.lstUsuariosConectados.TabIndex = 0
+        '
+        'lblPuntajeLimite
+        '
+        Me.lblPuntajeLimite.AutoSize = True
+        Me.lblPuntajeLimite.Location = New System.Drawing.Point(6, 71)
+        Me.lblPuntajeLimite.Name = "lblPuntajeLimite"
+        Me.lblPuntajeLimite.Size = New System.Drawing.Size(75, 13)
+        Me.lblPuntajeLimite.TabIndex = 2
+        Me.lblPuntajeLimite.Text = "Puntaje Límite"
+        '
+        'lblCodigoPartida
+        '
+        Me.lblCodigoPartida.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblCodigoPartida.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCodigoPartida.Location = New System.Drawing.Point(6, 16)
+        Me.lblCodigoPartida.Name = "lblCodigoPartida"
+        Me.lblCodigoPartida.Size = New System.Drawing.Size(301, 23)
+        Me.lblCodigoPartida.TabIndex = 0
+        Me.lblCodigoPartida.Text = "lblCodigoPartida"
+        Me.lblCodigoPartida.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'btnComenzar
+        '
+        Me.btnComenzar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnComenzar.Enabled = False
+        Me.btnComenzar.Location = New System.Drawing.Point(117, 312)
+        Me.btnComenzar.Name = "btnComenzar"
+        Me.btnComenzar.Size = New System.Drawing.Size(93, 31)
+        Me.btnComenzar.TabIndex = 1
+        Me.btnComenzar.Text = "&Comenzar"
+        Me.btnComenzar.UseVisualStyleBackColor = True
+        '
+        'txtPuntajeLimite
+        '
+        Me.txtPuntajeLimite.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPuntajeLimite.Location = New System.Drawing.Point(105, 69)
+        Me.txtPuntajeLimite.Name = "txtPuntajeLimite"
+        Me.txtPuntajeLimite.Size = New System.Drawing.Size(196, 20)
+        Me.txtPuntajeLimite.TabIndex = 5
         '
         'frmNuevaPartida
         '
@@ -151,6 +152,7 @@ Partial Class frmNuevaPartida
         Me.container.PerformLayout()
         Me.groupUsuariosConectados.ResumeLayout(False)
         Me.groupUsuariosConectados.PerformLayout()
+        CType(Me.txtPuntajeLimite, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -158,10 +160,10 @@ Partial Class frmNuevaPartida
     Friend WithEvents container As GroupBox
     Friend WithEvents btnComenzar As Button
     Friend WithEvents lblCodigoPartida As Label
-    Friend WithEvents txtPuntajeLimite As TextBox
     Friend WithEvents lblPuntajeLimite As Label
     Friend WithEvents groupUsuariosConectados As GroupBox
     Friend WithEvents lstUsuariosConectados As ListBox
     Friend WithEvents progressUsuariosConectados As ProgressBar
     Friend WithEvents lnkIniciarSession As LinkLabel
+    Friend WithEvents txtPuntajeLimite As NumericUpDown
 End Class

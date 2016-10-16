@@ -22,11 +22,21 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.ManoPorJugador2 = New ChinchonWinForms.ManoPorJugador()
         Me.VisorMonton = New ChinchonWinForms.VisorCarta()
         Me.VisorMazo = New ChinchonWinForms.VisorCarta()
         Me.ManoPorJugador1 = New ChinchonWinForms.ManoPorJugador()
-        Me.ManoPorJugador2 = New ChinchonWinForms.ManoPorJugador()
         Me.SuspendLayout()
+        '
+        'ManoPorJugador2
+        '
+        Me.ManoPorJugador2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ManoPorJugador2.BackColor = System.Drawing.Color.Transparent
+        Me.ManoPorJugador2.Location = New System.Drawing.Point(158, 0)
+        Me.ManoPorJugador2.Name = "ManoPorJugador2"
+        Me.ManoPorJugador2.Size = New System.Drawing.Size(628, 124)
+        Me.ManoPorJugador2.TabIndex = 3
         '
         'VisorMonton
         '
@@ -36,6 +46,7 @@ Partial Class frmMain
         Me.VisorMonton.HabilitarComoFuenteDeArrastre = True
         Me.VisorMonton.Location = New System.Drawing.Point(346, 302)
         Me.VisorMonton.Name = "VisorMonton"
+        Me.VisorMonton.RolAsignado = "Monton"
         Me.VisorMonton.Size = New System.Drawing.Size(133, 185)
         Me.VisorMonton.TabIndex = 2
         '
@@ -47,6 +58,7 @@ Partial Class frmMain
         Me.VisorMazo.Location = New System.Drawing.Point(562, 302)
         Me.VisorMazo.MostrarCarta = False
         Me.VisorMazo.Name = "VisorMazo"
+        Me.VisorMazo.RolAsignado = "Mazo"
         Me.VisorMazo.Size = New System.Drawing.Size(133, 185)
         Me.VisorMazo.TabIndex = 1
         '
@@ -59,16 +71,6 @@ Partial Class frmMain
         Me.ManoPorJugador1.Name = "ManoPorJugador1"
         Me.ManoPorJugador1.Size = New System.Drawing.Size(628, 124)
         Me.ManoPorJugador1.TabIndex = 0
-        '
-        'ManoPorJugador2
-        '
-        Me.ManoPorJugador2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ManoPorJugador2.BackColor = System.Drawing.Color.Transparent
-        Me.ManoPorJugador2.Location = New System.Drawing.Point(158, 0)
-        Me.ManoPorJugador2.Name = "ManoPorJugador2"
-        Me.ManoPorJugador2.Size = New System.Drawing.Size(628, 124)
-        Me.ManoPorJugador2.TabIndex = 3
         '
         'frmMain
         '

@@ -89,5 +89,23 @@ Namespace My.Resources
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ingrese sus credenciales para poder jugar.
+        '''</summary>
+        Friend ReadOnly Property Titulo_IngreseSusCredenciales() As String
+            Get
+                Return ResourceManager.GetString("Titulo_IngreseSusCredenciales", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Bienvenido! Presione comenzar cuando esté listo.
+        '''</summary>
+        Friend ReadOnly Property Titulo_NuevaPartida() As String
+            Get
+                Return ResourceManager.GetString("Titulo_NuevaPartida", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

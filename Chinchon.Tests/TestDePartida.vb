@@ -1,4 +1,6 @@
-﻿<TestClass()>
+﻿Imports Chinchon.Entities
+
+<TestClass()>
 Public Class TestDePartida
 
     <TestMethod()>
@@ -33,13 +35,20 @@ Public Class TestDePartida
 
     <TestMethod()>
     Public Sub UnaPartidaDebeNotificarCadaVezQueComienzaUnaRonda()
-        Dim partida As New Partida()
+        Dim contadorEventoDisparados As Integer = 0
+        Dim manejadorDelEvento As EventHandler = Sub(sender, e) contadorEventoDisparados += 1
         Dim jugadorA As New Jugador()
         Dim jugadorB As New Jugador()
-
+        Dim partida As New Partida()
+        AddHandler partida.EmpiezaNuevaRonda, manejadorDelEvento
         partida.Unirse(jugadorA)
         partida.Unirse(jugadorB)
-        partida.Comenzar()
 
+        'ACT & ASSERT
+        partida.Comenzar()
+        Assert.AreEqual(1, contadorEventoDisparados, "No se disparo el evento de comienzo de ronda al comenzar la partida")
+
+        partida.NuevaRonda()
+        Assert.AreEqual(2, contadorEventoDisparados, "No se disparo el evento de comienzo de ronda al comenzar una nueva ronda")
     End Sub
 End Class

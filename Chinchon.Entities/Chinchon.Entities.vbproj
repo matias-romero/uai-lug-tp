@@ -60,6 +60,8 @@
   <ItemGroup>
     <Compile Include="Carta.vb" />
     <Compile Include="CartaComodin.vb" />
+    <Compile Include="Interfaces\IJugadorRepositorio.vb" />
+    <Compile Include="Jugador.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

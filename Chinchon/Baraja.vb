@@ -1,6 +1,9 @@
 ﻿Imports Chinchon
 Imports Chinchon.Entities
-'Fijado en el alcance, las barajas son siempre españolas y de 50 cartas (12 de cada palo y dos comodines)
+
+''' <summary>
+''' Fijado en el alcance, las barajas son siempre españolas y de 50 cartas (12 de cada palo y dos comodines)
+''' </summary>
 Public Class Baraja
     Implements IEnumerable(Of Carta)
 
