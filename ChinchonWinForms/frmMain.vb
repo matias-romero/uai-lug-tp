@@ -49,4 +49,14 @@ Public Class frmMain
         'TODO: Conectar con el orquestador
         MessageBox.Show(String.Format("Solto la carta {0} en el monton", e.Carta))
     End Sub
+
+    Private Sub VisorMonton_OperacionDeCerrarRondaDetectada(sender As Object, e As MovimientoCartasEventArgs) Handles VisorMonton.OperacionDeCerrarRondaDetectada
+        'TODO: Conectar con el orquestador
+        MessageBox.Show(String.Format("Solicito cerrar la ronda con la carta {0}", e.Carta))
+        VisorMonton.EstaCerrado = True
+    End Sub
+
+    Private Sub RefrescarEstadoPartida(unaPartida As Partida)
+        Me.VisorMonton.CartaVisible = unaPartida.Monton.Cara
+    End Sub
 End Class

@@ -5,6 +5,7 @@ Imports Chinchon.Entities
 ''' Fijado en el alcance, las barajas son siempre españolas y de 50 cartas (12 de cada palo y dos comodines)
 ''' </summary>
 Public Class Baraja
+    Implements IBaraja
     Implements IEnumerable(Of Carta)
 
     Public Const CantidadCartasTotales As Integer = 50
@@ -39,7 +40,7 @@ Public Class Baraja
         _barajadorPorDefecto.Barajar(_cartas)
     End Sub
 
-    Public Function TomarCarta() As Carta
+    Public Function TomarCarta() As Carta Implements IBaraja.TomarCarta
         Return Me.TomarCartas(1).Single()
     End Function
 

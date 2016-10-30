@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conector.vb" />
-    <Compile Include="Exceptions\CredencialesInvalidasException.vb" />
     <Compile Include="GenericRepository.vb" />
     <Compile Include="IConector.vb" />
     <Compile Include="JugadorRepositorio.vb" />

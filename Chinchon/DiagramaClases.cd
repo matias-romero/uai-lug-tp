@@ -11,9 +11,10 @@
   <Class Name="Chinchon.Monton" Collapsed="true">
     <Position X="7.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACCAAAAQAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>AIAACCAAAAQAAAAAAAAAAAAAAgAAAAABAACAAAAAAAA=</HashCode>
       <FileName>Monton.vb</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Chinchon.Partida">
     <Position X="12" Y="1.25" Width="1.5" />
@@ -21,7 +22,7 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAmEAwAAgAAAAACAABBAAAAAEAAAAAAQIAAAECACQA=</HashCode>
+      <HashCode>AAAmEAwAAgAAAAQCAABBAAAIAEAAAAAAQIAACECACQA=</HashCode>
       <FileName>Partida.vb</FileName>
     </TypeIdentifier>
   </Class>

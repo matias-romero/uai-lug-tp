@@ -6,7 +6,7 @@ Namespace Configuracion
     ''' <summary>
     ''' Implementación de los Repositorios utilizando un repositorio SQL subyacente
     ''' </summary>
-    Public Class FactoriaRepositorioSQL
+    Public Class FactoriaRepositorioSql
         Implements IFactoriaRepositorios
 
         Private ReadOnly _cadenaConexion As String

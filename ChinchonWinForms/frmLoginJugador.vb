@@ -1,7 +1,6 @@
-﻿Imports Chinchon
-Imports Chinchon.Data
-Imports Chinchon.Data.Exceptions
+﻿
 Imports Chinchon.Entities
+Imports Chinchon.Entities.Exceptions
 
 Public Class frmLoginJugador
     Private Sub OK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK.Click
@@ -14,7 +13,7 @@ Public Class frmLoginJugador
         Me.Close()
     End Sub
 
-    Public Shared Function PreguntarCredenciales(titulo As String, repositorio As JugadorRepositorio) As Jugador
+    Public Shared Function PreguntarCredenciales(titulo As String, repositorio As IJugadorRepositorio) As Jugador
         Dim jugadorLogueado As Jugador = Nothing
         Using formLogin As New frmLoginJugador()
             formLogin.Text = titulo

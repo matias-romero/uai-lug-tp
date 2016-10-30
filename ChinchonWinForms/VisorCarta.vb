@@ -70,6 +70,22 @@ Public Class VisorCarta
         End Set
     End Property
 
+    ''' <summary>
+    ''' Obtiene el control que inicio el origen de la operacion de arrastrar/soltar carta
+    ''' </summary>
+    ''' <param name="e">Parametro del evento</param>
+    ''' <returns>Retorna el control que inicio el Drag o bien Nothing si es otro tipo de arrastre</returns>
+    Public Shared Function GetOrigenDragDrop(e As DragEventArgs) As Control
+
+        If Not e.Data.GetDataPresent(GetType(DragDropData)) Then
+            e.Effect = DragDropEffects.None
+            Return Nothing
+        End If
+
+        Dim data As DragDropData = e.Data.GetData(GetType(DragDropData))
+        Return LocalizadorDeControles.RecoverOriginalControl(data.NombreControl)
+    End Function
+
     Private Sub RenderizarCarta()
         'Libero los recursos no manejados GDI del bitmap
         If _cartaRenderizada IsNot Nothing Then
@@ -111,13 +127,7 @@ Public Class VisorCarta
     End Sub
 
     Private Sub VisorCarta_DragDrop(sender As Object, e As DragEventArgs)
-        If Not e.Data.GetDataPresent(GetType(DragDropData)) Then
-            e.Effect = DragDropEffects.None
-            Return
-        End If
-
-        Dim data As DragDropData = e.Data.GetData(GetType(DragDropData))
-        Dim origen As Control = LocalizadorDeControles.RecoverOriginalControl(data.NombreControl)
+        Dim origen As Control = GetOrigenDragDrop(e)
         If origen IsNot Nothing Then
             'Notificó un evento de desplazamiento solicitado por el usuario
             Call Me.OnOperacionDeSoltarCartaDetectada(origen, Me)
@@ -138,28 +148,4 @@ Public Class VisorCarta
         AddHandler Me.DragDrop, AddressOf Me.VisorCarta_DragDrop
         AddHandler Me.picture.DragDrop, AddressOf Me.VisorCarta_DragDrop
     End Sub
-
-    Private Function FullyQualifiedName() As String
-        Return LocalizadorDeControles.ResolveFullyQualifiedName(Me)
-        Dim nestedNamesStack As New Stack(Of String)
-        nestedNamesStack.Push(Me.Name)
-
-        Dim parentContainer As Object = Me.Parent
-        While parentContainer IsNot Nothing
-            Dim frm As Form = TryCast(parentContainer, Form) 'Los form son a su vez Controles
-            If frm IsNot Nothing Then
-                'nestedNamesStack.Push(frm.Name)
-                parentContainer = Nothing 'Corto el algoritmo si alcance al Formulario Contenedor
-            Else
-                Dim ctl As Control = TryCast(parentContainer, Control)
-                If ctl IsNot Nothing Then
-                    nestedNamesStack.Push(ctl.Name)
-                    parentContainer = ctl.Parent
-                End If
-            End If
-        End While
-
-        Return String.Join(".", nestedNamesStack.ToArray())
-    End Function
-
 End Class

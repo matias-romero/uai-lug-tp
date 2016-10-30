@@ -1,5 +1,6 @@
-﻿Imports Chinchon.Data.Exceptions
+﻿
 Imports Chinchon.Entities
+Imports Chinchon.Entities.Exceptions
 
 Public Class JugadorRepositorio
     Implements IJugadorRepositorio

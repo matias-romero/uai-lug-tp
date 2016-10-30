@@ -41,6 +41,18 @@ Public Class Partida
         End Get
     End Property
 
+    Public ReadOnly Property Monton As IMonton
+        Get
+            Return _monton
+        End Get
+    End Property
+
+    Public ReadOnly Property Mazo As IBaraja
+        Get
+            Return _mazo
+        End Get
+    End Property
+
     Public ReadOnly Property TurnoEnCurso As Turno
         Get
             Return _rondas.Last().TurnoActual

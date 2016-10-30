@@ -91,6 +91,25 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Red_Cross_svg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Red_Cross_svg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Asignar valor al comodín.
+        '''</summary>
+        Friend ReadOnly Property Titulo_AsignarValorComodin() As String
+            Get
+                Return ResourceManager.GetString("Titulo_AsignarValorComodin", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Ingrese sus credenciales para poder jugar.
         '''</summary>
         Friend ReadOnly Property Titulo_IngreseSusCredenciales() As String

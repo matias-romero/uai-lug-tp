@@ -22,11 +22,20 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.VisorMonton = New ChinchonWinForms.VisorMonton()
         Me.ManoPorJugador2 = New ChinchonWinForms.ManoPorJugador()
-        Me.VisorMonton = New ChinchonWinForms.VisorCarta()
         Me.VisorMazo = New ChinchonWinForms.VisorCarta()
         Me.ManoPorJugador1 = New ChinchonWinForms.ManoPorJugador()
         Me.SuspendLayout()
+        '
+        'VisorMonton
+        '
+        Me.VisorMonton.AllowDrop = True
+        Me.VisorMonton.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.VisorMonton.Location = New System.Drawing.Point(299, 232)
+        Me.VisorMonton.Name = "VisorMonton"
+        Me.VisorMonton.Size = New System.Drawing.Size(197, 255)
+        Me.VisorMonton.TabIndex = 4
         '
         'ManoPorJugador2
         '
@@ -38,24 +47,12 @@ Partial Class frmMain
         Me.ManoPorJugador2.Size = New System.Drawing.Size(628, 124)
         Me.ManoPorJugador2.TabIndex = 3
         '
-        'VisorMonton
-        '
-        Me.VisorMonton.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.VisorMonton.Carta = Nothing
-        Me.VisorMonton.HabilitarComoDestinoDeArrastre = True
-        Me.VisorMonton.HabilitarComoFuenteDeArrastre = True
-        Me.VisorMonton.Location = New System.Drawing.Point(346, 302)
-        Me.VisorMonton.Name = "VisorMonton"
-        Me.VisorMonton.RolAsignado = "Monton"
-        Me.VisorMonton.Size = New System.Drawing.Size(133, 185)
-        Me.VisorMonton.TabIndex = 2
-        '
         'VisorMazo
         '
         Me.VisorMazo.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.VisorMazo.Carta = Nothing
         Me.VisorMazo.HabilitarComoFuenteDeArrastre = True
-        Me.VisorMazo.Location = New System.Drawing.Point(562, 302)
+        Me.VisorMazo.Location = New System.Drawing.Point(529, 302)
         Me.VisorMazo.MostrarCarta = False
         Me.VisorMazo.Name = "VisorMazo"
         Me.VisorMazo.RolAsignado = "Mazo"
@@ -78,8 +75,8 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.ForestGreen
         Me.ClientSize = New System.Drawing.Size(925, 741)
-        Me.Controls.Add(Me.ManoPorJugador2)
         Me.Controls.Add(Me.VisorMonton)
+        Me.Controls.Add(Me.ManoPorJugador2)
         Me.Controls.Add(Me.VisorMazo)
         Me.Controls.Add(Me.ManoPorJugador1)
         Me.Name = "frmMain"
@@ -90,6 +87,6 @@ Partial Class frmMain
 
     Friend WithEvents ManoPorJugador1 As ManoPorJugador
     Friend WithEvents VisorMazo As VisorCarta
-    Friend WithEvents VisorMonton As VisorCarta
     Friend WithEvents ManoPorJugador2 As ManoPorJugador
+    Friend WithEvents VisorMonton As VisorMonton
 End Class
