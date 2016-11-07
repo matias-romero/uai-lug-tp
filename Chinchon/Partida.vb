@@ -55,9 +55,16 @@ Public Class Partida
 
     Public ReadOnly Property TurnoEnCurso As Turno
         Get
-            Return _rondas.Last().TurnoActual
+            Return Me.RondaActual.TurnoActual
         End Get
     End Property
+
+    Friend ReadOnly Property RondaActual As Ronda
+        Get
+            Return _rondas.Last()
+        End Get
+    End Property
+
 
     ''' <summary>
     ''' Permite que un jugador se una a la partida
@@ -99,7 +106,7 @@ Public Class Partida
     ''' Crea una nueva ronda notificando que cambio el turno
     ''' </summary>
     Public Function NuevaRonda() As Ronda
-        Dim ronda As Ronda = New Ronda(Me.Jugadores)
+        Dim ronda As Ronda = New Ronda(_jugadores)
         ronda.AvanzarTurno() 'Inicio el primer turno de la ronda
         _rondas.Add(ronda)
 

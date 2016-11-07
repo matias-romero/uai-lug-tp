@@ -6,7 +6,7 @@
         End Function
 
         Private Function AccionDePonerCartaEnElMonton() As IAccion
-            Return New PonerCartaEnElMonton()
+            'Return New PonerCartaEnElMonton()
         End Function
     End Class
 End Namespace

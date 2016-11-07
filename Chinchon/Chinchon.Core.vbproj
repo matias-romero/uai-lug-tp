@@ -59,6 +59,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acciones\CambiarPosicionCartaEnMano.vb" />
+    <Compile Include="Acciones\CerrarRonda.vb" />
     <Compile Include="Acciones\IAccion.vb" />
     <Compile Include="Acciones\PonerCartaEnElMonton.vb" />
     <Compile Include="Acciones\TomarCartaDesdeElMonton.vb" />

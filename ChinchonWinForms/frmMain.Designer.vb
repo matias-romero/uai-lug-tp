@@ -32,7 +32,8 @@ Partial Class frmMain
         '
         Me.VisorMonton.AllowDrop = True
         Me.VisorMonton.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.VisorMonton.Location = New System.Drawing.Point(299, 232)
+        Me.VisorMonton.CartaVisible = Nothing
+        Me.VisorMonton.Location = New System.Drawing.Point(299, 228)
         Me.VisorMonton.Name = "VisorMonton"
         Me.VisorMonton.Size = New System.Drawing.Size(197, 255)
         Me.VisorMonton.TabIndex = 4
@@ -52,7 +53,7 @@ Partial Class frmMain
         Me.VisorMazo.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.VisorMazo.Carta = Nothing
         Me.VisorMazo.HabilitarComoFuenteDeArrastre = True
-        Me.VisorMazo.Location = New System.Drawing.Point(529, 302)
+        Me.VisorMazo.Location = New System.Drawing.Point(529, 298)
         Me.VisorMazo.MostrarCarta = False
         Me.VisorMazo.Name = "VisorMazo"
         Me.VisorMazo.RolAsignado = "Mazo"
@@ -64,7 +65,7 @@ Partial Class frmMain
         Me.ManoPorJugador1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ManoPorJugador1.BackColor = System.Drawing.Color.Transparent
-        Me.ManoPorJugador1.Location = New System.Drawing.Point(158, 614)
+        Me.ManoPorJugador1.Location = New System.Drawing.Point(158, 606)
         Me.ManoPorJugador1.Name = "ManoPorJugador1"
         Me.ManoPorJugador1.Size = New System.Drawing.Size(628, 124)
         Me.ManoPorJugador1.TabIndex = 0
@@ -74,7 +75,7 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.ForestGreen
-        Me.ClientSize = New System.Drawing.Size(925, 741)
+        Me.ClientSize = New System.Drawing.Size(925, 733)
         Me.Controls.Add(Me.VisorMonton)
         Me.Controls.Add(Me.ManoPorJugador2)
         Me.Controls.Add(Me.VisorMazo)

@@ -1,9 +1,17 @@
-﻿Namespace Acciones
+﻿Imports Chinchon.Entities
+
+Namespace Acciones
     Public Class TomarCartaDesdeLaBaraja
         Implements IAccion
 
+        Private _partida As Partida
+        Public Sub New(partida As Partida)
+            _partida = partida
+        End Sub
+
         Public Sub Ejecutar() Implements IAccion.Ejecutar
-            Throw New NotImplementedException()
+            Dim proximaCarta As Carta = _partida.Mazo.TomarCarta()
+            _partida.TurnoEnCurso.CartaLevantada = proximaCarta
         End Sub
     End Class
 End Namespace

@@ -7,10 +7,10 @@ Public Class Ronda
     Public Event CambioTurno As EventHandler
 
     Private _turnoActual As Integer
-    Private _jugadoresActivos As Jugador()
+    Private _jugadoresActivos As ManoPorJugador()
     Private _turnosJugados As New List(Of Turno)
 
-    Public Sub New(jugadoresActivos As IEnumerable(Of Jugador))
+    Friend Sub New(jugadoresActivos As IEnumerable(Of ManoPorJugador))
         _turnoActual = -1
         'Copio los jugadores activos en cada ronda ya que es posible que algunos vayan quedando descalificados
         _jugadoresActivos = jugadoresActivos.ToArray()
@@ -25,8 +25,9 @@ Public Class Ronda
     Public Sub AvanzarTurno()
         _turnoActual += 1
         Dim indiceJugadorActual As Integer = _turnoActual Mod _jugadoresActivos.Count()
-        Dim jugadorActual As Jugador = _jugadoresActivos(indiceJugadorActual)
-        _turnosJugados.Add(New Turno(jugadorActual))
+        Dim jugadorActual As Jugador = _jugadoresActivos(indiceJugadorActual).Jugador
+        Dim manoActual As Mano = _jugadoresActivos(indiceJugadorActual).Mano
+        _turnosJugados.Add(New Turno(jugadorActual, manoActual))
     End Sub
 
     ''' <summary>
