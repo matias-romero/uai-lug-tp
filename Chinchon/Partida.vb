@@ -10,15 +10,22 @@ Public Class Partida
     Private Const MaximoNumeroDeJugadoresPermitidos As Integer = 4
 
     Private ReadOnly _id As Guid
-    Private ReadOnly _mazo As New Baraja()
-    Private ReadOnly _monton As New Monton()
+    Private ReadOnly _mazo As  Baraja
+    Private ReadOnly _monton As  Monton
     Private ReadOnly _rondas As New List(Of Ronda)
     Private ReadOnly _jugadores As New List(Of ManoPorJugador)
 
     Public Sub New()
-        _id = Guid.NewGuid()
-        Me.PuntajeLimite = 100
+        Me.new(Guid.NewGuid(), New Baraja(), new Monton())
     End Sub
+
+    public sub New(id As Guid, mazo As Baraja, monton As Monton)
+        _id = id
+        _mazo = mazo
+        _monton = monton
+
+        Me.PuntajeLimite = 100
+    End sub
 
     ''' <summary>
     ''' Devuelve el identificador de la partida
