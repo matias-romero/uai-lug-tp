@@ -41,6 +41,15 @@ Namespace Combinaciones
         End Function
 
         ''' <summary>
+        ''' Determina si la carta consultada está incluida en la combinación
+        ''' </summary>
+        ''' <param name="carta"></param>
+        ''' <returns></returns>
+        public Function TieneLaCarta(carta As carta) As Boolean
+            Return Me.Cartas.Contains(carta)
+        End Function
+
+        ''' <summary>
         ''' Determina el número mínimo de cartas permitidas para poder hacer la combinación
         ''' </summary>
         Public Overridable ReadOnly Property MinimoCartasNecesarias As Integer

@@ -53,6 +53,7 @@ Public Class Turno
 
     Private Sub ComprobarSiTerminoSuTurno()
         If Me.CartaLevantada IsNot Nothing AndAlso Me.CartaDescartada IsNot Nothing Then
+            Call Me.Mano.IntercambiarCarta(Me.CartaDescartada, me.CartaLevantada)
             Call Me.FinalizarTurno()
         End If
     End Sub

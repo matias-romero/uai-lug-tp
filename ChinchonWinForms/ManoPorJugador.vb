@@ -7,13 +7,18 @@ Public Class ManoPorJugador
     Private _manoDelJugador As Mano
     Private _visoresPorCarta As VisorCarta()
 
-    Private Sub ManoPorJugador_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    public sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
         _visoresPorCarta = New VisorCarta() {Me.VisorCarta1, Me.VisorCarta2, Me.VisorCarta3, Me.VisorCarta4, Me.VisorCarta5, Me.VisorCarta6, Me.VisorCarta7}
         For Each visor As VisorCarta In _visoresPorCarta 'Escucho los eventos de drop de cada visor y propago el mismo al consumidor
             AddHandler visor.OperacionDeSoltarCartaDetectada, AddressOf Me.OnOperacionDeSoltarCartaDetectada
         Next
     End Sub
-
+    
     Public Sub Init(manoDelJugador As Mano)
         _manoDelJugador = manoDelJugador
         Dim indiceControl As Integer = 0

@@ -1,4 +1,5 @@
 ﻿
+Imports Chinchon.Entities
 
 Public Interface IMonton
     Event CambioColeccion As EventHandler

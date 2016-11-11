@@ -12,7 +12,9 @@ Public Module Program
         'AddHandler orquestador.PartidaActual.EmpiezaNuevoTurno, AddressOf Me.EmpiezaNuevoTurno
 
         orquestador.PartidaActual.Unirse(New Jugador() With {.Id = 1, .Apodo = "Matias"})
-        orquestador.PartidaActual.Unirse(New Jugador() With {.Id = 2, .Apodo = "Rival"})
+        orquestador.PartidaActual.Unirse(New Jugador() With {.Id = 2, .Apodo = "Rival A"})
+        'orquestador.PartidaActual.Unirse(New Jugador() With {.Id = 3, .Apodo = "Rival B"})
+        'orquestador.PartidaActual.Unirse(New Jugador() With {.Id = 4, .Apodo = "Rival C"})
 
         orquestador.PartidaActual.Comenzar()
         '**************************************************

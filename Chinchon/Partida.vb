@@ -10,22 +10,22 @@ Public Class Partida
     Private Const MaximoNumeroDeJugadoresPermitidos As Integer = 4
 
     Private ReadOnly _id As Guid
-    Private ReadOnly _mazo As  Baraja
-    Private ReadOnly _monton As  Monton
+    Private ReadOnly _mazo As Baraja
+    Private ReadOnly _monton As Monton
     Private ReadOnly _rondas As New List(Of Ronda)
     Private ReadOnly _jugadores As New List(Of ManoPorJugador)
 
     Public Sub New()
-        Me.new(Guid.NewGuid(), New Baraja(), new Monton())
+        Me.New(Guid.NewGuid(), New Baraja(), New Monton())
     End Sub
 
-    public sub New(id As Guid, mazo As Baraja, monton As Monton)
+    Public Sub New(id As Guid, mazo As Baraja, monton As Monton)
         _id = id
         _mazo = mazo
         _monton = monton
 
         Me.PuntajeLimite = 100
-    End sub
+    End Sub
 
     ''' <summary>
     ''' Devuelve el identificador de la partida
@@ -117,8 +117,32 @@ Public Class Partida
         ronda.AvanzarTurno() 'Inicio el primer turno de la ronda
         _rondas.Add(ronda)
 
+        AddHandler ronda.CambioTurno, AddressOf Me.NotificarQueCambioElTurno
         RaiseEvent EmpiezaNuevaRonda(ronda, EventArgs.Empty)
+
         Return ronda
+    End Function
+
+    Private Sub NotificarQueCambioElTurno(sender As Object, e As EventArgs)
+        RaiseEvent EmpiezaNuevoTurno(Me, e)
+    End Sub
+
+    ''' <summary>
+    ''' Obtengo el presentador enlazado con el jugador indicado
+    ''' </summary>
+    ''' <param name="jugador">Un jugador de la partida</param>
+    ''' <returns>Retorna la visión de la partida desde el punto de vista de ese jugador</returns>
+    Public Function VerComo(jugador As Jugador) As VistaPorJugador
+        Return New VistaPorJugador(Me, jugador, Me.ObtenerManoDelJugador(jugador))
+    End Function
+
+    ''' <summary>
+    ''' Devuelve la mano asignada para ese jugador
+    ''' </summary>
+    ''' <param name="jugador">Jugador de la partida</param>
+    Private Function ObtenerManoDelJugador(jugador As Jugador) As Mano
+        Dim manoPorJugador As ManoPorJugador = _jugadores.Single(Function(mpj) mpj.Jugador.Equals(jugador))
+        Return manoPorJugador.Mano
     End Function
 
     Private ReadOnly Property PuedoComenzarPartida As Boolean

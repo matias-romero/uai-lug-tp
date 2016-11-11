@@ -32,6 +32,7 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(925, 733)
         Me.IsMdiContainer = true
         Me.Name = "frmMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMain"
         Me.ResumeLayout(false)
 

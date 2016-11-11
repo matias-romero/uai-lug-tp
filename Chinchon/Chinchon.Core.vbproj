@@ -72,9 +72,12 @@
     <Compile Include="Combinaciones\Combinacion.vb" />
     <Compile Include="Combinaciones\Escalera.vb" />
     <Compile Include="Configuracion\FactoriaRepositorioSql.vb" />
+    <Compile Include="Exceptions\NoHaySuficientesCartasException.vb" />
     <Compile Include="Exceptions\LimiteJugadoresPorAlcanzadoException.vb" />
+    <Compile Include="IBaraja.vb" />
     <Compile Include="IBarajador.vb" />
     <Compile Include="Configuracion\IFactoriaRepositorios.vb" />
+    <Compile Include="IMonton.vb" />
     <Compile Include="Mano.vb" />
     <Compile Include="ManoPorJugador.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

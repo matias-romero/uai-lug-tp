@@ -1,4 +1,5 @@
 ﻿Imports Chinchon.Entities
+Imports Moq
 
 <TestClass()>
 Public Class TestDePartida
@@ -51,4 +52,34 @@ Public Class TestDePartida
         partida.NuevaRonda()
         Assert.AreEqual(2, contadorEventoDisparados, "No se disparo el evento de comienzo de ronda al comenzar una nueva ronda")
     End Sub
+
+    <TestMethod()>
+    Public Sub ProbarUnaPartidaCompleta()
+        'ARRANGE
+        Dim montonArreglado As New Monton()
+        Dim barajadorMock As New Mock(Of IBarajador)
+        Dim mazoArreglado As New Baraja(barajadorMock.Object)
+        Dim partida As New Partida(Guid.NewGuid(), mazoArreglado, montonArreglado)
+        
+        Dim jugadorRed As Jugador = New Jugador() With {.Id = 1, .Apodo = "Red"}
+        Dim jugadorBlue As Jugador  = New Jugador() With {.Id = 2, .Apodo = "Blue"}
+        partida.Unirse(jugadorRed)
+        partida.Unirse(jugadorBlue)
+        partida.Comenzar()
+
+        Dim mvpRed As VistaPorJugador = partida.VerComo(jugadorRed)
+        Dim mvpBlue As VistaPorJugador = partida.VerComo(jugadorBlue)
+
+        'ACT & ASSERT
+        Assert.IsTrue(mvpRed.EsMiTurno, "Debe ser el turno de Red")
+        Assert.IsFalse(mvpBlue.EsMiTurno, "Blue todavía no tiene el turno")
+
+        mvpRed.TomarCartaDesdeElMazo()
+        Assert.IsTrue(mvpRed.EsMiTurno, "Hasta que no descarta sigue el siendo el turno de Red")
+        mvpRed.DescartarCarta(mvpRed.Mano.Cartas.ElementAt(2))
+        Assert.IsFalse(mvpRed.EsMiTurno, "Si tomé y descarté una carta terminó mi turno")
+
+        'Assert.AreEqual(jugadorBlue, partida.TurnoEnCurso.Jugador)
+    End Sub
 End Class
+

@@ -1,15 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Chinchon.Baraja" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="7.75" Y="0.5" Width="1.5" />
+  <Class Name="Chinchon.Baraja" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="0.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAACAQECBAAAAAAAIAAAAAAIAAEAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAACAQECBAAAAAAAIAAAgAAIAAEAAAABAAAAAA=</HashCode>
       <FileName>Baraja.vb</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Chinchon.Monton" Collapsed="true">
-    <Position X="7.75" Y="1.5" Width="1.5" />
+  <Class Name="Chinchon.Monton">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
       <HashCode>AIAACCAAAAQAAAAAAAAAAAAAAgAAAAABAACAAAAAAAA=</HashCode>
       <FileName>Monton.vb</FileName>
@@ -17,7 +23,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="Chinchon.Partida">
-    <Position X="12" Y="1.25" Width="1.5" />
+    <Position X="7" Y="2.25" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
@@ -27,14 +33,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Chinchon.Ronda">
-    <Position X="10.25" Y="1.25" Width="1.5" />
+    <Position X="9.25" Y="1.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAgAAACQAIAAAGAAA=</HashCode>
       <FileName>Ronda.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Chinchon.Combinaciones.Chinchon">
-    <Position X="1.25" Y="5.75" Width="2" />
+    <Position X="1.25" Y="6.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Combinaciones\Chinchon.vb</FileName>
@@ -46,45 +52,51 @@
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAgCFAAAAgAAAAQAAAAAAAAAAAAAAAAACA=</HashCode>
+      <HashCode>BEAAAAAAAAAgCFAAAAgAAAAQAAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>Combinaciones\Combinacion.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Chinchon.Combinaciones.Escalera">
-    <Position X="1.25" Y="3.75" Width="2" />
+    <Position X="1.25" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Combinaciones\Escalera.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Chinchon.Combinaciones.Pie">
-    <Position X="4.5" Y="3.75" Width="2" />
+    <Position X="4.5" Y="4.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Combinaciones\Pie.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Chinchon.Turno">
-    <Position X="10.25" Y="5" Width="1.5" />
+    <Position X="9.25" Y="4.75" Width="2" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAIAAAABAAAAAAAAABAIAgAAAAAEAAEA=</HashCode>
+      <HashCode>gAAAAAAAgAgAAKAAAABAAAAACAAABAIAgAAACAEAgEA=</HashCode>
       <FileName>Turno.vb</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Chinchon.Entities.Carta" Collapsed="true">
+  <Class Name="Chinchon.Entities.Carta">
     <Position X="13.75" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier />
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Chinchon.Entities.CartaComodin" Collapsed="true">
-    <Position X="13.75" Y="4.25" Width="1.5" />
+    <Position X="13.75" Y="5.25" Width="1.5" />
     <TypeIdentifier />
   </Class>
-  <Class Name="Chinchon.Entities.Jugador" Collapsed="true">
-    <Position X="10.25" Y="0.5" Width="1.5" />
+  <Class Name="Chinchon.Entities.Jugador">
+    <Position X="13.75" Y="6.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier />
   </Class>
   <Enum Name="Chinchon.Entities.Palo">

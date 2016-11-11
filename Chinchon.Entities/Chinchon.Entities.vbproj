@@ -61,8 +61,6 @@
     <Compile Include="Carta.vb" />
     <Compile Include="CartaComodin.vb" />
     <Compile Include="Exceptions\CredencialesInvalidasException.vb" />
-    <Compile Include="IBaraja.vb" />
-    <Compile Include="IMonton.vb" />
     <Compile Include="Interfaces\IJugadorRepositorio.vb" />
     <Compile Include="Jugador.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -81,6 +79,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Palo.vb" />
+    <Compile Include="ParticipacionJugadorEnPartida.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

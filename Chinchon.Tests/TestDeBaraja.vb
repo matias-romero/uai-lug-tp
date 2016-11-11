@@ -1,6 +1,4 @@
-﻿Imports System.Text
-Imports Chinchon.Entities
-Imports Microsoft.VisualStudio.TestTools.UnitTesting
+﻿Imports Chinchon.Entities
 
 <TestClass()>
 Public Class TestDeBaraja
