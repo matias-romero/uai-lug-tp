@@ -5,6 +5,8 @@ Namespace Combinaciones
     Public MustInherit Class Combinacion
         Private ReadOnly _cartas As New List(Of Carta)
 
+        public Event ColeccionModificada as EventHandler
+
         ''' <summary>
         ''' Enumera las cartas incluidas en la combinación
         ''' </summary>
@@ -21,6 +23,8 @@ Namespace Combinaciones
         ''' <param name="carta">La carta que agrega</param>
         Public Sub AgregarCarta(carta As Carta)
             _cartas.Add(carta)
+
+            Call Me.OnColeccionModificada()
         End Sub
 
         ''' <summary>
@@ -29,6 +33,8 @@ Namespace Combinaciones
         ''' <param name="listadoCartas">Listado de cartas por agregar</param>
         Public Sub AgregarCartas(listadoCartas As IEnumerable(Of Carta))
             _cartas.AddRange(listadoCartas)
+
+            Call Me.OnColeccionModificada()
         End Sub
 
         ''' <summary>
@@ -36,8 +42,10 @@ Namespace Combinaciones
         ''' </summary>
         ''' <param name="unaCarta">Carta que desea eliminar de la combinación</param>
         ''' <returns>Retorna verdadero en caso de haberla encontrado y removido de la colección</returns>
-        Public Function RemoverCarta(unaCarta As Carta)
-            Return _cartas.Remove(unaCarta)
+        Public Function RemoverCarta(unaCarta As Carta) As Boolean
+            Dim fueRemovida As Boolean = _cartas.Remove(unaCarta)
+            If fueRemovida Then Call Me.OnColeccionModificada()
+            Return fueRemovida
         End Function
 
         ''' <summary>
@@ -67,6 +75,15 @@ Namespace Combinaciones
         ''' Comprueba que la combinación elegida de cartas cumpla la regla de juego
         ''' </summary>
         Public MustOverride Function EsValida() As Boolean
+
+        Public Overrides Function ToString() As String
+            'Utilizo el nombre de la clase como dato representativo
+            Return Me.GetType().Name
+        End Function
+
+        Private sub OnColeccionModificada()
+            RaiseEvent ColeccionModificada(me, EventArgs.Empty)
+        End sub
     End Class
 
 End Namespace

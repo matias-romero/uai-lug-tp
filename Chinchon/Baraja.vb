@@ -56,11 +56,23 @@ Public Class Baraja
             Throw New NoHaySuficientesCartasException()
         End If
 
-        'Para el caso el usuario no conoce el orden así que da igual si es del principio o del final
-        Dim cartasTomadas As Carta() = _cartas.Take(cantidad).ToArray()
-        _cartas.RemoveRange(0, cartasTomadas.Length)
+        Dim cartasTomadas As Carta() = Me.TomarUltimasCartas(cantidad).ToArray()
+        _cartas.RemoveRange(_cartas.Count - cartasTomadas.Length, cartasTomadas.Length)
         Return cartasTomadas
     End Function
+
+    ''' <summary>
+    ''' Devuelve la última carta de la baraja (Proxima para tomar)
+    ''' </summary>
+    Public ReadOnly Property ProximaCarta As Carta Implements IBaraja.ProximaCarta
+        Get
+            If Me.EstaVacio Then 'Para evitar la InvalidOperationException cuando la pila esta vacia
+                Return Nothing
+            End If
+
+            Return Me.TomarUltimasCartas(1).Single()
+        End Get
+    End Property
 
     ''' <summary>
     ''' Repone las cartas indicadas de nuevo en la baraja y las mezcla utilizando el barajador por defecto
@@ -76,6 +88,10 @@ Public Class Baraja
             Return _cartas.Count = 0
         End Get
     End Property
+
+    Private Function TomarUltimasCartas(cantidad As Integer) As IEnumerable(Of Carta)
+        Return _cartas.Skip(Math.Max(0, _cartas.Count - cantidad))
+    End Function
 
 #Region "Implemento IEnumerable para poder foreachear la baraja"
     Public Function GetEnumerator() As IEnumerator(Of Carta) Implements IEnumerable(Of Carta).GetEnumerator

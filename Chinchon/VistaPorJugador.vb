@@ -48,6 +48,18 @@ Public Class VistaPorJugador
         End Get
     End Property
 
+    Public ReadOnly Property ProximaCartaDelMazo As Carta
+        Get
+            Return _partidaEnCurso.Mazo.ProximaCarta
+        End Get
+    End Property
+
+    Public ReadOnly Property CantidadRivales As Integer
+        Get
+            Return _partidaEnCurso.Jugadores.Count() - 1
+        End Get
+    End Property
+
     Private Sub CambioTurnoActual(sender As Object, e As EventArgs)
         If Me.EsMiTurno Then
             RaiseEvent ComenzoMiTurno(Me, EventArgs.Empty)
@@ -62,30 +74,37 @@ Public Class VistaPorJugador
         RaiseEvent CambioEstadoPartida(Me, EventArgs.Empty)
     End Sub
 
-    #Region "Defino las acciones soportadas por el jugador"
-    public sub TomarCartaDesdeElMonton()
-        Dim accion As IAccion = new TomarCartaDesdeElMonton(_partidaEnCurso)
+#Region "Defino las acciones soportadas por el jugador"
+    Public Sub TomarCartaDesdeElMonton()
+        Dim accion As IAccion = New TomarCartaDesdeElMonton(_partidaEnCurso)
         Call Me.RegistrarAccionDelJugador(accion)
-    End sub
+    End Sub
 
-    public sub TomarCartaDesdeElMazo()
-        Dim accion As IAccion = new TomarCartaDesdeLaBaraja(_partidaEnCurso)
+    Public Sub TomarCartaDesdeElMazo()
+        Dim accion As IAccion = New TomarCartaDesdeLaBaraja(_partidaEnCurso)
         Call Me.RegistrarAccionDelJugador(accion)
-    End sub
+    End Sub
 
-    public sub DescartarCarta(carta As Carta)
-        Dim accion As IAccion = new PonerCartaEnElMonton(_partidaEnCurso, carta)
+    Public Sub DescartarCarta(carta As Carta)
+        Dim accion As IAccion = New PonerCartaEnElMonton(_partidaEnCurso, carta)
         Call Me.RegistrarAccionDelJugador(accion)
-    End sub
+    End Sub
 
-    public sub CerrarRonda(cartaDeCierre As Carta)
-        Dim accion As IAccion = new CerrarRonda(_partidaEnCurso, cartaDeCierre)
+    Public Sub CerrarRonda(cartaDeCierre As Carta)
+        Dim accion As IAccion = New CerrarRonda(_partidaEnCurso, cartaDeCierre)
         Call Me.RegistrarAccionDelJugador(accion)
-    End sub
+    End Sub
 
-    Private sub RegistrarAccionDelJugador(accion As IAccion)
+    Public Sub ReordenarMano(cartaA As Carta, cartaB As Carta)
+        Dim accion As IAccion = New CambiarPosicionCartaEnMano(_mano, cartaA, cartaB)
+        Call Me.RegistrarAccionDelJugador(accion)
+
+        Call Me.OnCambioEstadoPartida()
+    End Sub
+
+    Private Sub RegistrarAccionDelJugador(accion As IAccion)
         accion.Ejecutar()
         'TODO: Guardarlas en el registro de la partida
-    End sub
-    #End Region
+    End Sub
+#End Region
 End Class

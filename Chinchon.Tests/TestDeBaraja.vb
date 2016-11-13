@@ -81,5 +81,6 @@ Public Class TestDeBaraja
         Dim cartasTomadas As Carta() = baraja.TomarCartas(CantidadCartasTomadas)
         Assert.AreEqual(baraja.CantidadCartasTotales - CantidadCartasTomadas, baraja.Count(), "La cantidad de cartas tomadas tiene que descontarse de la baraja")
         Assert.IsTrue(cartasTomadas.All(Function(c) Not baraja.Contains(c)), "No deben quedar en la baraja ninguna de las cartas tomadas")
+        Assert.IsTrue(cartasTomadas.SequenceEqual(ultimasTresCartas), "Se tomaron otras cartas en vez de las ultimas")
     End Sub
 End Class

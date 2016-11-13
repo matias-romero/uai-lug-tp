@@ -1,12 +1,16 @@
 ﻿Imports Chinchon
+Imports Chinchon.Entities
 
 Public Class frmTablero
+    Private ReadOnly ColorActivo As Color = Color.ForestGreen
+    Private ReadOnly ColorInactivo As Color = Color.DarkGray
+
     Private ReadOnly _vistaPorJugador As VistaPorJugador
-    Private ReadOnly Orquestador As OrquestadorDelJuego = OrquestadorDelJuego.InstanciaPorDefecto
 
     Public Sub New(vpj As VistaPorJugador)
         ' This call is required by the designer.
         InitializeComponent()
+        Me.BackColor = ColorInactivo
 
         ' Add any initialization after the InitializeComponent() call.
         _vistaPorJugador = vpj
@@ -14,7 +18,15 @@ Public Class frmTablero
         AddHandler _vistaPorJugador.FinalizoMiTurno, AddressOf Me.FinalizaMiTurno
         AddHandler _vistaPorJugador.CambioEstadoPartida, AddressOf Me.RefrescarEstadoPartida
 
+        Dim cantidadRivales As Integer = _vistaPorJugador.CantidadRivales
+        Me.ManoOponente1.Visible = cantidadRivales >= 1
+        Me.ManoOponente2.Visible = cantidadRivales >= 2
+        Me.ManoOponente3.Visible = cantidadRivales >= 3
+
         'Fake para disparar el evento al iniciar la partida
+        If _vistaPorJugador.EsMiTurno Then
+            Call ComienzaMiTurno(_vistaPorJugador, EventArgs.Empty)
+        End If
         Call RefrescarEstadoPartida(_vistaPorJugador, EventArgs.Empty)
     End Sub
 
@@ -23,46 +35,69 @@ Public Class frmTablero
     End Sub
 
     Private Sub ManoPorJugador1_OperacionDeSoltarCartaDetectada(sender As Object, e As MovimientoCartasEventArgs) Handles ManoPorJugador1.OperacionDeSoltarCartaDetectada
-        'TODO: Conectar con el orquestador
-        If e.Origen.Equals(Me.VisorMonton) Then
-            'Tomo carta desde el monton
+        Dim visorOrigen as VisorCarta = e.Origen
+        If visorOrigen.RolAsignado.Equals("Monton") Then
+            'Tomo carta desde el monton, y no puede volver hasta su proximo turno
             _vistaPorJugador.TomarCartaDesdeElMonton()
-        ElseIf e.Origen.Equals(Me.VisorMazo) Then
-            'Tomo carta desde el mazo
+            Call RefrescarMonton()
+        ElseIf visorOrigen.Equals(Me.VisorMazo) Then
+            'Tomo carta desde el mazo, se la muestro para que descarte la que quiera
+            Me.VisorMazo.MostrarCarta = True
             _vistaPorJugador.TomarCartaDesdeElMazo()
+        Else 
+            'Quiere reordenar sus cartas
+            Dim visorDestino As VisorCarta = e.Destino
+            _vistaPorJugador.ReordenarMano(visorOrigen.Carta, visorDestino.Carta)
         End If
-        MessageBox.Show(String.Format("Solto la carta {0} en la mano del jugador 1", e.Carta))
+    End Sub
+
+    Private Sub ManoPorJugador1_DobleClickSobreCartaDetectado(sender As Object, e As AccionConCartaRelacionadaEventArgs) Handles ManoPorJugador1.DobleClickSobreCartaDetectado
+        'Solo me interesan los comodines a los que pueden asignarles un valor
+        dim cartaComodin As CartaComodin = TryCast(e.Carta, CartaComodin)
+        if cartaComodin IsNot Nothing Then
+            Using formularioAsignarValorComodin As New frmAsignarValorComodin()
+                If formularioAsignarValorComodin.ShowDialog(me) = DialogResult.OK Then
+                    'TODO: Llamar a la accion de asignarvalor
+                End If
+            End Using
+        End If
     End Sub
 
     Private Sub VisorMonton_OperacionDeSoltarCartaDetectada(sender As Object, e As MovimientoCartasEventArgs) Handles VisorMonton.OperacionDeSoltarCartaDetectada
-        'TODO: Conectar con el orquestador
         'Suelto una carta en el monton
-        Dim accion As New Acciones.PonerCartaEnElMonton(Orquestador.PartidaActual, e.Carta)
-        accion.Ejecutar()
-        MessageBox.Show(String.Format("Solto la carta {0} en el monton", e.Carta))
+        _vistaPorJugador.DescartarCarta(e.Carta)
+        Call RefrescarMonton()
     End Sub
 
     Private Sub VisorMonton_OperacionDeCerrarRondaDetectada(sender As Object, e As MovimientoCartasEventArgs) Handles VisorMonton.OperacionDeCerrarRondaDetectada
-        'TODO: Conectar con el orquestador
-        MessageBox.Show(String.Format("Solicito cerrar la ronda con la carta {0}", e.Carta))
-        VisorMonton.EstaCerrado = True
-        Dim accionCierre As New Acciones.CerrarRonda(Orquestador.PartidaActual, e.Carta)
-        accionCierre.Ejecutar()
-        'TODO:
-        'Orquestador.EfectuarJugada(e.Carta, e.Origen, e.Destino)
+        If frmMain.PromptYesNoQuestion("¿Está seguro de que desea cerrar la ronda?") Then
+            _vistaPorJugador.CerrarRonda(e.Carta)
+            VisorMonton.EstaCerrado = True
+        End If
     End Sub
 
     Private Sub ComienzaMiTurno(sender As Object, e As EventArgs)
-        MessageBox.Show("Es el turno de: " & _vistaPorJugador.Jugador.ToString())
+        Me.BackColor = ColorActivo
     End Sub
 
     Private Sub FinalizaMiTurno(sender As Object, e As EventArgs)
-        MessageBox.Show("Termino el turno de: " & _vistaPorJugador.Jugador.ToString())
+        Me.BackColor = ColorInactivo
     End Sub
 
-    Private Sub RefrescarEstadoPartida(sender As Object, e As EventArgs)
+    Private sub RefrescarMonton()
         Me.VisorMonton.CartaVisible = _vistaPorJugador.CartaVisibleMonton
-        'me.VisorMazo.Enabled = _vistaPorJugador.EstaVacioElMazo
+    End sub
+
+    Private Sub RefrescarEstadoPartida(sender As Object, e As EventArgs)
+        Dim controlesHabilitados As Boolean = _vistaPorJugador.EsMiTurno
+
+        Call RefrescarMonton()
+        Me.VisorMazo.MostrarCarta = False
+        Me.VisorMazo.Carta = _vistaPorJugador.ProximaCartaDelMazo
         Me.ManoPorJugador1.Init(_vistaPorJugador.Mano)
+
+        Me.VisorMonton.Enabled = controlesHabilitados
+        Me.ManoPorJugador1.Enabled = controlesHabilitados
+        Me.VisorMazo.Enabled = controlesHabilitados
     End Sub
 End Class

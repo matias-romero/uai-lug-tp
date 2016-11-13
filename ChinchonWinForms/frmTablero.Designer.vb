@@ -22,13 +22,44 @@ Partial Class frmTablero
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.ManoOponente3 = New ChinchonWinForms.ManoOponente()
+        Me.ManoOponente2 = New ChinchonWinForms.ManoOponente()
+        Me.ManoOponente1 = New ChinchonWinForms.ManoOponente()
         Me.VisorMonton = New ChinchonWinForms.VisorMonton()
         Me.VisorMazo = New ChinchonWinForms.VisorCarta()
         Me.ManoPorJugador1 = New ChinchonWinForms.ManoPorJugador()
-        Me.ManoOponente1 = New ChinchonWinForms.ManoOponente()
-        Me.ManoOponente2 = New ChinchonWinForms.ManoOponente()
-        Me.ManoOponente3 = New ChinchonWinForms.ManoOponente()
         Me.SuspendLayout
+        '
+        'ManoOponente3
+        '
+        Me.ManoOponente3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.ManoOponente3.Location = New System.Drawing.Point(748, 192)
+        Me.ManoOponente3.MostrarHorizontal = true
+        Me.ManoOponente3.Name = "ManoOponente3"
+        Me.ManoOponente3.Size = New System.Drawing.Size(150, 350)
+        Me.ManoOponente3.TabIndex = 7
+        Me.ManoOponente3.Visible = false
+        '
+        'ManoOponente2
+        '
+        Me.ManoOponente2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.ManoOponente2.Location = New System.Drawing.Point(12, 192)
+        Me.ManoOponente2.MostrarHorizontal = true
+        Me.ManoOponente2.Name = "ManoOponente2"
+        Me.ManoOponente2.Size = New System.Drawing.Size(150, 350)
+        Me.ManoOponente2.TabIndex = 6
+        Me.ManoOponente2.Visible = false
+        '
+        'ManoOponente1
+        '
+        Me.ManoOponente1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.ManoOponente1.Location = New System.Drawing.Point(127, 12)
+        Me.ManoOponente1.Name = "ManoOponente1"
+        Me.ManoOponente1.Size = New System.Drawing.Size(700, 165)
+        Me.ManoOponente1.TabIndex = 5
         '
         'VisorMonton
         '
@@ -57,39 +88,10 @@ Partial Class frmTablero
         Me.ManoPorJugador1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.ManoPorJugador1.BackColor = System.Drawing.Color.Transparent
-        Me.ManoPorJugador1.Location = New System.Drawing.Point(127, 597)
+        Me.ManoPorJugador1.Location = New System.Drawing.Point(127, 556)
         Me.ManoPorJugador1.Name = "ManoPorJugador1"
-        Me.ManoPorJugador1.Size = New System.Drawing.Size(700, 124)
+        Me.ManoPorJugador1.Size = New System.Drawing.Size(700, 165)
         Me.ManoPorJugador1.TabIndex = 0
-        '
-        'ManoOponente1
-        '
-        Me.ManoOponente1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.ManoOponente1.Location = New System.Drawing.Point(127, 12)
-        Me.ManoOponente1.Name = "ManoOponente1"
-        Me.ManoOponente1.Size = New System.Drawing.Size(700, 165)
-        Me.ManoOponente1.TabIndex = 5
-        '
-        'ManoOponente2
-        '
-        Me.ManoOponente2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
-        Me.ManoOponente2.Location = New System.Drawing.Point(12, 192)
-        Me.ManoOponente2.MostrarHorizontal = true
-        Me.ManoOponente2.Name = "ManoOponente2"
-        Me.ManoOponente2.Size = New System.Drawing.Size(165, 392)
-        Me.ManoOponente2.TabIndex = 6
-        '
-        'ManoOponente3
-        '
-        Me.ManoOponente3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.ManoOponente3.Location = New System.Drawing.Point(748, 192)
-        Me.ManoOponente3.MostrarHorizontal = true
-        Me.ManoOponente3.Name = "ManoOponente3"
-        Me.ManoOponente3.Size = New System.Drawing.Size(165, 392)
-        Me.ManoOponente3.TabIndex = 7
         '
         'frmTablero
         '
@@ -109,10 +111,10 @@ Partial Class frmTablero
 
 End Sub
 
-    Friend WithEvents ManoPorJugador1 As ManoPorJugador
-    Friend WithEvents VisorMazo As VisorCarta
-    Friend WithEvents VisorMonton As VisorMonton
-    Friend WithEvents ManoOponente1 As ManoOponente
-    Friend WithEvents ManoOponente2 As ManoOponente
-    Friend WithEvents ManoOponente3 As ManoOponente
+    Private WithEvents ManoPorJugador1 As ManoPorJugador
+    Private WithEvents VisorMazo As VisorCarta
+    Private WithEvents VisorMonton As VisorMonton
+    Private WithEvents ManoOponente1 As ManoOponente
+    Private WithEvents ManoOponente2 As ManoOponente
+    Private WithEvents ManoOponente3 As ManoOponente
 End Class

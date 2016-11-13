@@ -9,6 +9,7 @@ Public Class VisorCarta
         Public Property RolAsociado As String
     End Class
 
+    Public Event DobleClickDetectado As EventoConCartaRelacionada
     Public Event OperacionArrastreIniciada As EventoConCartaRelacionada
     Public Event OperacionDeSoltarCartaDetectada As EventoConMovimientoCartasAsociado
 
@@ -107,6 +108,10 @@ Public Class VisorCarta
         _picture.Image = _cartaRenderizada
     End Sub
 
+    Private Sub OnDobleClickDetectado(carta As Carta)
+        RaiseEvent DobleClickDetectado(Me, New AccionConCartaRelacionadaEventArgs(carta))
+    End Sub
+
     Private Sub OnOperacionArrastreIniciada(laCarta As Carta)
         RaiseEvent OperacionArrastreIniciada(Me, New AccionConCartaRelacionadaEventArgs(laCarta))
     End Sub
@@ -115,7 +120,13 @@ Public Class VisorCarta
         RaiseEvent OperacionDeSoltarCartaDetectada(Me, New MovimientoCartasEventArgs(origen.Carta, origen, destino))
     End Sub
 
-    Private Sub VisorCarta_MouseDown(sender As Object, e As MouseEventArgs)
+    Protected Overridable Sub VisorCarta_MouseDown(sender As Object, e As MouseEventArgs)
+        'Dado que los eventos de Drag & Drop dificultan el capturar DoubleClick utilizo el botón derecho como alternativa
+        If e.Button = MouseButtons.Right Then
+            Call Me.OnDobleClickDetectado(Me.Carta)
+            Return
+        End If
+
         If Me.HabilitarComoFuenteDeArrastre AndAlso Me.Carta IsNot Nothing Then
             Call Me.OnOperacionArrastreIniciada(Me.Carta)
 

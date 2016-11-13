@@ -2,12 +2,13 @@
 Imports Chinchon.Entities
 
 Public Class ManoPorJugador
+    Public Event DobleClickSobreCartaDetectado As EventoConCartaRelacionada
     Public Event OperacionDeSoltarCartaDetectada As EventoConMovimientoCartasAsociado
 
     Private _manoDelJugador As Mano
     Private _visoresPorCarta As VisorCarta()
 
-    public sub New()
+    Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -16,9 +17,10 @@ Public Class ManoPorJugador
         _visoresPorCarta = New VisorCarta() {Me.VisorCarta1, Me.VisorCarta2, Me.VisorCarta3, Me.VisorCarta4, Me.VisorCarta5, Me.VisorCarta6, Me.VisorCarta7}
         For Each visor As VisorCarta In _visoresPorCarta 'Escucho los eventos de drop de cada visor y propago el mismo al consumidor
             AddHandler visor.OperacionDeSoltarCartaDetectada, AddressOf Me.OnOperacionDeSoltarCartaDetectada
+            AddHandler visor.DobleClickDetectado, AddressOf Me.OnDobleClickSobreCartaDetectado
         Next
     End Sub
-    
+
     Public Sub Init(manoDelJugador As Mano)
         _manoDelJugador = manoDelJugador
         Dim indiceControl As Integer = 0
@@ -52,4 +54,7 @@ Public Class ManoPorJugador
         RaiseEvent OperacionDeSoltarCartaDetectada(Me, e)
     End Sub
 
+    Private Sub OnDobleClickSobreCartaDetectado(sender As Object, e As AccionConCartaRelacionadaEventArgs)
+        RaiseEvent DobleClickSobreCartaDetectado(Me, e)
+    End Sub
 End Class

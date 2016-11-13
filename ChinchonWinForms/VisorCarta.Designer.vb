@@ -23,8 +23,8 @@ Partial Class VisorCarta
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.picture = New System.Windows.Forms.PictureBox()
-        CType(Me.picture, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        CType(Me.picture,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'picture
         '
@@ -34,19 +34,19 @@ Partial Class VisorCarta
         Me.picture.Size = New System.Drawing.Size(315, 369)
         Me.picture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.picture.TabIndex = 0
-        Me.picture.TabStop = False
+        Me.picture.TabStop = false
         '
         'VisorCarta
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.picture)
         Me.Name = "VisorCarta"
         Me.Size = New System.Drawing.Size(315, 369)
-        CType(Me.picture, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ResumeLayout(False)
+        CType(Me.picture,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
 
     Private WithEvents picture As PictureBox
 End Class

@@ -8,9 +8,6 @@ Public Module Program
 
         'TODO: Remover inicialización para pruebas directas
         '**************************************************
-        'AddHandler orquestador.PartidaActual.EmpiezaNuevaRonda, AddressOf Me.EmpiezaNuevoTurno
-        'AddHandler orquestador.PartidaActual.EmpiezaNuevoTurno, AddressOf Me.EmpiezaNuevoTurno
-
         orquestador.PartidaActual.Unirse(New Jugador() With {.Id = 1, .Apodo = "Matias"})
         orquestador.PartidaActual.Unirse(New Jugador() With {.Id = 2, .Apodo = "Rival A"})
         'orquestador.PartidaActual.Unirse(New Jugador() With {.Id = 3, .Apodo = "Rival B"})

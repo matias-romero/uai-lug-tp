@@ -86,6 +86,12 @@
     <Compile Include="frmLoginJugador.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmPresentarCombinaciones.Designer.vb">
+      <DependentUpon>frmPresentarCombinaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPresentarCombinaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmTablero.Designer.vb">
       <DependentUpon>frmTablero.vb</DependentUpon>
     </Compile>
@@ -147,6 +153,18 @@
     <Compile Include="VisorCarta.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="VisorCartaSeleccionable.Designer.vb">
+      <DependentUpon>VisorCartaSeleccionable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VisorCartaSeleccionable.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisorCombinacion.Designer.vb">
+      <DependentUpon>VisorCombinacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VisorCombinacion.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="VisorDeCartasEventsData.vb" />
     <Compile Include="VisorMonton.Designer.vb">
       <DependentUpon>VisorMonton.vb</DependentUpon>
@@ -161,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLoginJugador.resx">
       <DependentUpon>frmLoginJugador.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPresentarCombinaciones.resx">
+      <DependentUpon>frmPresentarCombinaciones.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTablero.resx">
       <DependentUpon>frmTablero.vb</DependentUpon>
@@ -186,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="VisorCarta.resx">
       <DependentUpon>VisorCarta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisorCombinacion.resx">
+      <DependentUpon>VisorCombinacion.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisorMonton.resx">
       <DependentUpon>VisorMonton.vb</DependentUpon>

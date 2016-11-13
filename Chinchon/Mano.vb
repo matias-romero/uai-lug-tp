@@ -20,7 +20,7 @@ Public Class Mano
 
     Public ReadOnly Property Combinaciones As IEnumerable(Of Combinacion)
         Get
-            return _combinaciones
+            Return _combinaciones
         End Get
     End Property
 
@@ -65,16 +65,23 @@ Public Class Mano
             Throw New ArgumentNullException("cartaExterna", "Debe indicar la carta que quiere intercambiar")
         End If
 
+        'Analizo si la carta que me pasa ya la tengo en otra posicion de mi mano para intercambiar lugares
+        Dim indiceExterna As Integer = _cartas.IndexOf(cartaExterna)
         Dim carta As Carta = _cartas(indice)
         _cartas(indice) = cartaExterna
+
+        If indiceExterna >= 0 Then
+            _cartas(indiceExterna) = carta
+        End If
+
         Return carta
     End Function
 
-    public sub RegistrarCombinacion(combinacion As Combinacion)
+    Public Sub RegistrarCombinacion(combinacion As Combinacion)
         _combinaciones.Add(combinacion)
-    End sub
+    End Sub
 
-    public sub DeshacerCombinacion(combinacion As Combinacion)
+    Public Sub DeshacerCombinacion(combinacion As Combinacion)
         _combinaciones.Remove(combinacion)
-    End sub
+    End Sub
 End Class

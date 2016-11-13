@@ -4,7 +4,8 @@ Namespace Acciones
     Public Class TomarCartaDesdeElMonton
         Implements IAccion
 
-        Private _partida As Partida
+        Private ReadOnly _partida As Partida
+
         Public Sub New(partida As Partida)
             _partida = partida
         End Sub

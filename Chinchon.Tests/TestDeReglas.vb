@@ -72,4 +72,23 @@ Public Class TestDeReglas
         Assert.IsTrue(combinacion.EsValida(), "El chinchón formando la escalera de 7 debe ser válido")
     End Sub
 
+    <TestMethod()>
+    Public Sub LasCombinacionesDebenNotificarCuandoSeAgreganOQuitanCartas()
+        Dim cartaComodin As New CartaComodin()
+        Assert.IsFalse(cartaComodin.TieneValorAsignado, "El comodin no puede tener valor asignado cuando lo creo")
+
+        Dim cartasPorCombinar As Carta() = New Carta() {New Carta(3, Palo.Espada), New Carta(4, Palo.Espada), cartaComodin, New Carta(6, Palo.Espada), New Carta(7, Palo.Espada), New Carta(8, Palo.Espada), New Carta(9, Palo.Espada)}
+        Dim combinacion As New Combinaciones.Chinchon()
+
+        combinacion.AgregarCartas(cartasPorCombinar.Take(5))
+        Assert.IsFalse(combinacion.EsValida(), "El chinchón debe tener al menos 7 cartas")
+
+        combinacion.AgregarCartas(cartasPorCombinar.Skip(5)) 'Agrego las restantes
+        Assert.IsFalse(combinacion.EsValida(), "El chinchón no puede ser válido hasta que el comodín asuma su valor")
+
+        cartaComodin.NumeroAsignadoPorUsuario = 5
+        cartaComodin.PaloAsignadoPorUsuario = Palo.Espada
+        Assert.IsTrue(combinacion.EsValida(), "El chinchón formando la escalera de 7 debe ser válido")
+    End Sub
+
 End Class
