@@ -23,8 +23,8 @@ Partial Class VisorCombinacion
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grupoContenedor = New System.Windows.Forms.GroupBox()
-        Me.btnEliminar = New System.Windows.Forms.Button()
         Me.flowPanel = New System.Windows.Forms.FlowLayoutPanel()
+        Me.btnEliminar = New System.Windows.Forms.Button()
         Me.grupoContenedor.SuspendLayout
         Me.SuspendLayout
         '
@@ -43,6 +43,18 @@ Partial Class VisorCombinacion
         Me.grupoContenedor.TabStop = false
         Me.grupoContenedor.Text = "Nombre_Combinacion"
         '
+        'flowPanel
+        '
+        Me.flowPanel.AllowDrop = true
+        Me.flowPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.flowPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.flowPanel.Location = New System.Drawing.Point(6, 29)
+        Me.flowPanel.Name = "flowPanel"
+        Me.flowPanel.Size = New System.Drawing.Size(534, 206)
+        Me.flowPanel.TabIndex = 1
+        '
         'btnEliminar
         '
         Me.btnEliminar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
@@ -52,17 +64,6 @@ Partial Class VisorCombinacion
         Me.btnEliminar.Size = New System.Drawing.Size(35, 23)
         Me.btnEliminar.TabIndex = 0
         Me.btnEliminar.UseVisualStyleBackColor = true
-        '
-        'flowPanel
-        '
-        Me.flowPanel.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.flowPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.flowPanel.Location = New System.Drawing.Point(6, 29)
-        Me.flowPanel.Name = "flowPanel"
-        Me.flowPanel.Size = New System.Drawing.Size(534, 206)
-        Me.flowPanel.TabIndex = 1
         '
         'VisorCombinacion
         '

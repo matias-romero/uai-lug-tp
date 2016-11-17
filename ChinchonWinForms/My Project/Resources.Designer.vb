@@ -126,5 +126,14 @@ Namespace My.Resources
                 Return ResourceManager.GetString("Titulo_NuevaPartida", resourceCulture)
             End Get
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to ¿Como desea combinar las cartas?.
+        '''</summary>
+        Friend ReadOnly Property Titulo_PresentarCombinaciones() As String
+            Get
+                Return ResourceManager.GetString("Titulo_PresentarCombinaciones", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

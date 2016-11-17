@@ -28,7 +28,7 @@ Partial Class frmAsignarValorComodin
         Me.lblPalo = New System.Windows.Forms.Label()
         Me.lblNumero = New System.Windows.Forms.Label()
         Me.VisorCarta1 = New ChinchonWinForms.VisorCarta()
-        Me.SuspendLayout()
+        Me.SuspendLayout
         '
         'btnOk
         '
@@ -38,12 +38,12 @@ Partial Class frmAsignarValorComodin
         Me.btnOk.Size = New System.Drawing.Size(75, 23)
         Me.btnOk.TabIndex = 0
         Me.btnOk.Text = "Aceptar"
-        Me.btnOk.UseVisualStyleBackColor = True
+        Me.btnOk.UseVisualStyleBackColor = true
         '
         'comboPalo
         '
         Me.comboPalo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.comboPalo.FormattingEnabled = True
+        Me.comboPalo.FormattingEnabled = true
         Me.comboPalo.Location = New System.Drawing.Point(12, 35)
         Me.comboPalo.Name = "comboPalo"
         Me.comboPalo.Size = New System.Drawing.Size(143, 21)
@@ -52,7 +52,7 @@ Partial Class frmAsignarValorComodin
         'comboNumero
         '
         Me.comboNumero.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.comboNumero.FormattingEnabled = True
+        Me.comboNumero.FormattingEnabled = true
         Me.comboNumero.Location = New System.Drawing.Point(12, 93)
         Me.comboNumero.Name = "comboNumero"
         Me.comboNumero.Size = New System.Drawing.Size(143, 21)
@@ -60,21 +60,21 @@ Partial Class frmAsignarValorComodin
         '
         'lblPalo
         '
-        Me.lblPalo.AutoSize = True
+        Me.lblPalo.AutoSize = true
         Me.lblPalo.Location = New System.Drawing.Point(9, 19)
         Me.lblPalo.Name = "lblPalo"
-        Me.lblPalo.Size = New System.Drawing.Size(39, 13)
+        Me.lblPalo.Size = New System.Drawing.Size(28, 13)
         Me.lblPalo.TabIndex = 3
-        Me.lblPalo.Text = "Label1"
+        Me.lblPalo.Text = "Palo"
         '
         'lblNumero
         '
-        Me.lblNumero.AutoSize = True
+        Me.lblNumero.AutoSize = true
         Me.lblNumero.Location = New System.Drawing.Point(9, 77)
         Me.lblNumero.Name = "lblNumero"
-        Me.lblNumero.Size = New System.Drawing.Size(39, 13)
+        Me.lblNumero.Size = New System.Drawing.Size(44, 13)
         Me.lblNumero.TabIndex = 4
-        Me.lblNumero.Text = "Label2"
+        Me.lblNumero.Text = "Numero"
         '
         'VisorCarta1
         '
@@ -87,7 +87,7 @@ Partial Class frmAsignarValorComodin
         '
         'frmAsignarValorComodin
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(267, 184)
         Me.Controls.Add(Me.VisorCarta1)
@@ -97,14 +97,14 @@ Partial Class frmAsignarValorComodin
         Me.Controls.Add(Me.comboPalo)
         Me.Controls.Add(Me.btnOk)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
+        Me.MaximizeBox = false
+        Me.MinimizeBox = false
         Me.Name = "frmAsignarValorComodin"
         Me.Text = "frmAsignarValorComodin"
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents btnOk As Button
     Friend WithEvents comboPalo As ComboBox

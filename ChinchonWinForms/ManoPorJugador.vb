@@ -5,8 +5,8 @@ Public Class ManoPorJugador
     Public Event DobleClickSobreCartaDetectado As EventoConCartaRelacionada
     Public Event OperacionDeSoltarCartaDetectada As EventoConMovimientoCartasAsociado
 
-    Private _manoDelJugador As Mano
-    Private _visoresPorCarta As VisorCarta()
+    Private _cartas As List(Of Carta)
+    Private ReadOnly _visoresPorCarta As VisorCarta()
 
     Public Sub New()
 
@@ -21,12 +21,17 @@ Public Class ManoPorJugador
         Next
     End Sub
 
-    Public Sub Init(manoDelJugador As Mano)
-        _manoDelJugador = manoDelJugador
+    Public Sub Init(cartas As IEnumerable(Of Carta))
+        _cartas = cartas.ToList()
         Dim indiceControl As Integer = 0
-        For Each carta As Carta In _manoDelJugador.Cartas
-            _visoresPorCarta(indiceControl).Carta = carta
-            _visoresPorCarta(indiceControl).RolAsignado = String.Concat("Mano_Indice=", indiceControl)
+        For Each visorPorCarta As VisorCarta In _visoresPorCarta
+            Dim carta as Carta  = Nothing
+            if _cartas.Count > indiceControl Then
+                carta = _cartas(indiceControl)
+            End If
+
+            visorPorCarta.Carta = carta
+            visorPorCarta.RolAsignado =String.Concat("Mano_Indice=", indiceControl) 
             indiceControl += 1
         Next
 

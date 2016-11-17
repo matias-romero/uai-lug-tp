@@ -94,7 +94,7 @@ Public Class frmTablero
         Call RefrescarMonton()
         Me.VisorMazo.MostrarCarta = False
         Me.VisorMazo.Carta = _vistaPorJugador.ProximaCartaDelMazo
-        Me.ManoPorJugador1.Init(_vistaPorJugador.Mano)
+        Me.ManoPorJugador1.Init(_vistaPorJugador.Mano.Cartas)
 
         Me.VisorMonton.Enabled = controlesHabilitados
         Me.ManoPorJugador1.Enabled = controlesHabilitados

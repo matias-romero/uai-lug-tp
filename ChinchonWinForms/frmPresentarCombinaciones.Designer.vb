@@ -26,10 +26,10 @@ Partial Class frmPresentarCombinaciones
         Me.tablePanel = New System.Windows.Forms.TableLayoutPanel()
         Me.btnConfirmar = New System.Windows.Forms.Button()
         Me.btnCancelar = New System.Windows.Forms.Button()
-        Me.VistaDeLaMano = New ChinchonWinForms.ManoPorJugador()
         Me.btnNuevoChinchon = New System.Windows.Forms.Button()
         Me.btnNuevoPie = New System.Windows.Forms.Button()
         Me.btnNuevaEscalera = New System.Windows.Forms.Button()
+        Me.VistaDeLaMano = New ChinchonWinForms.ManoPorJugador()
         Me.GroupBox1.SuspendLayout
         Me.SuspendLayout
         '
@@ -81,17 +81,6 @@ Partial Class frmPresentarCombinaciones
         Me.btnCancelar.Text = "Cancelar"
         Me.btnCancelar.UseVisualStyleBackColor = true
         '
-        'VistaDeLaMano
-        '
-        Me.VistaDeLaMano.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.VistaDeLaMano.BackColor = System.Drawing.Color.Transparent
-        Me.VistaDeLaMano.Location = New System.Drawing.Point(6, 19)
-        Me.VistaDeLaMano.Name = "VistaDeLaMano"
-        Me.VistaDeLaMano.Size = New System.Drawing.Size(882, 190)
-        Me.VistaDeLaMano.TabIndex = 0
-        '
         'btnNuevoChinchon
         '
         Me.btnNuevoChinchon.Anchor = System.Windows.Forms.AnchorStyles.Top
@@ -121,6 +110,17 @@ Partial Class frmPresentarCombinaciones
         Me.btnNuevaEscalera.TabIndex = 6
         Me.btnNuevaEscalera.Text = "Escalera"
         Me.btnNuevaEscalera.UseVisualStyleBackColor = true
+        '
+        'VistaDeLaMano
+        '
+        Me.VistaDeLaMano.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.VistaDeLaMano.BackColor = System.Drawing.Color.Transparent
+        Me.VistaDeLaMano.Location = New System.Drawing.Point(6, 19)
+        Me.VistaDeLaMano.Name = "VistaDeLaMano"
+        Me.VistaDeLaMano.Size = New System.Drawing.Size(882, 190)
+        Me.VistaDeLaMano.TabIndex = 0
         '
         'frmPresentarCombinaciones
         '
