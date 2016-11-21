@@ -91,6 +91,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to ¿Está seguro de que desea cerrar la ronda?.
+        '''</summary>
+        Friend ReadOnly Property Prompt_OperacionDeCerrarRondaDetectada() As String
+            Get
+                Return ResourceManager.GetString("Prompt_OperacionDeCerrarRondaDetectada", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
         Friend ReadOnly Property Red_Cross_svg() As System.Drawing.Bitmap

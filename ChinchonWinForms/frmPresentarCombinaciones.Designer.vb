@@ -63,6 +63,7 @@ Partial Class frmPresentarCombinaciones
         'btnConfirmar
         '
         Me.btnConfirmar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        Me.btnConfirmar.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.btnConfirmar.Location = New System.Drawing.Point(348, 567)
         Me.btnConfirmar.Name = "btnConfirmar"
         Me.btnConfirmar.Size = New System.Drawing.Size(100, 30)

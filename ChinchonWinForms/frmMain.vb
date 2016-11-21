@@ -5,7 +5,7 @@ Public Class frmMain
     Private ReadOnly Orquestador As OrquestadorDelJuego = OrquestadorDelJuego.InstanciaPorDefecto
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        For Each jugador As Jugador In Orquestador.PartidaActual.Jugadores.Reverse()
+        For Each jugador As Jugador In Orquestador.PartidaActual.JugadoresActivos.Reverse()
             Dim vistaPorJugador As VistaPorJugador = Orquestador.PartidaActual.VerComo(jugador)
             Dim formTablero As frmTablero = new frmTablero(vistaPorJugador)
             formTablero.Name = string.Format("frmTablero_{0}", jugador.Id)

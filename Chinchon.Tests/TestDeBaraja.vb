@@ -39,6 +39,17 @@ Public Class TestDeBaraja
     End Sub
 
     <TestMethod()>
+    Public Sub ProbarQueLaBarajaVieneEnElOrdenPorDefectoDeLasCartas()
+        Dim baraja As New Baraja()
+        Dim cartasDePrueba as List(Of Carta) = baraja.ToList()
+
+        Assert.IsTrue(cartasDePrueba.SequenceEqual(baraja), "Analizo la secuencia en el orden dado")
+
+        cartasDePrueba.Sort()
+        Assert.IsTrue(cartasDePrueba.SequenceEqual(baraja), "Ordenando por su método natural no debe alterarse la secuencia")
+    End Sub
+
+    <TestMethod()>
     Public Sub MezclarLaBarajaDebeAlterarElOrdenDeLasCartas()
         Dim baraja As New Baraja()
         Dim secuenciaPorDefecto As Carta() = baraja.ToArray()

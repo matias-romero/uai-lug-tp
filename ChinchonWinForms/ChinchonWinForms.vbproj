@@ -146,6 +146,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Notificador.Designer.vb">
+      <DependentUpon>Notificador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Notificador.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Program.vb" />
     <Compile Include="VisorCarta.Designer.vb">
       <DependentUpon>VisorCarta.vb</DependentUpon>
@@ -204,6 +210,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Notificador.resx">
+      <DependentUpon>Notificador.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisorCarta.resx">
       <DependentUpon>VisorCarta.vb</DependentUpon>

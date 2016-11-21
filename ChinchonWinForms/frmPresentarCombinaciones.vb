@@ -16,8 +16,15 @@ Public Class frmPresentarCombinaciones
 
         _cartasSinCombinar = New ObservableCollection(Of Carta)(mano.Cartas)
         AddHandler _cartasSinCombinar.CollectionChanged, AddressOf Me.ColeccionCartasSinCombinarModificada
+
         Call Me.VistaDeLaMano.Init(_cartasSinCombinar)
     End Sub
+
+    Public Iterator Function ObtenerCombinacionesPreparadas() As IEnumerable(Of Combinacion)
+        For Each control As VisorCombinacion In tablePanel.Controls
+            Yield control.CombinacionEnlazada
+        Next
+    End Function
 
     Private Sub ColeccionCartasSinCombinarModificada(sender As Object, e As NotifyCollectionChangedEventArgs)
         Call Me.VistaDeLaMano.Init(_cartasSinCombinar)
@@ -87,4 +94,36 @@ Public Class frmPresentarCombinaciones
 
         End If
     End Sub
+
+    Private Sub btnConfirmar_Click(sender As Object, e As EventArgs) Handles btnConfirmar.Click
+        'Analizo que todas las combinaciones sean validas a fin de dejarlo salir
+        Dim combinacionesRegistradas As Combinacion() = Me.ObtenerCombinacionesPreparadas().ToArray()
+        If combinacionesRegistradas.All(Function(c) c.EsValida()) Then
+            Call Me.Hide()  
+        End If
+    End Sub
+
+    Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
+        Call Me.Hide()
+    End Sub
+
+    ''' <summary>
+    ''' Muestra un Pop-Up ofreciendo al jugador que prepare un listado de combinaciones posibles para armar la jugada
+    ''' </summary>
+    ''' <param name="contenedor">Formulario contenedor del dialogo modal</param>
+    ''' <param name="mano">Mano del jugador</param>
+    ''' <returns>Retorna el listado de combinaciones válidas preparadas</returns>
+    public Shared Function CombinarCartasEnMano(contenedor As Form, mano As Mano) As Combinacion()
+        Dim combinaciones As New List(Of Combinacion)()
+        using formulario As New frmPresentarCombinaciones(mano)
+            if formulario.ShowDialog(contenedor) = DialogResult.OK then
+                combinaciones.AddRange(formulario.ObtenerCombinacionesPreparadas())
+            End If
+            
+            formulario.Close()
+        End Using
+
+        Return combinaciones.ToArray()
+    End Function
+
 End Class

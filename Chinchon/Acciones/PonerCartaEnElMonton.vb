@@ -1,4 +1,5 @@
 ﻿Imports Chinchon.Entities
+Imports Chinchon.Exceptions
 
 Namespace Acciones
     Public Class PonerCartaEnElMonton
@@ -12,7 +13,16 @@ Namespace Acciones
             _cartaDescartada = cartaDescartada
         End Sub
 
+        Public Sub Validar()
+            Dim turnoEnCurso As Turno = _partida.TurnoEnCurso
+            If turnoEnCurso.CartaLevantada Is nothing Then
+                Throw new AccionNoPermitidaException("Debe levantar una carta primero.")
+            End If
+        End Sub
+
         Public Sub Ejecutar() Implements IAccion.Ejecutar
+            Call Me.Validar()
+
             _partida.Monton.Poner(_cartaDescartada)
             _partida.TurnoEnCurso.CartaDescartada = _cartaDescartada
         End Sub

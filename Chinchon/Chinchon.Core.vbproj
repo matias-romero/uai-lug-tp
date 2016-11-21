@@ -59,19 +59,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acciones\AbandonarPartida.vb" />
     <Compile Include="Acciones\CambiarPosicionCartaEnMano.vb" />
     <Compile Include="Acciones\CerrarRonda.vb" />
     <Compile Include="Acciones\IAccion.vb" />
     <Compile Include="Acciones\PonerCartaEnElMonton.vb" />
+    <Compile Include="Acciones\PresentarCombinacion.vb" />
     <Compile Include="Acciones\TomarCartaDesdeElMonton.vb" />
     <Compile Include="Acciones\TomarCartaDesdeLaBaraja.vb" />
-    <Compile Include="Acciones\TraductorDeAcciones.vb" />
     <Compile Include="Baraja.vb" />
     <Compile Include="BarajadorPorAzar.vb" />
     <Compile Include="Combinaciones\Chinchon.vb" />
     <Compile Include="Combinaciones\Combinacion.vb" />
     <Compile Include="Combinaciones\Escalera.vb" />
     <Compile Include="Configuracion\FactoriaRepositorioSql.vb" />
+    <Compile Include="Delegados.vb" />
+    <Compile Include="Exceptions\AccionNoPermitidaException.vb" />
     <Compile Include="Exceptions\NoHaySuficientesCartasException.vb" />
     <Compile Include="Exceptions\LimiteJugadoresPorAlcanzadoException.vb" />
     <Compile Include="IBaraja.vb" />
@@ -99,7 +102,9 @@
     <Compile Include="Partida.vb" />
     <Compile Include="Combinaciones\Pie.vb" />
     <Compile Include="Monton.vb" />
+    <Compile Include="PartidaExtensions.vb" />
     <Compile Include="Ronda.vb" />
+    <Compile Include="RondaDeCierre.vb" />
     <Compile Include="Turno.vb" />
     <Compile Include="VistaPorJugador.vb" />
   </ItemGroup>

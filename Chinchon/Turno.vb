@@ -1,5 +1,8 @@
 ﻿Imports Chinchon.Entities
 
+''' <summary>
+''' El turno registra la jugada realizada por un jugador dentro de la ronda
+''' </summary>
 Public Class Turno
     Public Event TurnoFinalizado As EventHandler
 
@@ -23,6 +26,9 @@ Public Class Turno
         End Get
     End Property
 
+    ''' <summary>
+    ''' Devuelve las cartas en la mano del jugador
+    ''' </summary>
     Public ReadOnly Property Mano As Mano
         Get
             Return _mano
@@ -51,14 +57,42 @@ Public Class Turno
         End Set
     End Property
 
+    Private _cartaDescartadaParaCierre As Carta
+    Public Property CartaDescartadaParaCierre As Carta
+        Get
+            Return _cartaDescartadaParaCierre
+        End Get
+        Set(value As Carta)
+            _cartaDescartadaParaCierre = value
+            Call ComprobarSiTerminoSuTurno()
+        End Set
+    End Property
+
+    'Le doy semántica al cierre
+    Public ReadOnly Property RealizoUnCierre As Boolean
+        Get
+            Return Me.CartaDescartadaParaCierre IsNot Nothing
+        End Get
+    End Property
+
     Private Sub ComprobarSiTerminoSuTurno()
         'Debo haber levantado y descartado una carta para considerar que jugó
-        If Me.CartaLevantada IsNot Nothing AndAlso Me.CartaDescartada IsNot Nothing Then
-            If Not Me.CartaLevantada.Equals(Me.CartaDescartada) Then
-                Call Me.Mano.IntercambiarCarta(Me.CartaDescartada, Me.CartaLevantada)
-            End If
+        If Me.CartaLevantada IsNot Nothing Then
+            If Me.CartaDescartada IsNot Nothing Then 'Descarta en el pozo
+                If Not Me.CartaLevantada.Equals(Me.CartaDescartada) Then
+                    Call Me.Mano.IntercambiarCarta(Me.CartaDescartada, Me.CartaLevantada)
+                End If
 
-            Call Me.FinalizarTurno()
+                Call Me.FinalizarTurno()
+
+            ElseIf Me.CartaDescartadaParaCierre IsNot Nothing Then 'Descarta para un cierre
+                If Not Me.CartaLevantada.Equals(Me.CartaDescartadaParaCierre) Then
+                    Call Me.Mano.IntercambiarCarta(Me.CartaDescartadaParaCierre, Me.CartaLevantada)
+                End If
+
+                Call Me.FinalizarTurno()
+
+            End If
         End If
     End Sub
 
@@ -71,7 +105,7 @@ Public Class Turno
         End Get
     End Property
 
-    Public Sub FinalizarTurno()
+    Private Sub FinalizarTurno()
         _stopwatch.Stop()
         Me.OnTurnoFinalizado()
     End Sub

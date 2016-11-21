@@ -31,6 +31,7 @@ Public Class Baraja
         'Agrego los dos comodines
         _cartas.Add(New CartaComodin())
         _cartas.Add(New CartaComodin())
+        _cartas.Sort()
     End Sub
 
     ''' <summary>

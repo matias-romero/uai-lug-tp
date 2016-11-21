@@ -37,7 +37,7 @@ Public Class frmNuevaPartida
     End Sub
 
     Private Sub EnlazarListado()
-        Dim listadoUsuarios As IList(Of Jugador) = Orquestador.PartidaActual.Jugadores.ToList()
+        Dim listadoUsuarios As IList(Of Jugador) = Orquestador.PartidaActual.JugadoresActivos.ToList()
 
         Me.lstUsuariosConectados.DataSource = Nothing
         Me.lstUsuariosConectados.DataSource = listadoUsuarios

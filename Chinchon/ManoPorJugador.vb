@@ -13,5 +13,7 @@ Friend Class ManoPorJugador
         End Get
     End Property
 
+    Public Property PuntajeAcumulado as Integer 
+
     Public Property Mano As Mano
 End Class

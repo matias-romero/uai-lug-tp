@@ -13,10 +13,15 @@ Public Class Partida
     Private ReadOnly _mazo As Baraja
     Private ReadOnly _monton As Monton
     Private ReadOnly _rondas As New List(Of Ronda)
-    Private ReadOnly _jugadores As New List(Of ManoPorJugador)
+    Private ReadOnly _jugadoresActivos As New List(Of ManoPorJugador)
+    Private ReadOnly _jugadoresRegistrados As New List(Of ManoPorJugador)
 
     Public Sub New()
-        Me.New(Guid.NewGuid(), New Baraja(), New Monton())
+        Me.New(Guid.NewGuid(), New Baraja())
+    End Sub
+
+    Public Sub New(id As Guid, mazo As Baraja)
+        Me.New(id, mazo, New Monton())
     End Sub
 
     Public Sub New(id As Guid, mazo As Baraja, monton As Monton)
@@ -41,19 +46,27 @@ Public Class Partida
     ''' </summary>
     Public Property PuntajeLimite As Integer
 
-    'Solo permito enumerar los jugadores registrados en la partida
-    Public ReadOnly Property Jugadores As IEnumerable(Of Jugador)
+    ''' <summary>
+    ''' Enumera los jugadores que siguen jugando actualmente
+    ''' </summary>
+    Public ReadOnly Property JugadoresActivos As IEnumerable(Of Jugador)
         Get
-            Return _jugadores.Select(Function(mpj) mpj.Jugador)
+            Return _jugadoresActivos.Select(Function(mpj) mpj.Jugador)
         End Get
     End Property
 
+    ''' <summary>
+    ''' Devuelve la referencia al montón utilizado en esta partida
+    ''' </summary>
     Public ReadOnly Property Monton As IMonton
         Get
             Return _monton
         End Get
     End Property
 
+    ''' <summary>
+    ''' Devuelve la referencia al mazo utilizado en esta partida
+    ''' </summary>
     Public ReadOnly Property Mazo As IBaraja
         Get
             Return _mazo
@@ -72,24 +85,33 @@ Public Class Partida
         End Get
     End Property
 
-
     ''' <summary>
     ''' Permite que un jugador se una a la partida
     ''' </summary>
     ''' <param name="nuevoJugador">Nuevo jugador</param>
     Public Sub Unirse(nuevoJugador As Jugador)
         'Valido que no supere el máximo de jugadores permitidos por partida
-        If _jugadores.Count >= MaximoNumeroDeJugadoresPermitidos Then
+        If _jugadoresActivos.Count >= MaximoNumeroDeJugadoresPermitidos Then
             Throw New LimiteJugadoresPorAlcanzadoException()
         End If
 
         Dim nuevaManoPorJugador As New ManoPorJugador(nuevoJugador)
-        _jugadores.Add(nuevaManoPorJugador)
+        _jugadoresActivos.Add(nuevaManoPorJugador)
+        _jugadoresRegistrados.Add(nuevaManoPorJugador)
 
         'Notifico si la partida ya puede comenzar
         If Me.PuedoComenzarPartida Then
             Me.OnPartidaListaParaEmpezar()
         End If
+    End Sub
+
+    ''' <summary>
+    ''' Registra que un jugador abandona la partida
+    ''' </summary>
+    ''' <param name="jugador">Jugador que abandona</param>
+    Public Sub Abandonar(jugador As Jugador)
+        'TODO: Computarle una derrota
+        'Lo borro de los jugadores activos
     End Sub
 
     ''' <summary>
@@ -102,7 +124,7 @@ Public Class Partida
 
         'Mezclo el mazo y reparto la mano de cada jugador
         _mazo.Barajar()
-        For Each manoPorJugador In _jugadores
+        For Each manoPorJugador In _jugadoresActivos
             manoPorJugador.Mano = New Mano(_mazo.TomarCartas(7))
         Next
 
@@ -112,19 +134,29 @@ Public Class Partida
     ''' <summary>
     ''' Crea una nueva ronda notificando que cambio el turno
     ''' </summary>
-    Public Function NuevaRonda() As Ronda
-        Dim ronda As Ronda = New Ronda(_jugadores)
-        ronda.AvanzarTurno() 'Inicio el primer turno de la ronda
+    Public Sub NuevaRonda()
+        Dim numeroProximaRonda As Integer = _rondas.Count + 1
+        Dim ronda As Ronda = New Ronda(numeroProximaRonda, _jugadoresActivos)
+        AddHandler ronda.CambioTurno, AddressOf Me.NotificarQueCambioElTurno
+        AddHandler ronda.RondaFinalizada, AddressOf Me.FinDeRondaDetectado
         _rondas.Add(ronda)
 
+        ronda.AvanzarTurno() 'Inicio el primer turno de la ronda
+        Call Me.NotificarQueComienzaUnaNuevaRonda(ronda)
+    End Sub
+
+    ''' <summary>
+    ''' Crea una nueva ronda notificando que cambio el turno
+    ''' </summary>
+    Private Sub NuevaRondaDeCierre()
+        Dim numeroProximaRonda As Integer = _rondas.Count + 1
+        Dim ronda As Ronda = New RondaDeCierre(numeroProximaRonda, _jugadoresActivos)
         AddHandler ronda.CambioTurno, AddressOf Me.NotificarQueCambioElTurno
-        RaiseEvent EmpiezaNuevaRonda(ronda, EventArgs.Empty)
+        AddHandler ronda.RondaFinalizada, AddressOf Me.FinDeRondaDetectado
+        _rondas.Add(ronda)
 
-        Return ronda
-    End Function
-
-    Private Sub NotificarQueCambioElTurno(sender As Object, e As EventArgs)
-        RaiseEvent EmpiezaNuevoTurno(Me, e)
+        ronda.AvanzarTurno() 'Inicio el primer turno de la ronda
+        Call Me.NotificarQueComienzaUnaNuevaRonda(ronda)
     End Sub
 
     ''' <summary>
@@ -137,21 +169,48 @@ Public Class Partida
     End Function
 
     ''' <summary>
+    ''' Devuelve el puntaje acumulado de un jugador en esta partida
+    ''' </summary>
+    ''' <param name="jugador">Jugador de la partida</param>
+    Public Function ObtenerPuntajePorJugador(jugador As Jugador) As Integer
+        Dim manoPorJugador As ManoPorJugador = _jugadoresActivos.Single(Function(mpj) mpj.Jugador.Equals(jugador))
+        Return manoPorJugador.PuntajeAcumulado
+    End Function
+
+    ''' <summary>
     ''' Devuelve la mano asignada para ese jugador
     ''' </summary>
     ''' <param name="jugador">Jugador de la partida</param>
     Private Function ObtenerManoDelJugador(jugador As Jugador) As Mano
-        Dim manoPorJugador As ManoPorJugador = _jugadores.Single(Function(mpj) mpj.Jugador.Equals(jugador))
+        Dim manoPorJugador As ManoPorJugador = _jugadoresActivos.Single(Function(mpj) mpj.Jugador.Equals(jugador))
         Return manoPorJugador.Mano
     End Function
 
     Private ReadOnly Property PuedoComenzarPartida As Boolean
         Get
-            Return _jugadores.Count >= MinimoNumeroJugadoresRequeridos
+            Return _jugadoresActivos.Count >= MinimoNumeroJugadoresRequeridos
         End Get
     End Property
 
     Private Sub OnPartidaListaParaEmpezar()
         RaiseEvent PartidaListaParaEmpezar(Me, EventArgs.Empty)
+    End Sub
+
+    Private Sub NotificarQueCambioElTurno(sender As Object, e As EventArgs)
+        RaiseEvent EmpiezaNuevoTurno(Me, e)
+    End Sub
+
+    Private Sub NotificarQueComienzaUnaNuevaRonda(ronda As Ronda)
+        RaiseEvent EmpiezaNuevaRonda(ronda, EventArgs.Empty)
+    End Sub
+
+    Private Sub FinDeRondaDetectado(sender As Object, e As EventArgs)
+        Dim ronda As Ronda = DirectCast(sender, Ronda)
+        If ronda.TurnoActual.RealizoUnCierre Then
+            'TODO: Ver como pedir que muestren todos sus combinaciones y calculen los puntos
+        Else
+            'Si no hubo un cierre, sigo jugando otra ronda
+            Call Me.NuevaRonda()
+        End If
     End Sub
 End Class

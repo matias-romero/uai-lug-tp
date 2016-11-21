@@ -46,4 +46,12 @@ Public Class CartaComodin
             Return ValorComodin
         End Get
     End Property
+
+    Public Overrides Function ToString() As String
+        If Me.TieneValorAsignado Then
+            Return String.Format("Comodín evaluado como {0}", MyBase.ToString())
+        Else
+            Return "Comodín"
+        End If
+    End Function
 End Class

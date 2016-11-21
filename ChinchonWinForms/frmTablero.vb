@@ -1,5 +1,4 @@
 ﻿Imports Chinchon
-Imports Chinchon.Entities
 
 Public Class frmTablero
     Private ReadOnly ColorActivo As Color = Color.ForestGreen
@@ -11,12 +10,14 @@ Public Class frmTablero
         ' This call is required by the designer.
         InitializeComponent()
         Me.BackColor = ColorInactivo
+        Me.groupMano.Text = vpj.Jugador.Apodo
 
         ' Add any initialization after the InitializeComponent() call.
         _vistaPorJugador = vpj
         AddHandler _vistaPorJugador.ComenzoMiTurno, AddressOf Me.ComienzaMiTurno
         AddHandler _vistaPorJugador.FinalizoMiTurno, AddressOf Me.FinalizaMiTurno
         AddHandler _vistaPorJugador.CambioEstadoPartida, AddressOf Me.RefrescarEstadoPartida
+        AddHandler _vistaPorJugador.MensajeEntranteDelSistema, AddressOf Me.MensajeEntranteDelSistemaDetectado
 
         Dim cantidadRivales As Integer = _vistaPorJugador.CantidadRivales
         Me.ManoOponente1.Visible = cantidadRivales >= 1
@@ -51,18 +52,6 @@ Public Class frmTablero
         End If
     End Sub
 
-    Private Sub ManoPorJugador1_DobleClickSobreCartaDetectado(sender As Object, e As AccionConCartaRelacionadaEventArgs) Handles ManoPorJugador1.DobleClickSobreCartaDetectado
-        'Solo me interesan los comodines a los que pueden asignarles un valor
-        dim cartaComodin As CartaComodin = TryCast(e.Carta, CartaComodin)
-        if cartaComodin IsNot Nothing Then
-            Using formularioAsignarValorComodin As New frmAsignarValorComodin()
-                If formularioAsignarValorComodin.ShowDialog(me) = DialogResult.OK Then
-                    'TODO: Llamar a la accion de asignarvalor
-                End If
-            End Using
-        End If
-    End Sub
-
     Private Sub VisorMonton_OperacionDeSoltarCartaDetectada(sender As Object, e As MovimientoCartasEventArgs) Handles VisorMonton.OperacionDeSoltarCartaDetectada
         'Suelto una carta en el monton
         _vistaPorJugador.DescartarCarta(e.Carta)
@@ -70,9 +59,8 @@ Public Class frmTablero
     End Sub
 
     Private Sub VisorMonton_OperacionDeCerrarRondaDetectada(sender As Object, e As MovimientoCartasEventArgs) Handles VisorMonton.OperacionDeCerrarRondaDetectada
-        If frmMain.PromptYesNoQuestion("¿Está seguro de que desea cerrar la ronda?") Then
+        If frmMain.PromptYesNoQuestion(My.Resources.Prompt_OperacionDeCerrarRondaDetectada) Then
             _vistaPorJugador.CerrarRonda(e.Carta)
-            VisorMonton.EstaCerrado = True
         End If
     End Sub
 
@@ -99,5 +87,12 @@ Public Class frmTablero
         Me.VisorMonton.Enabled = controlesHabilitados
         Me.ManoPorJugador1.Enabled = controlesHabilitados
         Me.VisorMazo.Enabled = controlesHabilitados
+        Me.VisorMonton.EstaCerrado = _vistaPorJugador.EstaCerradaLaRonda
+
+        me.lblPuntajeAcumulado.Text = _vistaPorJugador.PuntajeAcumulado
+    End Sub
+
+    Private Sub MensajeEntranteDelSistemaDetectado(sender As Object, e As MensajeSistemaEventArgs)
+        Me.panelNotificador.Notificar(e.Mensaje, e.Sugerencia)
     End Sub
 End Class

@@ -16,7 +16,7 @@ Public Class TestDePartida
     Public Sub UnaPartidaRequiereAlMenosDosJugadoresParaPoderComenzarPreservandoElOrdenEnQueSeUnen()
         Dim partida As New Partida()
 
-        Assert.IsFalse(partida.Jugadores.Any(), "Una nueva partida no debe traer ningún jugador registrado")
+        Assert.IsFalse(partida.JugadoresActivos.Any(), "Una nueva partida no debe traer ningún jugador registrado")
 
         Dim jugadorA As New Jugador()
         Dim jugadorB As New Jugador()
@@ -31,7 +31,7 @@ Public Class TestDePartida
         Assert.IsTrue(eventoDisparado)
 
         Dim secuenciaEsperada As Jugador() = New Jugador() {jugadorA, jugadorB}
-        Assert.IsTrue(secuenciaEsperada.SequenceEqual(partida.Jugadores), "Debe devolverme los dos jugadores registrados en el mismo orden que se registraron")
+        Assert.IsTrue(secuenciaEsperada.SequenceEqual(partida.JugadoresActivos), "Debe devolverme los dos jugadores registrados en el mismo orden que se registraron")
     End Sub
 
     <TestMethod()>
@@ -42,11 +42,9 @@ Public Class TestDePartida
         Dim jugadorB As New Jugador()
         Dim partida As New Partida()
         AddHandler partida.EmpiezaNuevaRonda, manejadorDelEvento
-        partida.Unirse(jugadorA)
-        partida.Unirse(jugadorB)
 
         'ACT & ASSERT
-        partida.Comenzar()
+        partida.Comenzar(jugadorA, jugadorB)
         Assert.AreEqual(1, contadorEventoDisparados, "No se disparo el evento de comienzo de ronda al comenzar la partida")
 
         partida.NuevaRonda()
@@ -54,23 +52,39 @@ Public Class TestDePartida
     End Sub
 
     <TestMethod()>
+    public sub UnaMazoDebePerderSieteCartasPorCadaJugadorRegistradoEnLaPartida()
+        'ARRANGE
+        const CantidadEsperadaCartas As Integer = Baraja.CantidadCartasTotales - 7 * 2
+        Dim barajadorMock As New Mock(Of IBarajador)
+        Dim mazoArreglado As New Baraja(barajadorMock.Object)
+        Dim partida As New Partida(Guid.NewGuid(), mazoArreglado)
+
+        'ACT
+        partida.Comenzar(New Jugador(), New Jugador())
+        
+        'ASSERT
+        Assert.AreEqual(CantidadEsperadaCartas, mazoArreglado.Count())
+    End sub
+
+    <TestMethod()>
+    <TestCategory("Integracion")>
     Public Sub ProbarUnaPartidaCompleta()
         'ARRANGE
         Dim montonArreglado As New Monton()
         Dim barajadorMock As New Mock(Of IBarajador)
-        Dim mazoArreglado As New Baraja(barajadorMock.Object)
+        Dim mazoArreglado As New Baraja(barajadorMock.Object) 'Com,Com,1oro,2o,3o,...,1esp,2e,...,1copa,...,1basto,...,12b
         Dim partida As New Partida(Guid.NewGuid(), mazoArreglado, montonArreglado)
         
         Dim jugadorRed As Jugador = New Jugador() With {.Id = 1, .Apodo = "Red"}
         Dim jugadorBlue As Jugador  = New Jugador() With {.Id = 2, .Apodo = "Blue"}
-        partida.Unirse(jugadorRed)
-        partida.Unirse(jugadorBlue)
-        partida.Comenzar()
+        partida.Comenzar(jugadorRed, jugadorBlue)
 
         Dim mvpRed As VistaPorJugador = partida.VerComo(jugadorRed)
         Dim mvpBlue As VistaPorJugador = partida.VerComo(jugadorBlue)
 
         'ACT & ASSERT
+        Assert.AreEqual(new CartaComodin(), mazoArreglado.First(), "La primer carta debe ser 1 comodín")
+        Assert.AreEqual(new Carta(10, Palo.Espada), mazoArreglado.ProximaCarta, "La proxima carta debe ser el 10 de Espada (reparti las ultimas 14 ya)")
         Assert.IsTrue(mvpRed.EsMiTurno, "Debe ser el turno de Red")
         Assert.IsFalse(mvpBlue.EsMiTurno, "Blue todavía no tiene el turno")
 

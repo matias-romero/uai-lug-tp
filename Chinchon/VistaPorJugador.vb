@@ -1,13 +1,15 @@
 ﻿Imports Chinchon.Acciones
 Imports Chinchon.Entities
+Imports Chinchon.Exceptions
 
 ''' <summary>
 ''' Actúa como un Model-View-Presenter ocupandose de la perspectiva de la partida según un jugador en particular
 ''' </summary>
 Public Class VistaPorJugador
-    Public Event CambioEstadoPartida As EventHandler
     Public Event ComenzoMiTurno As EventHandler
     Public Event FinalizoMiTurno As EventHandler
+    Public Event CambioEstadoPartida As EventHandler
+    Public Event MensajeEntranteDelSistema As NotificacionConMensajeEventHandler
 
     Private ReadOnly _mano As Mano
     Private ReadOnly _jugador As Jugador
@@ -42,6 +44,12 @@ Public Class VistaPorJugador
         End Get
     End Property
 
+    Public ReadOnly Property PuntajeAcumulado As Integer
+        Get
+            Return _partidaEnCurso.ObtenerPuntajePorJugador(_jugador)
+        End Get
+    End Property
+
     Public ReadOnly Property CartaVisibleMonton As Carta
         Get
             Return _partidaEnCurso.Monton.Cara
@@ -56,7 +64,13 @@ Public Class VistaPorJugador
 
     Public ReadOnly Property CantidadRivales As Integer
         Get
-            Return _partidaEnCurso.Jugadores.Count() - 1
+            Return _partidaEnCurso.JugadoresActivos.Count() - 1
+        End Get
+    End Property
+
+    Public ReadOnly Property EstaCerradaLaRonda As Boolean
+        Get
+            Return TypeOf _partidaEnCurso.RondaActual Is RondaDeCierre
         End Get
     End Property
 
@@ -72,6 +86,10 @@ Public Class VistaPorJugador
 
     Private Sub OnCambioEstadoPartida()
         RaiseEvent CambioEstadoPartida(Me, EventArgs.Empty)
+    End Sub
+
+    Private Sub OnMensajeEntranteDelSistema(mensaje As String, sugerencia As String)
+        RaiseEvent MensajeEntranteDelSistema(Me, New MensajeSistemaEventArgs(mensaje, sugerencia))
     End Sub
 
 #Region "Defino las acciones soportadas por el jugador"
@@ -102,9 +120,17 @@ Public Class VistaPorJugador
         Call Me.OnCambioEstadoPartida()
     End Sub
 
+    Public Sub Abandonar()
+
+    End Sub
+
     Private Sub RegistrarAccionDelJugador(accion As IAccion)
-        accion.Ejecutar()
-        'TODO: Guardarlas en el registro de la partida
+        Try
+            accion.Ejecutar()
+            'TODO: Guardarlas en el registro de la partida
+        Catch ex As AccionNoPermitidaException
+            Call Me.OnMensajeEntranteDelSistema(ex.Message, ex.Sugerencia)
+        End Try
     End Sub
 #End Region
 End Class
