@@ -15,15 +15,12 @@ Public Class frmMain
 
         me.WindowState = FormWindowState.Maximized
         me.LayoutMdi(MdiLayout.TileVertical)
-
-        dim formAux as New frmPresentarCombinaciones(Orquestador.PartidaActual.TurnoEnCurso.Mano)
-        formAux.Show()
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        'If Not PromptYesNoQuestion("¿Está seguro que desea abandonar el juego?")  then
-        '    e.Cancel = true
-        'End If
+        If Not PromptYesNoQuestion(My.Resources.Prompt_AbandonarPartida) then
+            e.Cancel = true
+        End If
 
         'Grabo lo que necesite y cierro el juego normalmente
     End Sub

@@ -91,6 +91,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to ¿Está seguro que desea abandonar el juego?.
+        '''</summary>
+        Friend ReadOnly Property Prompt_AbandonarPartida() As String
+            Get
+                Return ResourceManager.GetString("Prompt_AbandonarPartida", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to ¿Está seguro de que desea cerrar la ronda?.
         '''</summary>
         Friend ReadOnly Property Prompt_OperacionDeCerrarRondaDetectada() As String

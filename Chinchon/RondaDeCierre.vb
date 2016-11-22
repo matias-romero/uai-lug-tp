@@ -6,7 +6,11 @@
 Public Class RondaDeCierre
     Inherits Ronda
 
-    friend Sub New(numero As Integer, jugadoresActivos As IEnumerable(Of ManoPorJugador))
+    Friend Sub New(numero As Integer, jugadoresActivos As IEnumerable(Of ManoPorJugador))
         MyBase.New(numero, jugadoresActivos)
     End Sub
+
+    Public Shared Function IsCompatible(ronda As Ronda)
+        Return TypeOf ronda Is RondaDeCierre
+    End Function
 End Class

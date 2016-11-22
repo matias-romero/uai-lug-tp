@@ -1,4 +1,5 @@
-﻿Imports Chinchon.Entities
+﻿Imports Chinchon.Combinaciones
+Imports Chinchon.Entities
 Imports Moq
 
 <TestClass()>
@@ -77,23 +78,64 @@ Public Class TestDePartida
         
         Dim jugadorRed As Jugador = New Jugador() With {.Id = 1, .Apodo = "Red"}
         Dim jugadorBlue As Jugador  = New Jugador() With {.Id = 2, .Apodo = "Blue"}
+        partida.PuntajeLimite = 10 'Para hacerlo super corto
         partida.Comenzar(jugadorRed, jugadorBlue)
 
         Dim mvpRed As VistaPorJugador = partida.VerComo(jugadorRed)
         Dim mvpBlue As VistaPorJugador = partida.VerComo(jugadorBlue)
 
+        Dim solicitoPresentarCombinacionesRed As Boolean = false
+        AddHandler mvpRed.SolicitarQuePresenteSusCombinaciones, sub(sender, args) solicitoPresentarCombinacionesRed = true
+
+        Dim solicitoPresentarCombinacionesBlue As Boolean = false
+        AddHandler mvpBlue.SolicitarQuePresenteSusCombinaciones, sub(sender, args) solicitoPresentarCombinacionesBlue = true
+
         'ACT & ASSERT
         Assert.AreEqual(new CartaComodin(), mazoArreglado.First(), "La primer carta debe ser 1 comodín")
-        Assert.AreEqual(new Carta(10, Palo.Espada), mazoArreglado.ProximaCarta, "La proxima carta debe ser el 10 de Espada (reparti las ultimas 14 ya)")
+        Dim proximaCartaDelMazoAlEmpezar As Carta = new Carta(10, Palo.Espada)
+        Assert.AreEqual(proximaCartaDelMazoAlEmpezar, mazoArreglado.ProximaCarta, "La proxima carta debe ser el 10 de Espada (reparti las ultimas 14 ya)")
         Assert.IsTrue(mvpRed.EsMiTurno, "Debe ser el turno de Red")
         Assert.IsFalse(mvpBlue.EsMiTurno, "Blue todavía no tiene el turno")
 
+        'Primer turno de cada uno
         mvpRed.TomarCartaDesdeElMazo()
-        Assert.IsTrue(mvpRed.EsMiTurno, "Hasta que no descarta sigue el siendo el turno de Red")
-        mvpRed.DescartarCarta(mvpRed.Mano.Cartas.ElementAt(2))
-        Assert.IsFalse(mvpRed.EsMiTurno, "Si tomé y descarté una carta terminó mi turno")
+        Assert.IsTrue(mvpRed.EsMiTurno, "Hasta que no descarta sigue siendo el turno de Red")
 
-        'Assert.AreEqual(jugadorBlue, partida.TurnoEnCurso.Jugador)
+        Dim cartaDescartePrimerTurnoRed As Carta  = mvpRed.Mano.Cartas.ElementAt(1)
+        mvpRed.DescartarCarta(cartaDescartePrimerTurnoRed)
+        Assert.IsFalse(mvpRed.EsMiTurno, "Si tomé y descarté una carta terminó mi turno")
+        Assert.IsTrue(mvpBlue.EsMiTurno, "No avanzó al otro jugador al terminar el turno")
+        Assert.AreEqual(mvpBlue.CartaVisibleMonton, cartaDescartePrimerTurnoRed)
+        Assert.AreEqual(proximaCartaDelMazoAlEmpezar, mvpRed.Mano.Cartas.ElementAt(1), "Debe haber intercambiado la tercera carta con la que levantó del mazo")
+
+        mvpBlue.TomarCartaDesdeElMonton()
+        Assert.IsTrue(mvpBlue.EsMiTurno, "Hasta que no descarta sigue siendo el turno de Blue")
+        Dim cartaDescartePrimerTurnoBlue As Carta = mvpBlue.Mano.Cartas.ElementAt(0)
+        mvpBlue.DescartarCarta(cartaDescartePrimerTurnoBlue)
+        Assert.AreEqual(mvpRed.CartaVisibleMonton, cartaDescartePrimerTurnoBlue)
+        Assert.IsFalse(mvpBlue.EsMiTurno, "Si descarté tuvo que terminar el primer turno de Blue")
+        Assert.AreEqual(cartaDescartePrimerTurnoRed, mvpBlue.Mano.Cartas.ElementAt(0), "Debe haber intercambiado la primera carta de la mano por la que levantó recien")
+
+        'Segundo turno de cada uno y nueva ronda
+        Assert.IsFalse(mvpBlue.EstaCerradaLaRonda, "La ronda debe seguir en juego para Blue")
+        Assert.IsFalse(mvpRed.EstaCerradaLaRonda, "La ronda debe seguir en juego para Red")
+        Assert.IsTrue(mvpRed.EsMiTurno, "Debe ser el segundo turno de Red")
+        Assert.IsFalse(mvpBlue.EsMiTurno, "Blue todavía no tiene el segundo turno")
+
+        mvpRed.TomarCartaDesdeElMazo()
+        Assert.IsFalse(solicitoPresentarCombinacionesRed)
+        mvpRed.CerrarRonda(mvpRed.Mano.Cartas.ElementAt(1))
+        Assert.IsTrue(solicitoPresentarCombinacionesRed, "Al hacer el cierre tiene que pedirme las combinaciones para presentar")
+
+        Assert.IsTrue(mvpRed.EsMiTurno, "Debe ser el tercer turno de Red")
+        Dim combinacionA As New Escalera()
+        combinacionA.AgregarCartas(mvpRed.Mano.Cartas.Skip(2))
+        Assert.IsTrue(combinacionA.EsValida())
+
+        Assert.IsFalse(solicitoPresentarCombinacionesBlue, "Todavía no debió pedirle combinaciones a Blue")
+        Call mvpRed.RegistrarCombinaciones(combinacionA)
+        Assert.IsTrue(solicitoPresentarCombinacionesBlue, "Una vez presentadas las combinaciones de Red debe seguir con Blue")
+        Assert.IsTrue(mvpBlue.EsMiTurno)
     End Sub
 End Class
 

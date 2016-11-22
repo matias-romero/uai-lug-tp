@@ -23,8 +23,9 @@ Partial Class frmTablero
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.groupMano = New System.Windows.Forms.GroupBox()
-        Me.lblPuntaje = New System.Windows.Forms.Label()
         Me.lblPuntajeAcumulado = New System.Windows.Forms.Label()
+        Me.lblPuntaje = New System.Windows.Forms.Label()
+        Me.linkPerfil = New System.Windows.Forms.LinkLabel()
         Me.ManoPorJugador1 = New ChinchonWinForms.ManoPorJugador()
         Me.panelNotificador = New ChinchonWinForms.Notificador()
         Me.ManoOponente3 = New ChinchonWinForms.ManoOponente()
@@ -39,6 +40,7 @@ Partial Class frmTablero
         '
         Me.groupMano.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
             Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.groupMano.Controls.Add(Me.linkPerfil)
         Me.groupMano.Controls.Add(Me.lblPuntajeAcumulado)
         Me.groupMano.Controls.Add(Me.lblPuntaje)
         Me.groupMano.Controls.Add(Me.ManoPorJugador1)
@@ -48,28 +50,39 @@ Partial Class frmTablero
         Me.groupMano.Size = New System.Drawing.Size(901, 173)
         Me.groupMano.TabIndex = 9
         Me.groupMano.TabStop = false
-        Me.groupMano.Text = "<Name>"
-        '
-        'lblPuntaje
-        '
-        Me.lblPuntaje.AutoSize = true
-        Me.lblPuntaje.Location = New System.Drawing.Point(24, 31)
-        Me.lblPuntaje.Name = "lblPuntaje"
-        Me.lblPuntaje.Size = New System.Drawing.Size(70, 20)
-        Me.lblPuntaje.TabIndex = 1
-        Me.lblPuntaje.Text = "Puntaje"
         '
         'lblPuntajeAcumulado
         '
         Me.lblPuntajeAcumulado.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
             Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.lblPuntajeAcumulado.Font = New System.Drawing.Font("Calisto MT", 36!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblPuntajeAcumulado.Location = New System.Drawing.Point(6, 51)
+        Me.lblPuntajeAcumulado.Location = New System.Drawing.Point(16, 61)
         Me.lblPuntajeAcumulado.Name = "lblPuntajeAcumulado"
         Me.lblPuntajeAcumulado.Size = New System.Drawing.Size(101, 108)
         Me.lblPuntajeAcumulado.TabIndex = 2
         Me.lblPuntajeAcumulado.Text = "100"
         Me.lblPuntajeAcumulado.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblPuntaje
+        '
+        Me.lblPuntaje.AutoSize = true
+        Me.lblPuntaje.Location = New System.Drawing.Point(31, 41)
+        Me.lblPuntaje.Name = "lblPuntaje"
+        Me.lblPuntaje.Size = New System.Drawing.Size(70, 20)
+        Me.lblPuntaje.TabIndex = 1
+        Me.lblPuntaje.Text = "Puntaje"
+        '
+        'linkPerfil
+        '
+        Me.linkPerfil.ActiveLinkColor = System.Drawing.Color.Black
+        Me.linkPerfil.BackColor = System.Drawing.Color.Transparent
+        Me.linkPerfil.Location = New System.Drawing.Point(0, 9)
+        Me.linkPerfil.Name = "linkPerfil"
+        Me.linkPerfil.Size = New System.Drawing.Size(132, 20)
+        Me.linkPerfil.TabIndex = 3
+        Me.linkPerfil.TabStop = true
+        Me.linkPerfil.Text = "<Nombre>"
+        Me.linkPerfil.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'ManoPorJugador1
         '
@@ -179,4 +192,5 @@ End Sub
     Private WithEvents groupMano As GroupBox
     Private WithEvents lblPuntajeAcumulado As Label
     Private WithEvents lblPuntaje As Label
+    Private WithEvents linkPerfil As LinkLabel
 End Class

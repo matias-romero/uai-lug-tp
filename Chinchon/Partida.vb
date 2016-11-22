@@ -135,10 +135,9 @@ Public Class Partida
     ''' Crea una nueva ronda notificando que cambio el turno
     ''' </summary>
     Public Sub NuevaRonda()
-        Dim numeroProximaRonda As Integer = _rondas.Count + 1
-        Dim ronda As Ronda = New Ronda(numeroProximaRonda, _jugadoresActivos)
+        Dim ronda As Ronda = New Ronda(Me.ObtenerNumeroProximaRonda(), _jugadoresActivos)
         AddHandler ronda.CambioTurno, AddressOf Me.NotificarQueCambioElTurno
-        AddHandler ronda.RondaFinalizada, AddressOf Me.FinDeRondaDetectado
+        AddHandler ronda.RondaFinalizada, AddressOf Me.FinDeRondaOrdinariaDetectado
         _rondas.Add(ronda)
 
         ronda.AvanzarTurno() 'Inicio el primer turno de la ronda
@@ -149,10 +148,9 @@ Public Class Partida
     ''' Crea una nueva ronda notificando que cambio el turno
     ''' </summary>
     Private Sub NuevaRondaDeCierre()
-        Dim numeroProximaRonda As Integer = _rondas.Count + 1
-        Dim ronda As Ronda = New RondaDeCierre(numeroProximaRonda, _jugadoresActivos)
+        Dim ronda As Ronda = New RondaDeCierre(Me.ObtenerNumeroProximaRonda(), _jugadoresActivos)
         AddHandler ronda.CambioTurno, AddressOf Me.NotificarQueCambioElTurno
-        AddHandler ronda.RondaFinalizada, AddressOf Me.FinDeRondaDetectado
+        AddHandler ronda.RondaFinalizada, AddressOf Me.FinDeRondaDeCierreDetectado
         _rondas.Add(ronda)
 
         ronda.AvanzarTurno() 'Inicio el primer turno de la ronda
@@ -186,6 +184,10 @@ Public Class Partida
         Return manoPorJugador.Mano
     End Function
 
+    Private Function ObtenerNumeroProximaRonda() As Integer
+        Return _rondas.Count + 1
+    End Function
+
     Private ReadOnly Property PuedoComenzarPartida As Boolean
         Get
             Return _jugadoresActivos.Count >= MinimoNumeroJugadoresRequeridos
@@ -204,13 +206,20 @@ Public Class Partida
         RaiseEvent EmpiezaNuevaRonda(ronda, EventArgs.Empty)
     End Sub
 
-    Private Sub FinDeRondaDetectado(sender As Object, e As EventArgs)
+    Private Sub FinDeRondaOrdinariaDetectado(sender As Object, e As EventArgs)
         Dim ronda As Ronda = DirectCast(sender, Ronda)
         If ronda.TurnoActual.RealizoUnCierre Then
-            'TODO: Ver como pedir que muestren todos sus combinaciones y calculen los puntos
+            'Juego una ronda para solicitar todas las combinaciones a cada usuario
+            Call Me.NuevaRondaDeCierre()
         Else
-            'Si no hubo un cierre, sigo jugando otra ronda
+            'Si no hubo un cierre, sigo jugando otra ronda ordinaria
             Call Me.NuevaRonda()
         End If
+
+    End Sub
+
+    Private Sub FinDeRondaDeCierreDetectado(sender As Object, e As EventArgs)
+        'Cuando finaliza la ronda de cierre, cada jugador ya preparó sus combinaciones así que computo los puntos
+        'TODO: Computar puntos y descalificar perdedores
     End Sub
 End Class

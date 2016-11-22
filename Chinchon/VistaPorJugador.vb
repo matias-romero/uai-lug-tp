@@ -1,4 +1,5 @@
 ﻿Imports Chinchon.Acciones
+Imports Chinchon.Combinaciones
 Imports Chinchon.Entities
 Imports Chinchon.Exceptions
 
@@ -9,6 +10,7 @@ Public Class VistaPorJugador
     Public Event ComenzoMiTurno As EventHandler
     Public Event FinalizoMiTurno As EventHandler
     Public Event CambioEstadoPartida As EventHandler
+    Public Event SolicitarQuePresenteSusCombinaciones As EventHandler
     Public Event MensajeEntranteDelSistema As NotificacionConMensajeEventHandler
 
     Private ReadOnly _mano As Mano
@@ -70,15 +72,19 @@ Public Class VistaPorJugador
 
     Public ReadOnly Property EstaCerradaLaRonda As Boolean
         Get
-            Return TypeOf _partidaEnCurso.RondaActual Is RondaDeCierre
+            Return RondaDeCierre.IsCompatible(_partidaEnCurso.RondaActual)
         End Get
     End Property
 
     Private Sub CambioTurnoActual(sender As Object, e As EventArgs)
         If Me.EsMiTurno Then
             RaiseEvent ComenzoMiTurno(Me, EventArgs.Empty)
+            'En caso de que sea una ronda de cierre solicito pedir las combinaciones a cada jugador
+            If Me.EstaCerradaLaRonda Then Call Me.OnSolicitarQuePresenteSusCombinaciones()
+
         Else
             RaiseEvent FinalizoMiTurno(Me, EventArgs.Empty)
+
         End If
 
         Call Me.OnCambioEstadoPartida()
@@ -90,6 +96,10 @@ Public Class VistaPorJugador
 
     Private Sub OnMensajeEntranteDelSistema(mensaje As String, sugerencia As String)
         RaiseEvent MensajeEntranteDelSistema(Me, New MensajeSistemaEventArgs(mensaje, sugerencia))
+    End Sub
+
+    Private Sub OnSolicitarQuePresenteSusCombinaciones()
+        RaiseEvent SolicitarQuePresenteSusCombinaciones(Me, EventArgs.Empty)
     End Sub
 
 #Region "Defino las acciones soportadas por el jugador"
@@ -120,8 +130,14 @@ Public Class VistaPorJugador
         Call Me.OnCambioEstadoPartida()
     End Sub
 
-    Public Sub Abandonar()
+    Public Sub RegistrarCombinaciones(ParamArray combinaciones As Combinacion())
+        Dim accion As IAccion = New PresentarCombinaciones(_partidaEnCurso, combinaciones)
+        Call Me.RegistrarAccionDelJugador(accion)
+    End Sub
 
+    Public Sub Abandonar()
+        Dim accion As IAccion = New AbandonarPartida(_partidaEnCurso, _jugador)
+        Call Me.RegistrarAccionDelJugador(accion)
     End Sub
 
     Private Sub RegistrarAccionDelJugador(accion As IAccion)
@@ -130,6 +146,7 @@ Public Class VistaPorJugador
             'TODO: Guardarlas en el registro de la partida
         Catch ex As AccionNoPermitidaException
             Call Me.OnMensajeEntranteDelSistema(ex.Message, ex.Sugerencia)
+
         End Try
     End Sub
 #End Region

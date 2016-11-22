@@ -7,14 +7,14 @@ Imports Chinchon.Entities
 Public Class frmPresentarCombinaciones
     Private ReadOnly _cartasSinCombinar As ObservableCollection(Of Carta)
 
-    Public Sub New(mano As Mano)
+    Public Sub New(cartas As IEnumerable(Of Carta))
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
         Me.Text = My.Resources.Titulo_PresentarCombinaciones
 
-        _cartasSinCombinar = New ObservableCollection(Of Carta)(mano.Cartas)
+        _cartasSinCombinar = New ObservableCollection(Of Carta)(cartas)
         AddHandler _cartasSinCombinar.CollectionChanged, AddressOf Me.ColeccionCartasSinCombinarModificada
 
         Call Me.VistaDeLaMano.Init(_cartasSinCombinar)
@@ -115,7 +115,7 @@ Public Class frmPresentarCombinaciones
     ''' <returns>Retorna el listado de combinaciones válidas preparadas</returns>
     public Shared Function CombinarCartasEnMano(contenedor As Form, mano As Mano) As Combinacion()
         Dim combinaciones As New List(Of Combinacion)()
-        using formulario As New frmPresentarCombinaciones(mano)
+        using formulario As New frmPresentarCombinaciones(mano.Cartas)
             if formulario.ShowDialog(contenedor) = DialogResult.OK then
                 combinaciones.AddRange(formulario.ObtenerCombinacionesPreparadas())
             End If

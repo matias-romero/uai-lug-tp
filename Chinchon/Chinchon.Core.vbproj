@@ -64,7 +64,7 @@
     <Compile Include="Acciones\CerrarRonda.vb" />
     <Compile Include="Acciones\IAccion.vb" />
     <Compile Include="Acciones\PonerCartaEnElMonton.vb" />
-    <Compile Include="Acciones\PresentarCombinacion.vb" />
+    <Compile Include="Acciones\PresentarCombinaciones.vb" />
     <Compile Include="Acciones\TomarCartaDesdeElMonton.vb" />
     <Compile Include="Acciones\TomarCartaDesdeLaBaraja.vb" />
     <Compile Include="Baraja.vb" />

@@ -107,6 +107,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TestDePartida.vb" />
+    <Compile Include="TestDeJugador.vb" />
     <Compile Include="TestDeReglas.vb" />
   </ItemGroup>
   <ItemGroup>

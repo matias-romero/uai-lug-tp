@@ -36,28 +36,35 @@ Public Class Ronda
     End Property
 
     Friend Sub AvanzarTurno()
-        Call Me.ComprobarRondaFinalizada()
+        If Not Me.ComprobarRondaFinalizada() Then 'Solo sigo en caso de que no haya finalizado
+            _turnoActual += 1
+            Dim indiceJugadorActual As Integer = Me.IndiceJugadorActual()
+            Dim jugadorActual As Jugador = _jugadoresActivos(indiceJugadorActual).Jugador
+            Dim manoActual As Mano = _jugadoresActivos(indiceJugadorActual).Mano
 
-        _turnoActual += 1
-        Dim indiceJugadorActual As Integer = Me.IndiceJugadorActual()
-        Dim jugadorActual As Jugador = _jugadoresActivos(indiceJugadorActual).Jugador
-        Dim manoActual As Mano = _jugadoresActivos(indiceJugadorActual).Mano
+            Dim turno = New Turno(jugadorActual, manoActual)
+            AddHandler turno.TurnoFinalizado, AddressOf Me.NotificarQueFinalizoElTurno
 
-        Dim turno = New Turno(jugadorActual, manoActual)
-        AddHandler turno.TurnoFinalizado, AddressOf Me.NotificarQueFinalizoElTurno
-
-        _turnosJugados.Add(turno)
-    End Sub
-
-    Protected Sub ComprobarRondaFinalizada()
-        'La ronda finaliza cuando todos los jugadores tuvieron su turno o alguno realizó un cierre
-        If _turnosJugados.Any() Then
-            If  _turnosJugados.Count = _jugadoresActivos.Length OrElse Me.TurnoActual.RealizoUnCierre Then
-                Call Me.NotificarRondaFinalizada()
-
-            End If
+            _turnosJugados.Add(turno)
+            RaiseEvent CambioTurno(Me, EventArgs.Empty)
         End If
     End Sub
+
+    Protected Function ComprobarRondaFinalizada() As Boolean
+        Dim finalizoLaRonda As Boolean = False
+
+        'La ronda finaliza cuando todos los jugadores tuvieron su turno o alguno realizó un cierre
+        If _turnosJugados.Any() Then
+            If _turnosJugados.Count = _jugadoresActivos.Length OrElse Me.TurnoActual.RealizoUnCierre Then
+                Call Me.NotificarRondaFinalizada()
+                finalizoLaRonda = True
+
+            End If
+
+        End If
+
+        Return finalizoLaRonda
+    End Function
 
     ''' <summary>
     ''' Devuelve el indice del jugador que tiene habilitado el turno
@@ -68,7 +75,6 @@ Public Class Ronda
 
     Private Sub NotificarQueFinalizoElTurno(sender As Object, e As EventArgs)
         Call Me.AvanzarTurno()
-        RaiseEvent CambioTurno(Me, e)
     End Sub
 
     Private Sub NotificarRondaFinalizada()
