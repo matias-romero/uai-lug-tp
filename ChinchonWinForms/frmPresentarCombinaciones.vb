@@ -20,7 +20,16 @@ Public Class frmPresentarCombinaciones
         Call Me.VistaDeLaMano.Init(_cartasSinCombinar)
     End Sub
 
-    Public Iterator Function ObtenerCombinacionesPreparadas() As IEnumerable(Of Combinacion)
+    ''' <summary>
+    ''' Devuelve todas las combinaciones válidas preparadas por el jugador
+    ''' </summary>
+    Public ReadOnly Property CombinacionesPreparadas As IEnumerable(Of Combinacion)
+        Get
+            Return Me.ObtenerCombinacionesPreparadas().Where(Function(c) c.EsValida())
+        End Get
+    End Property
+
+    Private Iterator Function ObtenerCombinacionesPreparadas() As IEnumerable(Of Combinacion)
         For Each control As VisorCombinacion In tablePanel.Controls
             Yield control.CombinacionEnlazada
         Next
@@ -70,7 +79,7 @@ Public Class frmPresentarCombinaciones
     Private Sub OnNuevaCartaDectectadaHandler(sender As Object, e As AccionConCartaRelacionadaEventArgs)
         Dim cartaIntercambio As Carta = e.Carta
         Dim visorDestino As VisorCombinacion = DirectCast(sender, VisorCombinacion)
-        
+
         'Remuevo la carta arrastrada de la mano original y la agrego en la combinación elegida
         _cartasSinCombinar.Remove(cartaIntercambio)
         visorDestino.CombinacionEnlazada.AgregarCarta(cartaIntercambio)
@@ -78,12 +87,12 @@ Public Class frmPresentarCombinaciones
 
     Private Sub VistaDeLaMano_DobleClickSobreCartaDetectado(sender As Object, e As AccionConCartaRelacionadaEventArgs) Handles VistaDeLaMano.DobleClickSobreCartaDetectado
         'Solo me interesan los comodines a los que pueden asignarles un valor
-        dim cartaComodin As CartaComodin = TryCast(e.Carta, CartaComodin)
-        if cartaComodin IsNot Nothing Then
+        Dim cartaComodin As CartaComodin = TryCast(e.Carta, CartaComodin)
+        If cartaComodin IsNot Nothing Then
             Using formularioAsignarValorComodin As New frmAsignarValorComodin()
                 formularioAsignarValorComodin.NumeroSeleccionado = cartaComodin.NumeroAsignadoPorUsuario
                 formularioAsignarValorComodin.PaloSeleccionado = cartaComodin.PaloAsignadoPorUsuario
-                If formularioAsignarValorComodin.ShowDialog(me) = DialogResult.OK Then
+                If formularioAsignarValorComodin.ShowDialog(Me) = DialogResult.OK Then
                     'TODO: Llamar a la accion de asignarvalor
                     cartaComodin.PaloAsignadoPorUsuario = formularioAsignarValorComodin.PaloSeleccionado
                     cartaComodin.NumeroAsignadoPorUsuario = formularioAsignarValorComodin.NumeroSeleccionado
@@ -99,12 +108,12 @@ Public Class frmPresentarCombinaciones
         'Analizo que todas las combinaciones sean validas a fin de dejarlo salir
         Dim combinacionesRegistradas As Combinacion() = Me.ObtenerCombinacionesPreparadas().ToArray()
         If combinacionesRegistradas.All(Function(c) c.EsValida()) Then
-            Call Me.Hide()  
+            Me.DialogResult = DialogResult.OK
+            Call Me.Hide()
+        Else
+            'Informo que debe preparar combinaciones válidas para seguir
+            Messagebox.Show(Me, "Por favor revise que no queden combinaciones inválidas para continuar")
         End If
-    End Sub
-
-    Private Sub btnCancelar_Click(sender As Object, e As EventArgs) Handles btnCancelar.Click
-        Call Me.Hide()
     End Sub
 
     ''' <summary>
@@ -113,13 +122,13 @@ Public Class frmPresentarCombinaciones
     ''' <param name="contenedor">Formulario contenedor del dialogo modal</param>
     ''' <param name="mano">Mano del jugador</param>
     ''' <returns>Retorna el listado de combinaciones válidas preparadas</returns>
-    public Shared Function CombinarCartasEnMano(contenedor As Form, mano As Mano) As Combinacion()
+    Public Shared Function CombinarCartasEnMano(contenedor As Form, mano As Mano) As Combinacion()
         Dim combinaciones As New List(Of Combinacion)()
-        using formulario As New frmPresentarCombinaciones(mano.Cartas)
-            if formulario.ShowDialog(contenedor) = DialogResult.OK then
-                combinaciones.AddRange(formulario.ObtenerCombinacionesPreparadas())
+        Using formulario As New frmPresentarCombinaciones(mano.Cartas)
+            If formulario.ShowDialog(contenedor) = DialogResult.OK Then
+                combinaciones.AddRange(formulario.CombinacionesPreparadas)
             End If
-            
+
             formulario.Close()
         End Using
 

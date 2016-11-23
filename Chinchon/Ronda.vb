@@ -29,11 +29,28 @@ Public Class Ronda
         End Get
     End Property
 
+    ''' <summary>
+    ''' Devuelve el turno actual de la ronda
+    ''' </summary>
     Public ReadOnly Property TurnoActual As Turno
         Get
             Return _turnosJugados(_turnoActual)
         End Get
     End Property
+
+    ''' <summary>
+    ''' Devuelve el tiempo jugado por ronda de ese jugador
+    ''' </summary>
+    Public Function ContabilizarTiempoJugadoPorJugador(jugador As Jugador) As TimeSpan
+        Dim total As TimeSpan = TimeSpan.Zero
+        For Each turno In _turnosJugados
+            If turno.Jugador.Equals(jugador) Then
+                total = total.Add(turno.TiempoTranscurrido)
+            End If
+        Next
+
+        Return total
+    End Function
 
     Friend Sub AvanzarTurno()
         If Not Me.ComprobarRondaFinalizada() Then 'Solo sigo en caso de que no haya finalizado

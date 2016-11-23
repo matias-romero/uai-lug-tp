@@ -8,6 +8,7 @@ Public Module Program
 
         'TODO: Remover inicialización para pruebas directas
         '**************************************************
+        orquestador.CambiarPartidaActual(New Partida())
         Dim nuevoJugador  = New Jugador() With {.Id = 1, .Apodo = "Matias"}
         nuevoJugador.ParticipacionesRegistradasEnPartidas.Add(new ParticipacionJugadorEnPartida() With { .FueGanador = True, .TiempoDeJuegoNeto = TimeSpan.FromHours(1) })
         nuevoJugador.ParticipacionesRegistradasEnPartidas.Add(new ParticipacionJugadorEnPartida() With { .FueGanador = True, .TiempoDeJuegoNeto = TimeSpan.FromMinutes(15) })

@@ -11,7 +11,7 @@ Namespace Acciones
 
         Public Sub New(partida As Partida, combinaciones As IEnumerable(Of Combinacion))
             _partida = partida
-            _combinaciones = combinaciones
+            _combinaciones = combinaciones.ToArray()
         End Sub
 
         Public Sub Validar()

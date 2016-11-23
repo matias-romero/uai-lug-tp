@@ -85,16 +85,17 @@ Public Class frmTablero
 
     Private Sub RefrescarEstadoPartida(sender As Object, e As EventArgs)
         Dim controlesHabilitados As Boolean = _vistaPorJugador.EsMiTurno
+        Dim estaCerradaLaRonda As Boolean = _vistaPorJugador.EstaCerradaLaRonda
 
         Call RefrescarMonton()
         Me.VisorMazo.MostrarCarta = False
         Me.VisorMazo.Carta = _vistaPorJugador.ProximaCartaDelMazo
         Me.ManoPorJugador1.Init(_vistaPorJugador.Mano.Cartas)
 
-        Me.VisorMonton.Enabled = controlesHabilitados
-        Me.ManoPorJugador1.Enabled = controlesHabilitados
-        Me.VisorMazo.Enabled = controlesHabilitados
-        Me.VisorMonton.EstaCerrado = _vistaPorJugador.EstaCerradaLaRonda
+        Me.VisorMonton.Enabled = controlesHabilitados AndAlso Not estaCerradaLaRonda
+        Me.ManoPorJugador1.Enabled = controlesHabilitados AndAlso Not estaCerradaLaRonda
+        Me.VisorMazo.Enabled = controlesHabilitados AndAlso Not estaCerradaLaRonda
+        Me.VisorMonton.EstaCerrado = estaCerradaLaRonda
 
         Me.lblPuntajeAcumulado.Text = _vistaPorJugador.PuntajeAcumulado
     End Sub

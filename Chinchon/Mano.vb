@@ -2,7 +2,7 @@
 Imports Chinchon.Entities
 
 ''' <summary>
-''' Modela las 7 cartas en juego por cada jugador
+''' Modela las 7 cartas en juego por cada jugador y sus combinaciones
 ''' </summary>
 Public Class Mano
     Private ReadOnly _cartas As New List(Of Carta)
@@ -18,9 +18,21 @@ Public Class Mano
         End Get
     End Property
 
+    ''' <summary>
+    ''' Enumera las combinaciones registradas con las cartas de la mano
+    ''' </summary>
     Public ReadOnly Property Combinaciones As IEnumerable(Of Combinacion)
         Get
             Return _combinaciones
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' Devuelve el puntaje acumulado en la mano basado en las cartas que no fueron combinadas
+    ''' </summary>
+    Public ReadOnly Property PuntajeSinCombinar As Integer
+        Get
+            return Me.CartasSinCombinar.Sum(Function(c) c.ValorSinCombinar)
         End Get
     End Property
 

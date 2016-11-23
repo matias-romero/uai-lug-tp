@@ -3,6 +3,7 @@ Imports Chinchon.Exceptions
 
 Public Class Partida
     Public Event PartidaListaParaEmpezar As EventHandler
+    public Event PartidaFinalizada As EventHandler
     Public Event EmpiezaNuevaRonda As EventHandler
     Public Event EmpiezaNuevoTurno As EventHandler
 
@@ -56,6 +57,15 @@ Public Class Partida
     End Property
 
     ''' <summary>
+    ''' Enumera los jugadores que participan o participaron de la partida
+    ''' </summary>
+    Public ReadOnly Property JugadoresRegistrados As IEnumerable(Of Jugador)
+        Get
+            Return _jugadoresRegistrados.Select(Function(mpj) mpj.Jugador)
+        End Get
+    End Property
+
+    ''' <summary>
     ''' Devuelve la referencia al montón utilizado en esta partida
     ''' </summary>
     Public ReadOnly Property Monton As IMonton
@@ -101,17 +111,18 @@ Public Class Partida
 
         'Notifico si la partida ya puede comenzar
         If Me.PuedoComenzarPartida Then
-            Me.OnPartidaListaParaEmpezar()
+            Me.NotificarPartidaListaParaEmpezar()
         End If
     End Sub
 
     ''' <summary>
     ''' Registra que un jugador abandona la partida
     ''' </summary>
-    ''' <param name="jugador">Jugador que abandona</param>
+    ''' <param name="jugador">Jugador descalificado</param>
     Public Sub Abandonar(jugador As Jugador)
-        'TODO: Computarle una derrota
-        'Lo borro de los jugadores activos
+        'Lo borro de los jugadores activos y registro su derrota
+        _jugadoresActivos.RemoveAll(Function(mpj) mpj.Jugador.Equals(jugador))
+        Call Me.RegistrarDerrota(jugador)
     End Sub
 
     ''' <summary>
@@ -132,10 +143,10 @@ Public Class Partida
     End Sub
 
     ''' <summary>
-    ''' Crea una nueva ronda notificando que cambio el turno
+    ''' Crea una nueva ronda ordinaria notificando que cambio el turno
     ''' </summary>
     Public Sub NuevaRonda()
-        Dim ronda As Ronda = New Ronda(Me.ObtenerNumeroProximaRonda(), _jugadoresActivos)
+        Dim ronda As New Ronda(Me.ObtenerNumeroProximaRonda(), _jugadoresActivos)
         AddHandler ronda.CambioTurno, AddressOf Me.NotificarQueCambioElTurno
         AddHandler ronda.RondaFinalizada, AddressOf Me.FinDeRondaOrdinariaDetectado
         _rondas.Add(ronda)
@@ -145,10 +156,11 @@ Public Class Partida
     End Sub
 
     ''' <summary>
-    ''' Crea una nueva ronda notificando que cambio el turno
+    ''' Crea una nueva ronda de cierre para recolectar las combinaciones de cada jugador
     ''' </summary>
-    Private Sub NuevaRondaDeCierre()
-        Dim ronda As Ronda = New RondaDeCierre(Me.ObtenerNumeroProximaRonda(), _jugadoresActivos)
+    Private Sub NuevaRondaDeCierre(jugador As Jugador)
+        Dim jugadoresReordenados = _jugadoresActivos.ReordenarJugadoresActivosCentrandoEn(jugador)
+        Dim ronda As New RondaDeCierre(Me.ObtenerNumeroProximaRonda(), jugadoresReordenados)
         AddHandler ronda.CambioTurno, AddressOf Me.NotificarQueCambioElTurno
         AddHandler ronda.RondaFinalizada, AddressOf Me.FinDeRondaDeCierreDetectado
         _rondas.Add(ronda)
@@ -171,7 +183,7 @@ Public Class Partida
     ''' </summary>
     ''' <param name="jugador">Jugador de la partida</param>
     Public Function ObtenerPuntajePorJugador(jugador As Jugador) As Integer
-        Dim manoPorJugador As ManoPorJugador = _jugadoresActivos.Single(Function(mpj) mpj.Jugador.Equals(jugador))
+        Dim manoPorJugador As ManoPorJugador = _jugadoresRegistrados.Single(Function(mpj) mpj.Jugador.Equals(jugador))
         Return manoPorJugador.PuntajeAcumulado
     End Function
 
@@ -184,6 +196,16 @@ Public Class Partida
         Return manoPorJugador.Mano
     End Function
 
+    Private Function ObtenerTiempoNetoPorJugador(jugador As Jugador) As TimeSpan
+        Dim total As TimeSpan = TimeSpan.Zero
+        For Each ronda As Ronda In _rondas
+            Dim tiempoPorRonda As TimeSpan = ronda.ContabilizarTiempoJugadoPorJugador(jugador)
+            total = total.Add(tiempoPorRonda)
+        Next
+
+        Return total
+    End Function
+
     Private Function ObtenerNumeroProximaRonda() As Integer
         Return _rondas.Count + 1
     End Function
@@ -194,8 +216,54 @@ Public Class Partida
         End Get
     End Property
 
-    Private Sub OnPartidaListaParaEmpezar()
+    Private Sub FinDeRondaOrdinariaDetectado(sender As Object, e As EventArgs)
+        Dim ronda As Ronda = DirectCast(sender, Ronda)
+        If ronda.TurnoActual.RealizoUnCierre Then
+            'Juego una ronda para solicitar todas las combinaciones a cada usuario
+            Dim jugadorQueCierra As Jugador = ronda.TurnoActual.Jugador
+            Call Me.NuevaRondaDeCierre(jugadorQueCierra)
+        Else
+            'Si no hubo un cierre, sigo jugando otra ronda ordinaria
+            Call Me.NuevaRonda()
+        End If
+
+    End Sub
+
+    Private Sub FinDeRondaDeCierreDetectado(sender As Object, e As EventArgs)
+        Dim jugadoresDescalificados As New List(Of Jugador)()
+        'Cuando finaliza la ronda de cierre, cada jugador ya preparó sus combinaciones así que computo los puntos
+        For Each jugadorActivo As ManoPorJugador In _jugadoresActivos
+            jugadorActivo.PuntajeAcumulado += jugadorActivo.Mano.PuntajeSinCombinar
+
+            If jugadorActivo.PuntajeAcumulado >= Me.PuntajeLimite Then
+                jugadoresDescalificados.Add(jugadorActivo.Jugador)
+            End If
+        Next
+
+        Dim cantidadJugadoresActivos As Integer = _jugadoresActivos.Count - jugadoresDescalificados.Count
+        Call Me.DescalificarJugadores(jugadoresDescalificados)
+        If cantidadJugadoresActivos > 1 Then
+            'Todavía queda mas de uno, sigo con otra ronda
+            Call Me.NuevaRonda()
+        else
+            'En caso de que todos se hayan excedido, gana el que menos puntos tenga
+            If Not _jugadoresActivos.Any() Then
+                Dim jugadorConMenorPuntaje = _jugadoresRegistrados.Aggregate(Function(min, mpj) IIf(min Is nothing OrElse mpj.PuntajeAcumulado >= min.PuntajeAcumulado, mpj, min))
+                _jugadoresActivos.Add(jugadorConMenorPuntaje)
+            End If
+
+            'Tenemos al ganador
+            Call Me.RegistrarVictoria(_jugadoresActivos(0).Jugador)
+            Call Me.NotificarPartidaFinalizada()
+        End If
+    End Sub
+
+    Private Sub NotificarPartidaListaParaEmpezar()
         RaiseEvent PartidaListaParaEmpezar(Me, EventArgs.Empty)
+    End Sub
+
+    Private Sub NotificarPartidaFinalizada()
+        RaiseEvent PartidaFinalizada(me, EventArgs.Empty)
     End Sub
 
     Private Sub NotificarQueCambioElTurno(sender As Object, e As EventArgs)
@@ -206,20 +274,27 @@ Public Class Partida
         RaiseEvent EmpiezaNuevaRonda(ronda, EventArgs.Empty)
     End Sub
 
-    Private Sub FinDeRondaOrdinariaDetectado(sender As Object, e As EventArgs)
-        Dim ronda As Ronda = DirectCast(sender, Ronda)
-        If ronda.TurnoActual.RealizoUnCierre Then
-            'Juego una ronda para solicitar todas las combinaciones a cada usuario
-            Call Me.NuevaRondaDeCierre()
-        Else
-            'Si no hubo un cierre, sigo jugando otra ronda ordinaria
-            Call Me.NuevaRonda()
-        End If
+    Private sub DescalificarJugadores(jugadores As IEnumerable(Of Jugador))
+        For Each jugador As Jugador In jugadores
+            Call Me.Abandonar(jugador)
+        Next
+    End sub
 
+    Private Sub RegistrarDerrota(jugador As Jugador)
+        Dim participacion As New ParticipacionJugadorEnPartida() With { .FueGanador = False }
+        Call Me.RegistrarParticipacion(jugador, participacion)
     End Sub
 
-    Private Sub FinDeRondaDeCierreDetectado(sender As Object, e As EventArgs)
-        'Cuando finaliza la ronda de cierre, cada jugador ya preparó sus combinaciones así que computo los puntos
-        'TODO: Computar puntos y descalificar perdedores
+    Private Sub RegistrarVictoria(jugador As Jugador)
+        Dim participacion As New ParticipacionJugadorEnPartida() With { .FueGanador = True }
+        Call Me.RegistrarParticipacion(jugador, participacion)
+    End Sub
+
+    Private Sub RegistrarParticipacion(jugador As Jugador, participacion As ParticipacionJugadorEnPartida)
+        participacion.IdentificadorPartida = Me.Id
+        participacion.PuntosAcumulados = Me.ObtenerPuntajePorJugador(jugador)
+        participacion.TiempoDeJuegoNeto = Me.ObtenerTiempoNetoPorJugador(jugador)
+
+        jugador.ParticipacionesRegistradasEnPartidas.Add(participacion)
     End Sub
 End Class

@@ -56,6 +56,19 @@ Public Class Jugador
         End Get
     End Property
 
+    Public Overrides Function GetHashCode() As Integer
+        Return Me.Id.GetHashCode()
+    End Function
+
+    Public Overrides Function Equals(obj As Object) As Boolean
+        Dim other As Jugador = TryCast(obj, Jugador)
+        If other Is Nothing Then
+            Return False
+        End If
+
+        Return Object.ReferenceEquals(other, Me) OrElse other.Id.Equals(me.Id)
+    End Function
+
     Public Overrides Function ToString() As String
         Return Me.Apodo
     End Function

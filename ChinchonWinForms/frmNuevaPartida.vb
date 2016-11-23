@@ -3,13 +3,14 @@ Imports Chinchon.Entities
 
 Public Class frmNuevaPartida
     Private ReadOnly Orquestador As OrquestadorDelJuego = OrquestadorDelJuego.InstanciaPorDefecto
-
+    Private ReadOnly _nuevaPartida As New Partida()
+    
     Private Sub frmNuevaPartida_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = My.Resources.Titulo_NuevaPartida
 
         'Explicito la configuración que voy a utilizar con el programa
         Orquestador.UtilizarRepositoriosUsandoCadenaDeConexion(My.Settings.RepositorioPrincipal)
-        Call Me.EnlazarDatosDePartida(Orquestador.PartidaActual)
+        Call Me.EnlazarDatosDePartida(_nuevaPartida)
     End Sub
 
     Private Sub EnlazarDatosDePartida(partida As Partida)
@@ -20,15 +21,16 @@ Public Class frmNuevaPartida
     End Sub
 
     Private Sub btnComenzar_Click(sender As Object, e As EventArgs) Handles btnComenzar.Click
-        Orquestador.PartidaActual.Comenzar()
+        Orquestador.CambiarPartidaActual(_nuevaPartida)
+        Me.DialogResult = DialogResult.OK
     End Sub
 
     Private Sub lnkIniciarSession_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkIniciarSession.LinkClicked
         Dim nuevoJugador As Jugador = frmLoginJugador.PreguntarCredenciales(My.Resources.Titulo_IngreseSusCredenciales, Orquestador.Repositorios.Jugadores())
         If nuevoJugador IsNot Nothing Then
-            Orquestador.PartidaActual.Unirse(nuevoJugador)
+            _nuevaPartida.Unirse(nuevoJugador)
 
-            Call Me.EnlazarListado()
+            Call Me.EnlazarListado(_nuevaPartida)
         End If
     End Sub
 
@@ -36,8 +38,8 @@ Public Class frmNuevaPartida
         Me.btnComenzar.Enabled = True
     End Sub
 
-    Private Sub EnlazarListado()
-        Dim listadoUsuarios As IList(Of Jugador) = Orquestador.PartidaActual.JugadoresActivos.ToList()
+    Private Sub EnlazarListado(partida As Partida)
+        Dim listadoUsuarios As IList(Of Jugador) = partida.JugadoresActivos.ToList()
 
         Me.lstUsuariosConectados.DataSource = Nothing
         Me.lstUsuariosConectados.DataSource = listadoUsuarios

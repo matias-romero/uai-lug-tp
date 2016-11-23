@@ -1,5 +1,4 @@
 ﻿Imports Chinchon.Configuracion
-Imports Chinchon.Entities
 
 'Dedicado para servir de "contenedor" que le brinde una interfaz simplificada a los consumidores
 Public Class OrquestadorDelJuego
@@ -20,18 +19,18 @@ Public Class OrquestadorDelJuego
     End Property
 #End Region
 
-    Private ReadOnly _partidaActual As Partida
+    Private _partidaActual As Partida
     Private _factoriaRepositorios As IFactoriaRepositorios
-
-    Public Sub New()
-        _partidaActual = New Partida()
-    End Sub
-
+    
     Public ReadOnly Property PartidaActual As Partida
         Get
             Return _partidaActual
         End Get
     End Property
+    
+    Public sub CambiarPartidaActual(otraPartida As Partida)
+        _partidaActual = otraPartida
+    End sub
 
     Public ReadOnly Property Repositorios As IFactoriaRepositorios
         Get
@@ -43,15 +42,4 @@ Public Class OrquestadorDelJuego
     Public Sub UtilizarRepositoriosUsandoCadenaDeConexion(cadenaConexion As String)
         _factoriaRepositorios = New FactoriaRepositorioSQL(cadenaConexion)
     End Sub
-
-    ''' <summary>
-    ''' Recibe el gesto realizado por el jugador y efectua la jugada esperada en la partida
-    ''' </summary>
-    ''' <param name="carta">Carta en cuestión</param>
-    ''' <param name="origen">Desde donde se tomó la carta</param>
-    ''' <param name="destino">Lugar donde se depositó la carta</param>
-    ''' <returns></returns>
-    Public Function EfectuarJugada(carta As Carta, origen As Object, destino As Object) As Boolean
-
-    End Function
 End Class

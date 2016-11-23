@@ -23,13 +23,12 @@ Partial Class frmPresentarCombinaciones
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.VistaDeLaMano = New ChinchonWinForms.ManoPorJugador()
         Me.tablePanel = New System.Windows.Forms.TableLayoutPanel()
         Me.btnConfirmar = New System.Windows.Forms.Button()
-        Me.btnCancelar = New System.Windows.Forms.Button()
         Me.btnNuevoChinchon = New System.Windows.Forms.Button()
         Me.btnNuevoPie = New System.Windows.Forms.Button()
         Me.btnNuevaEscalera = New System.Windows.Forms.Button()
-        Me.VistaDeLaMano = New ChinchonWinForms.ManoPorJugador()
         Me.GroupBox1.SuspendLayout
         Me.SuspendLayout
         '
@@ -44,6 +43,17 @@ Partial Class frmPresentarCombinaciones
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = false
         Me.GroupBox1.Text = "Cartas en Mano"
+        '
+        'VistaDeLaMano
+        '
+        Me.VistaDeLaMano.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.VistaDeLaMano.BackColor = System.Drawing.Color.Transparent
+        Me.VistaDeLaMano.Location = New System.Drawing.Point(6, 19)
+        Me.VistaDeLaMano.Name = "VistaDeLaMano"
+        Me.VistaDeLaMano.Size = New System.Drawing.Size(882, 190)
+        Me.VistaDeLaMano.TabIndex = 0
         '
         'tablePanel
         '
@@ -63,24 +73,12 @@ Partial Class frmPresentarCombinaciones
         'btnConfirmar
         '
         Me.btnConfirmar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnConfirmar.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.btnConfirmar.Location = New System.Drawing.Point(348, 567)
+        Me.btnConfirmar.Location = New System.Drawing.Point(409, 567)
         Me.btnConfirmar.Name = "btnConfirmar"
         Me.btnConfirmar.Size = New System.Drawing.Size(100, 30)
         Me.btnConfirmar.TabIndex = 2
         Me.btnConfirmar.Text = "Confirmar"
         Me.btnConfirmar.UseVisualStyleBackColor = true
-        '
-        'btnCancelar
-        '
-        Me.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancelar.Location = New System.Drawing.Point(470, 567)
-        Me.btnCancelar.Name = "btnCancelar"
-        Me.btnCancelar.Size = New System.Drawing.Size(100, 30)
-        Me.btnCancelar.TabIndex = 3
-        Me.btnCancelar.Text = "Cancelar"
-        Me.btnCancelar.UseVisualStyleBackColor = true
         '
         'btnNuevoChinchon
         '
@@ -112,28 +110,15 @@ Partial Class frmPresentarCombinaciones
         Me.btnNuevaEscalera.Text = "Escalera"
         Me.btnNuevaEscalera.UseVisualStyleBackColor = true
         '
-        'VistaDeLaMano
-        '
-        Me.VistaDeLaMano.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.VistaDeLaMano.BackColor = System.Drawing.Color.Transparent
-        Me.VistaDeLaMano.Location = New System.Drawing.Point(6, 19)
-        Me.VistaDeLaMano.Name = "VistaDeLaMano"
-        Me.VistaDeLaMano.Size = New System.Drawing.Size(882, 190)
-        Me.VistaDeLaMano.TabIndex = 0
-        '
         'frmPresentarCombinaciones
         '
         Me.AcceptButton = Me.btnConfirmar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.btnCancelar
         Me.ClientSize = New System.Drawing.Size(919, 609)
         Me.Controls.Add(Me.btnNuevaEscalera)
         Me.Controls.Add(Me.btnNuevoPie)
         Me.Controls.Add(Me.btnNuevoChinchon)
-        Me.Controls.Add(Me.btnCancelar)
         Me.Controls.Add(Me.btnConfirmar)
         Me.Controls.Add(Me.tablePanel)
         Me.Controls.Add(Me.GroupBox1)
@@ -148,7 +133,6 @@ End Sub
     Private WithEvents GroupBox1 As GroupBox
     Private WithEvents tablePanel As TableLayoutPanel
     Private WithEvents btnConfirmar As Button
-    Private WithEvents btnCancelar As Button
     Private WithEvents VistaDeLaMano As ManoPorJugador
     Private WithEvents btnNuevoChinchon As Button
     Private WithEvents btnNuevoPie As Button

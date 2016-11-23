@@ -103,6 +103,7 @@
     <Compile Include="Combinaciones\Pie.vb" />
     <Compile Include="Monton.vb" />
     <Compile Include="PartidaExtensions.vb" />
+    <Compile Include="ResumenPartida.vb" />
     <Compile Include="Ronda.vb" />
     <Compile Include="RondaDeCierre.vb" />
     <Compile Include="Turno.vb" />
