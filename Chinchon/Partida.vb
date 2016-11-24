@@ -250,6 +250,7 @@ Public Class Partida
             If Not _jugadoresActivos.Any() Then
                 Dim jugadorConMenorPuntaje = _jugadoresRegistrados.Aggregate(Function(min, mpj) IIf(min Is nothing OrElse mpj.PuntajeAcumulado >= min.PuntajeAcumulado, mpj, min))
                 _jugadoresActivos.Add(jugadorConMenorPuntaje)
+                jugadoresDescalificados.Remove(jugadorConMenorPuntaje.Jugador)
             End If
 
             'Tenemos al ganador

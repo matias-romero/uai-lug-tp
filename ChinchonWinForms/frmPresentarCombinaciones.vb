@@ -90,6 +90,7 @@ Public Class frmPresentarCombinaciones
         Dim cartaComodin As CartaComodin = TryCast(e.Carta, CartaComodin)
         If cartaComodin IsNot Nothing Then
             Using formularioAsignarValorComodin As New frmAsignarValorComodin()
+                formularioAsignarValorComodin.StartPosition = FormStartPosition.CenterParent
                 formularioAsignarValorComodin.NumeroSeleccionado = cartaComodin.NumeroAsignadoPorUsuario
                 formularioAsignarValorComodin.PaloSeleccionado = cartaComodin.PaloAsignadoPorUsuario
                 If formularioAsignarValorComodin.ShowDialog(Me) = DialogResult.OK Then
@@ -112,7 +113,7 @@ Public Class frmPresentarCombinaciones
             Call Me.Hide()
         Else
             'Informo que debe preparar combinaciones válidas para seguir
-            Messagebox.Show(Me, "Por favor revise que no queden combinaciones inválidas para continuar")
+            Messagebox.Show(Me, My.Resources.Error_VerificarCombinacionesInvalidas)
         End If
     End Sub
 
@@ -125,6 +126,7 @@ Public Class frmPresentarCombinaciones
     Public Shared Function CombinarCartasEnMano(contenedor As Form, mano As Mano) As Combinacion()
         Dim combinaciones As New List(Of Combinacion)()
         Using formulario As New frmPresentarCombinaciones(mano.Cartas)
+            formulario.StartPosition = FormStartPosition.CenterParent
             If formulario.ShowDialog(contenedor) = DialogResult.OK Then
                 combinaciones.AddRange(formulario.CombinacionesPreparadas)
             End If

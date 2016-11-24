@@ -148,4 +148,16 @@
   <data name="Prompt_AbandonarPartida" xml:space="preserve">
     <value>¿Está seguro que desea abandonar el juego?</value>
   </data>
+  <data name="Prompt_TieneUsuarioRegistrado" xml:space="preserve">
+    <value>¿Ya jugó alguna vez con nosotros?</value>
+  </data>
+  <data name="Titulo_CompleteSusDatos" xml:space="preserve">
+    <value>Complete sus datos para registrar un nuevo jugador</value>
+  </data>
+  <data name="Error_VerificarCombinacionesInvalidas" xml:space="preserve">
+    <value>Por favor revise que no queden combinaciones inválidas para continuar</value>
+  </data>
+  <data name="Error_GuardandoEstadisticasEnRepositorio" xml:space="preserve">
+    <value>Ocurrió un error grabando las estadísticas de la partida</value>
+  </data>
 </root>

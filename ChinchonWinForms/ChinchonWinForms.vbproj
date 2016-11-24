@@ -99,6 +99,12 @@
     <Compile Include="frmPresentarCombinaciones.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmResumenPartida.Designer.vb">
+      <DependentUpon>frmResumenPartida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmResumenPartida.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmTablero.Designer.vb">
       <DependentUpon>frmTablero.vb</DependentUpon>
     </Compile>
@@ -198,6 +204,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPresentarCombinaciones.resx">
       <DependentUpon>frmPresentarCombinaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegistrarJugador.resx">
+      <DependentUpon>frmRegistrarJugador.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResumenPartida.resx">
+      <DependentUpon>frmResumenPartida.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTablero.resx">
       <DependentUpon>frmTablero.vb</DependentUpon>

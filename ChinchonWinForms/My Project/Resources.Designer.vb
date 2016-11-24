@@ -91,6 +91,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Ocurrió un error grabando las estadísticas de la partida.
+        '''</summary>
+        Friend ReadOnly Property Error_GuardandoEstadisticasEnRepositorio() As String
+            Get
+                Return ResourceManager.GetString("Error_GuardandoEstadisticasEnRepositorio", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Por favor revise que no queden combinaciones inválidas para continuar.
+        '''</summary>
+        Friend ReadOnly Property Error_VerificarCombinacionesInvalidas() As String
+            Get
+                Return ResourceManager.GetString("Error_VerificarCombinacionesInvalidas", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to ¿Está seguro que desea abandonar el juego?.
         '''</summary>
         Friend ReadOnly Property Prompt_AbandonarPartida() As String
@@ -105,6 +123,15 @@ Namespace My.Resources
         Friend ReadOnly Property Prompt_OperacionDeCerrarRondaDetectada() As String
             Get
                 Return ResourceManager.GetString("Prompt_OperacionDeCerrarRondaDetectada", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to ¿Ya jugó alguna vez con nosotros?.
+        '''</summary>
+        Friend ReadOnly Property Prompt_TieneUsuarioRegistrado() As String
+            Get
+                Return ResourceManager.GetString("Prompt_TieneUsuarioRegistrado", resourceCulture)
             End Get
         End Property
         
@@ -124,6 +151,15 @@ Namespace My.Resources
         Friend ReadOnly Property Titulo_AsignarValorComodin() As String
             Get
                 Return ResourceManager.GetString("Titulo_AsignarValorComodin", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Complete sus datos para registrar un nuevo jugador.
+        '''</summary>
+        Friend ReadOnly Property Titulo_CompleteSusDatos() As String
+            Get
+                Return ResourceManager.GetString("Titulo_CompleteSusDatos", resourceCulture)
             End Get
         End Property
         

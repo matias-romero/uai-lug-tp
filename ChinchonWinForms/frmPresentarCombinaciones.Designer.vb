@@ -23,12 +23,12 @@ Partial Class frmPresentarCombinaciones
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.VistaDeLaMano = New ChinchonWinForms.ManoPorJugador()
         Me.tablePanel = New System.Windows.Forms.TableLayoutPanel()
         Me.btnConfirmar = New System.Windows.Forms.Button()
         Me.btnNuevoChinchon = New System.Windows.Forms.Button()
         Me.btnNuevoPie = New System.Windows.Forms.Button()
         Me.btnNuevaEscalera = New System.Windows.Forms.Button()
+        Me.VistaDeLaMano = New ChinchonWinForms.ManoPorJugador()
         Me.GroupBox1.SuspendLayout
         Me.SuspendLayout
         '
@@ -39,21 +39,10 @@ Partial Class frmPresentarCombinaciones
         Me.GroupBox1.Controls.Add(Me.VistaDeLaMano)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 13)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(894, 215)
+        Me.GroupBox1.Size = New System.Drawing.Size(859, 215)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = false
         Me.GroupBox1.Text = "Cartas en Mano"
-        '
-        'VistaDeLaMano
-        '
-        Me.VistaDeLaMano.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-            Or System.Windows.Forms.AnchorStyles.Left)  _
-            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.VistaDeLaMano.BackColor = System.Drawing.Color.Transparent
-        Me.VistaDeLaMano.Location = New System.Drawing.Point(6, 19)
-        Me.VistaDeLaMano.Name = "VistaDeLaMano"
-        Me.VistaDeLaMano.Size = New System.Drawing.Size(882, 190)
-        Me.VistaDeLaMano.TabIndex = 0
         '
         'tablePanel
         '
@@ -67,13 +56,13 @@ Partial Class frmPresentarCombinaciones
         Me.tablePanel.Name = "tablePanel"
         Me.tablePanel.RowCount = 1
         Me.tablePanel.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.tablePanel.Size = New System.Drawing.Size(894, 283)
+        Me.tablePanel.Size = New System.Drawing.Size(859, 403)
         Me.tablePanel.TabIndex = 1
         '
         'btnConfirmar
         '
         Me.btnConfirmar.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.btnConfirmar.Location = New System.Drawing.Point(409, 567)
+        Me.btnConfirmar.Location = New System.Drawing.Point(392, 687)
         Me.btnConfirmar.Name = "btnConfirmar"
         Me.btnConfirmar.Size = New System.Drawing.Size(100, 30)
         Me.btnConfirmar.TabIndex = 2
@@ -83,7 +72,7 @@ Partial Class frmPresentarCombinaciones
         'btnNuevoChinchon
         '
         Me.btnNuevoChinchon.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnNuevoChinchon.Location = New System.Drawing.Point(214, 232)
+        Me.btnNuevoChinchon.Location = New System.Drawing.Point(197, 232)
         Me.btnNuevoChinchon.Name = "btnNuevoChinchon"
         Me.btnNuevoChinchon.Size = New System.Drawing.Size(100, 30)
         Me.btnNuevoChinchon.TabIndex = 4
@@ -93,7 +82,7 @@ Partial Class frmPresentarCombinaciones
         'btnNuevoPie
         '
         Me.btnNuevoPie.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnNuevoPie.Location = New System.Drawing.Point(604, 232)
+        Me.btnNuevoPie.Location = New System.Drawing.Point(587, 232)
         Me.btnNuevoPie.Name = "btnNuevoPie"
         Me.btnNuevoPie.Size = New System.Drawing.Size(100, 30)
         Me.btnNuevoPie.TabIndex = 5
@@ -103,19 +92,30 @@ Partial Class frmPresentarCombinaciones
         'btnNuevaEscalera
         '
         Me.btnNuevaEscalera.Anchor = System.Windows.Forms.AnchorStyles.Top
-        Me.btnNuevaEscalera.Location = New System.Drawing.Point(409, 234)
+        Me.btnNuevaEscalera.Location = New System.Drawing.Point(392, 234)
         Me.btnNuevaEscalera.Name = "btnNuevaEscalera"
         Me.btnNuevaEscalera.Size = New System.Drawing.Size(100, 30)
         Me.btnNuevaEscalera.TabIndex = 6
         Me.btnNuevaEscalera.Text = "Escalera"
         Me.btnNuevaEscalera.UseVisualStyleBackColor = true
         '
+        'VistaDeLaMano
+        '
+        Me.VistaDeLaMano.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.VistaDeLaMano.BackColor = System.Drawing.Color.Transparent
+        Me.VistaDeLaMano.Location = New System.Drawing.Point(6, 19)
+        Me.VistaDeLaMano.Name = "VistaDeLaMano"
+        Me.VistaDeLaMano.Size = New System.Drawing.Size(847, 190)
+        Me.VistaDeLaMano.TabIndex = 0
+        '
         'frmPresentarCombinaciones
         '
         Me.AcceptButton = Me.btnConfirmar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(919, 609)
+        Me.ClientSize = New System.Drawing.Size(884, 729)
         Me.Controls.Add(Me.btnNuevaEscalera)
         Me.Controls.Add(Me.btnNuevoPie)
         Me.Controls.Add(Me.btnNuevoChinchon)

@@ -1,17 +1,20 @@
-﻿Imports Chinchon
+﻿Imports System.Timers
+Imports Chinchon
 Imports Chinchon.Entities
 
 Public Class frmMain
+    Private WithEvents TimerDelayHelper As New Timers.Timer(1500) With {.Enabled = False, .AutoReset = False}
+
     Private ReadOnly Orquestador As OrquestadorDelJuego = OrquestadorDelJuego.InstanciaPorDefecto
+    Private _ultimoResumenDePartida As ResumenPartida
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Text = String.Format("{0} (v{1})", Application.ProductName, Application.ProductVersion)
-        If (Orquestador.PartidaActual IsNot Nothing) Then Me.ComenzarPartida(Orquestador.PartidaActual) 'Para casos prearmados
         Me.WindowState = FormWindowState.Maximized
-        Me.LayoutMdi(MdiLayout.TileVertical)
     End Sub
 
     Private Sub ComenzarPartida(partidaActual As Partida)
+        _ultimoResumenDePartida = Nothing
         AddHandler partidaActual.PartidaFinalizada, AddressOf Me.OnPartidaFinalizada
 
         For Each jugador As Jugador In partidaActual.JugadoresActivos.Reverse()
@@ -22,19 +25,17 @@ Public Class frmMain
             formTablero.Show()
         Next
 
+        Me.LayoutMdi(MdiLayout.TileVertical)
     End Sub
 
     Private Sub OnPartidaFinalizada(sender As Object, e As EventArgs)
         Dim partidaFinalizada As Partida = DirectCast(sender, Partida)
-        Dim resumen As New ResumenPartida(partidaFinalizada)
-        'Cierro todos los tableros y muestro el resultado de la partida
-        For Each tablero As frmTablero In Me.MdiChildren
-            tablero.Close()
-            'tablero.Dispose()
-        Next
+        _ultimoResumenDePartida = New ResumenPartida(partidaFinalizada)
 
-        'TODO: Poner un formulario mas feliz con el resumen de la partida
-        MessageBox.Show("Gracias por jugar con nosotros. Finalizó la partida " + partidaFinalizada.Id.ToString() + " : FELICITACIONES " + resumen.Ganador.ToString())
+        'Guardo las estadísticas de la partida
+        Call Me.RegistrarEstadisticasJugadores(_ultimoResumenDePartida.Participantes)
+        'Utilizo un timer para diferir el evento y liberar el stack (Cheap-Threading)
+        TimerDelayHelper.Start()
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
@@ -62,5 +63,35 @@ Public Class frmMain
 
     Private Sub SalirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalirToolStripMenuItem.Click
         Call Me.Close()
+    End Sub
+
+    Private Sub OrdenarTablerosToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OrdenarTablerosToolStripMenuItem.Click
+        Me.LayoutMdi(MdiLayout.TileVertical)
+    End Sub
+
+    Private Sub RegistrarEstadisticasJugadores(jugadores As IEnumerable(Of Jugador))
+        Try
+            Dim repositorioJugadores As IJugadorRepositorio = Orquestador.Repositorios.Jugadores()
+            Call repositorioJugadores.Actualizar(jugadores)
+        Catch ex As Exception
+            MessageBox.Show(My.Resources.Error_GuardandoEstadisticasEnRepositorio, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
+    Private Sub MostrarResultadosPartida()
+        'Cierro todos los tableros y muestro el resultado de la partida
+        For Each tablero As frmTablero In Me.MdiChildren
+            tablero.Close()
+            tablero.Dispose()
+        Next
+
+        Using formResumen As New frmResumenPartida(_ultimoResumenDePartida)
+            formResumen.ShowDialog(Me)
+        End Using
+    End Sub
+
+    Private Sub TimerDelayHelper_Elapsed(sender As Object, e As ElapsedEventArgs) Handles TimerDelayHelper.Elapsed
+        Me.BeginInvoke(Sub() Call Me.MostrarResultadosPartida())
     End Sub
 End Class
