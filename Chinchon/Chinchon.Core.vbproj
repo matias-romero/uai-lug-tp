@@ -59,47 +59,50 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acciones\AbandonarPartida.vb" />
+    <Compile Include="Acciones\CambiarPosicionCartaEnMano.vb" />
+    <Compile Include="Acciones\CerrarRonda.vb" />
     <Compile Include="Acciones\IAccion.vb" />
+    <Compile Include="Acciones\PonerCartaEnElMonton.vb" />
+    <Compile Include="Acciones\PresentarCombinaciones.vb" />
+    <Compile Include="Acciones\TomarCartaDesdeElMonton.vb" />
+    <Compile Include="Acciones\TomarCartaDesdeLaBaraja.vb" />
     <Compile Include="Baraja.vb" />
     <Compile Include="BarajadorPorAzar.vb" />
-    <Compile Include="Carta.vb" />
-    <Compile Include="CartaComodin.vb" />
     <Compile Include="Combinaciones\Chinchon.vb" />
     <Compile Include="Combinaciones\Combinacion.vb" />
     <Compile Include="Combinaciones\Escalera.vb" />
+    <Compile Include="Configuracion\FactoriaRepositorioSql.vb" />
+    <Compile Include="Delegados.vb" />
+    <Compile Include="Exceptions\AccionNoPermitidaException.vb" />
+    <Compile Include="Exceptions\NoHaySuficientesCartasException.vb" />
     <Compile Include="Exceptions\LimiteJugadoresPorAlcanzadoException.vb" />
+    <Compile Include="IBaraja.vb" />
     <Compile Include="IBarajador.vb" />
+    <Compile Include="Configuracion\IFactoriaRepositorios.vb" />
+    <Compile Include="IMonton.vb" />
     <Compile Include="Mano.vb" />
     <Compile Include="ManoPorJugador.vb" />
-    <Compile Include="Palo.vb" />
-    <Compile Include="Jugador.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
-    </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="OrquestadorDelJuego.vb" />
     <Compile Include="Partida.vb" />
     <Compile Include="Combinaciones\Pie.vb" />
     <Compile Include="Monton.vb" />
+    <Compile Include="PartidaExtensions.vb" />
+    <Compile Include="ResumenPartida.vb" />
     <Compile Include="Ronda.vb" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <Compile Include="RondaDeCierre.vb" />
+    <Compile Include="Turno.vb" />
+    <Compile Include="VistaPorJugador.vb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DiagramaClases.cd" />
@@ -112,6 +115,16 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chinchon.Data\Chinchon.Data.vbproj">
+      <Project>{66fee86f-f9dd-4ffc-9fab-1b241881eceb}</Project>
+      <Name>Chinchon.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Chinchon.Entities\Chinchon.Entities.vbproj">
+      <Project>{cf4ec479-c0b5-4442-b339-22c1143cc427}</Project>
+      <Name>Chinchon.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

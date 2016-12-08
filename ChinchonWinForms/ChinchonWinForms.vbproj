@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FAEEB47B-FD1A-47D5-947E-0F0C18120FC9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>ChinchonWinForms.My.MyApplication</StartupObject>
+    <StartupObject>Sub Main</StartupObject>
     <RootNamespace>ChinchonWinForms</RootNamespace>
     <AssemblyName>ChinchonWinForms</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -45,8 +45,12 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -71,6 +75,42 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAsignarValorComodin.Designer.vb">
+      <DependentUpon>frmAsignarValorComodin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAsignarValorComodin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLoginJugador.Designer.vb">
+      <DependentUpon>frmLoginJugador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoginJugador.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPerfilJugador.Designer.vb">
+      <DependentUpon>frmPerfilJugador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPerfilJugador.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPresentarCombinaciones.Designer.vb">
+      <DependentUpon>frmPresentarCombinaciones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPresentarCombinaciones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmResumenPartida.Designer.vb">
+      <DependentUpon>frmResumenPartida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmResumenPartida.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTablero.Designer.vb">
+      <DependentUpon>frmTablero.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTablero.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMain.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -78,7 +118,32 @@
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmNuevaPartida.Designer.vb">
+      <DependentUpon>frmNuevaPartida.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmNuevaPartida.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRegistrarJugador.Designer.vb">
+      <DependentUpon>frmRegistrarJugador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRegistrarJugador.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GestorDeImagenes.vb" />
+    <Compile Include="LocalizadorDeControles.vb" />
+    <Compile Include="ManoOponente.Designer.vb">
+      <DependentUpon>ManoOponente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManoOponente.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ManoPorJugador.Designer.vb">
+      <DependentUpon>ManoPorJugador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ManoPorJugador.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -94,16 +159,73 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Notificador.Designer.vb">
+      <DependentUpon>Notificador.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Notificador.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Program.vb" />
     <Compile Include="VisorCarta.Designer.vb">
       <DependentUpon>VisorCarta.vb</DependentUpon>
     </Compile>
     <Compile Include="VisorCarta.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="VisorCartaSeleccionable.Designer.vb">
+      <DependentUpon>VisorCartaSeleccionable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VisorCartaSeleccionable.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisorCombinacion.Designer.vb">
+      <DependentUpon>VisorCombinacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VisorCombinacion.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisorDeCartasEventsData.vb" />
+    <Compile Include="VisorMonton.Designer.vb">
+      <DependentUpon>VisorMonton.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VisorMonton.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmAsignarValorComodin.resx">
+      <DependentUpon>frmAsignarValorComodin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLoginJugador.resx">
+      <DependentUpon>frmLoginJugador.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPerfilJugador.resx">
+      <DependentUpon>frmPerfilJugador.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPresentarCombinaciones.resx">
+      <DependentUpon>frmPresentarCombinaciones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRegistrarJugador.resx">
+      <DependentUpon>frmRegistrarJugador.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmResumenPartida.resx">
+      <DependentUpon>frmResumenPartida.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTablero.resx">
+      <DependentUpon>frmTablero.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevaPartida.resx">
+      <DependentUpon>frmNuevaPartida.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManoOponente.resx">
+      <DependentUpon>ManoOponente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManoPorJugador.resx">
+      <DependentUpon>ManoPorJugador.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -111,11 +233,21 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Notificador.resx">
+      <DependentUpon>Notificador.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VisorCarta.resx">
       <DependentUpon>VisorCarta.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VisorCombinacion.resx">
+      <DependentUpon>VisorCombinacion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisorMonton.resx">
+      <DependentUpon>VisorMonton.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -128,9 +260,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Chinchon.Data\Chinchon.Data.vbproj">
-      <Project>{66fee86f-f9dd-4ffc-9fab-1b241881eceb}</Project>
-      <Name>Chinchon.Data</Name>
+    <ProjectReference Include="..\Chinchon.Entities\Chinchon.Entities.vbproj">
+      <Project>{cf4ec479-c0b5-4442-b339-22c1143cc427}</Project>
+      <Name>Chinchon.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Chinchon\Chinchon.Core.vbproj">
       <Project>{1b43e33c-7801-4d00-a98b-7dd82998de1b}</Project>
@@ -139,6 +271,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Licenses.txt" />
+    <None Include="Resources\Red_Cross.svg.png" />
+    <None Include="Resources\ChinchonLogo.png" />
     <None Include="Resources\Comodin_Solo.jpg" />
     <None Include="Resources\Baraja_española_completa.png" />
   </ItemGroup>

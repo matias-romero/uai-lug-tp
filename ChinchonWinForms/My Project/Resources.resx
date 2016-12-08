@@ -124,4 +124,40 @@
   <data name="Comodin_Solo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Comodin_Solo.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ChinchonLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ChinchonLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Titulo_NuevaPartida" xml:space="preserve">
+    <value>Bienvenido! Presione comenzar cuando esté listo</value>
+  </data>
+  <data name="Titulo_IngreseSusCredenciales" xml:space="preserve">
+    <value>Ingrese sus credenciales para poder jugar</value>
+  </data>
+  <data name="Titulo_AsignarValorComodin" xml:space="preserve">
+    <value>Asignar valor al comodín</value>
+  </data>
+  <data name="Red_Cross_svg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Red_Cross.svg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Titulo_PresentarCombinaciones" xml:space="preserve">
+    <value>¿Como desea combinar las cartas?</value>
+  </data>
+  <data name="Prompt_OperacionDeCerrarRondaDetectada" xml:space="preserve">
+    <value>¿Está seguro de que desea cerrar la ronda?</value>
+  </data>
+  <data name="Prompt_AbandonarPartida" xml:space="preserve">
+    <value>¿Está seguro que desea abandonar el juego?</value>
+  </data>
+  <data name="Prompt_TieneUsuarioRegistrado" xml:space="preserve">
+    <value>¿Ya jugó alguna vez con nosotros?</value>
+  </data>
+  <data name="Titulo_CompleteSusDatos" xml:space="preserve">
+    <value>Complete sus datos para registrar un nuevo jugador</value>
+  </data>
+  <data name="Error_VerificarCombinacionesInvalidas" xml:space="preserve">
+    <value>Por favor revise que no queden combinaciones inválidas para continuar</value>
+  </data>
+  <data name="Error_GuardandoEstadisticasEnRepositorio" xml:space="preserve">
+    <value>Ocurrió un error grabando las estadísticas de la partida</value>
+  </data>
 </root>

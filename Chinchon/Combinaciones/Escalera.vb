@@ -1,4 +1,6 @@
-﻿Namespace Combinaciones
+﻿Imports Chinchon.Entities
+
+Namespace Combinaciones
 
     ''' <summary>
     ''' Una escalera es cuando tengo más de tres cartas con números consecutivos y del mismo palo

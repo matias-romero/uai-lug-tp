@@ -73,10 +73,120 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property ChinchonLogo() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("ChinchonLogo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property Comodin_Solo() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Comodin_Solo", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ocurrió un error grabando las estadísticas de la partida.
+        '''</summary>
+        Friend ReadOnly Property Error_GuardandoEstadisticasEnRepositorio() As String
+            Get
+                Return ResourceManager.GetString("Error_GuardandoEstadisticasEnRepositorio", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Por favor revise que no queden combinaciones inválidas para continuar.
+        '''</summary>
+        Friend ReadOnly Property Error_VerificarCombinacionesInvalidas() As String
+            Get
+                Return ResourceManager.GetString("Error_VerificarCombinacionesInvalidas", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to ¿Está seguro que desea abandonar el juego?.
+        '''</summary>
+        Friend ReadOnly Property Prompt_AbandonarPartida() As String
+            Get
+                Return ResourceManager.GetString("Prompt_AbandonarPartida", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to ¿Está seguro de que desea cerrar la ronda?.
+        '''</summary>
+        Friend ReadOnly Property Prompt_OperacionDeCerrarRondaDetectada() As String
+            Get
+                Return ResourceManager.GetString("Prompt_OperacionDeCerrarRondaDetectada", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to ¿Ya jugó alguna vez con nosotros?.
+        '''</summary>
+        Friend ReadOnly Property Prompt_TieneUsuarioRegistrado() As String
+            Get
+                Return ResourceManager.GetString("Prompt_TieneUsuarioRegistrado", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Red_Cross_svg() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Red_Cross_svg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Asignar valor al comodín.
+        '''</summary>
+        Friend ReadOnly Property Titulo_AsignarValorComodin() As String
+            Get
+                Return ResourceManager.GetString("Titulo_AsignarValorComodin", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Complete sus datos para registrar un nuevo jugador.
+        '''</summary>
+        Friend ReadOnly Property Titulo_CompleteSusDatos() As String
+            Get
+                Return ResourceManager.GetString("Titulo_CompleteSusDatos", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ingrese sus credenciales para poder jugar.
+        '''</summary>
+        Friend ReadOnly Property Titulo_IngreseSusCredenciales() As String
+            Get
+                Return ResourceManager.GetString("Titulo_IngreseSusCredenciales", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Bienvenido! Presione comenzar cuando esté listo.
+        '''</summary>
+        Friend ReadOnly Property Titulo_NuevaPartida() As String
+            Get
+                Return ResourceManager.GetString("Titulo_NuevaPartida", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to ¿Como desea combinar las cartas?.
+        '''</summary>
+        Friend ReadOnly Property Titulo_PresentarCombinaciones() As String
+            Get
+                Return ResourceManager.GetString("Titulo_PresentarCombinaciones", resourceCulture)
             End Get
         End Property
     End Module

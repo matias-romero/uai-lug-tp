@@ -1,6 +1,11 @@
-﻿Imports Chinchon
-'Fijado en el alcance, las barajas son siempre españolas y de 50 cartas (12 de cada palo y dos comodines)
+﻿Imports Chinchon.Entities
+Imports Chinchon.Exceptions
+
+''' <summary>
+''' Fijado en el alcance, las barajas son siempre españolas y de 50 cartas (12 de cada palo y dos comodines)
+''' </summary>
 Public Class Baraja
+    Implements IBaraja
     Implements IEnumerable(Of Carta)
 
     Public Const CantidadCartasTotales As Integer = 50
@@ -26,6 +31,7 @@ Public Class Baraja
         'Agrego los dos comodines
         _cartas.Add(New CartaComodin())
         _cartas.Add(New CartaComodin())
+        _cartas.Sort()
     End Sub
 
     ''' <summary>
@@ -35,14 +41,57 @@ Public Class Baraja
         _barajadorPorDefecto.Barajar(_cartas)
     End Sub
 
-    Public Function TomarCarta() As Carta
+    ''' <summary>
+    ''' Toma la última carta de la baraja
+    ''' </summary>
+    Public Function TomarCarta() As Carta Implements IBaraja.TomarCarta
         Return Me.TomarCartas(1).Single()
     End Function
 
+    ''' <summary>
+    ''' Toma las n últimas cartas de la baraja
+    ''' </summary>
+    ''' <param name="cantidad">Cantidad de cartas a extraer</param>
     Public Function TomarCartas(cantidad As Integer) As Carta()
-        Dim cartasTomadas As Carta() = _cartas.Take(cantidad).ToArray()
-        _cartas.RemoveRange(0, cartasTomadas.Length)
+        If _cartas.Count < cantidad Then
+            Throw New NoHaySuficientesCartasException()
+        End If
+
+        Dim cartasTomadas As Carta() = Me.TomarUltimasCartas(cantidad).ToArray()
+        _cartas.RemoveRange(_cartas.Count - cartasTomadas.Length, cartasTomadas.Length)
         Return cartasTomadas
+    End Function
+
+    ''' <summary>
+    ''' Devuelve la última carta de la baraja (Proxima para tomar)
+    ''' </summary>
+    Public ReadOnly Property ProximaCarta As Carta Implements IBaraja.ProximaCarta
+        Get
+            If Me.EstaVacio Then 'Para evitar la InvalidOperationException cuando la pila esta vacia
+                Return Nothing
+            End If
+
+            Return Me.TomarUltimasCartas(1).Single()
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' Repone las cartas indicadas de nuevo en la baraja y las mezcla utilizando el barajador por defecto
+    ''' </summary>
+    ''' <param name="cartas">Cartas devueltas</param>
+    Public Sub DevolverCartas(cartas As IEnumerable(Of Carta))
+        _cartas.AddRange(cartas)
+        Call Me.Barajar()
+    End Sub
+
+    Private ReadOnly Property EstaVacio As Boolean
+        Get
+            Return _cartas.Count = 0
+        End Get
+    End Property
+
+    Private Function TomarUltimasCartas(cantidad As Integer) As IEnumerable(Of Carta)
+        Return _cartas.Skip(Math.Max(0, _cartas.Count - cantidad))
     End Function
 
 #Region "Implemento IEnumerable para poder foreachear la baraja"

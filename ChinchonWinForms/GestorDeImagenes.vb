@@ -1,5 +1,6 @@
 ﻿Imports Chinchon
 Imports System.Drawing
+Imports Chinchon.Entities
 
 ''' <summary>
 ''' Utilitario para encapsular los dibujos de cada carta

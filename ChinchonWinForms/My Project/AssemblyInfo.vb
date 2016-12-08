@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("ChinchonWinForms")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyTitle("Chinchon! Play with us :)")>
+<Assembly: AssemblyDescription("Version del juego Chinchon utilizado como playground de la materia LUG en la UAI")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("ChinchonWinForms")>
-<Assembly: AssemblyCopyright("Copyright ©  2016")>
+<Assembly: AssemblyProduct("Chinchon! Play with us")>
+<Assembly: AssemblyCopyright("")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>

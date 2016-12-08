@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,42 +20,80 @@ Partial Class frmMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.VisorCarta2 = New ChinchonWinForms.VisorCarta()
-        Me.VisorCarta1 = New ChinchonWinForms.VisorCarta()
-        Me.SuspendLayout()
+        Me.MainMenuStrip = New System.Windows.Forms.MenuStrip()
+        Me.PartidaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NuevaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OrdenarTablerosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MainMenuStrip.SuspendLayout
+        Me.SuspendLayout
         '
-        'VisorCarta2
+        'MainMenuStrip
         '
-        Me.VisorCarta2.Carta = Nothing
-        Me.VisorCarta2.Location = New System.Drawing.Point(222, 29)
-        Me.VisorCarta2.Name = "VisorCarta2"
-        Me.VisorCarta2.Size = New System.Drawing.Size(119, 167)
-        Me.VisorCarta2.TabIndex = 1
+        Me.MainMenuStrip.Font = New System.Drawing.Font("Segoe UI", 12!)
+        Me.MainMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PartidaToolStripMenuItem})
+        Me.MainMenuStrip.Location = New System.Drawing.Point(0, 0)
+        Me.MainMenuStrip.Name = "MainMenuStrip"
+        Me.MainMenuStrip.Size = New System.Drawing.Size(925, 29)
+        Me.MainMenuStrip.TabIndex = 1
+        Me.MainMenuStrip.Text = "MenuStrip1"
         '
-        'VisorCarta1
+        'PartidaToolStripMenuItem
         '
-        Me.VisorCarta1.Carta = Nothing
-        Me.VisorCarta1.Location = New System.Drawing.Point(26, 29)
-        Me.VisorCarta1.MostrarCarta = False
-        Me.VisorCarta1.Name = "VisorCarta1"
-        Me.VisorCarta1.Size = New System.Drawing.Size(119, 167)
-        Me.VisorCarta1.TabIndex = 0
+        Me.PartidaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NuevaToolStripMenuItem, Me.OrdenarTablerosToolStripMenuItem, Me.ToolStripMenuItem1, Me.SalirToolStripMenuItem})
+        Me.PartidaToolStripMenuItem.Name = "PartidaToolStripMenuItem"
+        Me.PartidaToolStripMenuItem.Size = New System.Drawing.Size(70, 25)
+        Me.PartidaToolStripMenuItem.Text = "Partida"
+        '
+        'NuevaToolStripMenuItem
+        '
+        Me.NuevaToolStripMenuItem.Name = "NuevaToolStripMenuItem"
+        Me.NuevaToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N),System.Windows.Forms.Keys)
+        Me.NuevaToolStripMenuItem.Size = New System.Drawing.Size(207, 26)
+        Me.NuevaToolStripMenuItem.Text = "Nueva..."
+        '
+        'OrdenarTablerosToolStripMenuItem
+        '
+        Me.OrdenarTablerosToolStripMenuItem.Name = "OrdenarTablerosToolStripMenuItem"
+        Me.OrdenarTablerosToolStripMenuItem.Size = New System.Drawing.Size(207, 26)
+        Me.OrdenarTablerosToolStripMenuItem.Text = "Ordenar tableros..."
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(204, 6)
+        '
+        'SalirToolStripMenuItem
+        '
+        Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
+        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(207, 26)
+        Me.SalirToolStripMenuItem.Text = "&Salir"
         '
         'frmMain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(441, 456)
-        Me.Controls.Add(Me.VisorCarta2)
-        Me.Controls.Add(Me.VisorCarta1)
+        Me.BackColor = System.Drawing.Color.ForestGreen
+        Me.ClientSize = New System.Drawing.Size(925, 733)
+        Me.Controls.Add(Me.MainMenuStrip)
+        Me.IsMdiContainer = true
         Me.Name = "frmMain"
-        Me.Text = "Form1"
-        Me.ResumeLayout(False)
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "frmMain"
+        Me.MainMenuStrip.ResumeLayout(false)
+        Me.MainMenuStrip.PerformLayout
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
-    Friend WithEvents VisorCarta1 As VisorCarta
-    Friend WithEvents VisorCarta2 As VisorCarta
+    Friend WithEvents MainMenuStrip As MenuStrip
+    Friend WithEvents PartidaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NuevaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
+    Friend WithEvents SalirToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OrdenarTablerosToolStripMenuItem As ToolStripMenuItem
 End Class

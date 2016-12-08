@@ -1,4 +1,6 @@
-﻿Namespace Combinaciones
+﻿Imports Chinchon.Entities
+
+Namespace Combinaciones
 
     ''' <summary>
     ''' Un pie o trío es cuando tengo tres o cuatro cartas con el mismo número (y distinto palo)
