@@ -1,5 +1,7 @@
 # uai-lug-tp
-Chinchón 
+Este proyecto fue presentado para el final de la materia **T109 22 - LENGUAJES DE ÚLTIMA GENERACIÓN** de la carrera Ing. en Sistemas Informáticos de la Universidad Abierta Interamericana.
+
+__Chinchón__
 
 Para preparar el entorno de pruebas:
 1) Ejecutar el ScriptCompleto.sql (por defecto creará una base llamada ChinchonSql)
